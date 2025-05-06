@@ -1,0 +1,7 @@
+@theme {
+  --font-*: initial;
+
+  --font-sans: Poppins, Arial, Roboto, sans-serif;
+  --font-serif: "Cormorant Garamond", Garamond, "Times New Roman", Georgia,
+    serif;
+}
