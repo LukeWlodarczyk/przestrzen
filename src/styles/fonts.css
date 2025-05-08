@@ -2,6 +2,20 @@
   --font-*: initial;
 
   --font-sans: Poppins, Arial, Roboto, sans-serif;
-  --font-serif: "Cormorant Garamond", Garamond, "Times New Roman", Georgia,
-    serif;
+  --font-serif:
+    "Cormorant Garamond", Garamond, "Times New Roman", Georgia, serif;
+
+  --text-*: initial;
+
+  /* @link https://utopia.fyi/type/calculator?c=320,16,1.125,1520,20,1.2,6,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+
+  --text-xs: clamp(0.7901rem, 0.7693rem + 0.1039vw, 0.8681rem);
+  --text-sm: clamp(0.8889rem, 0.8481rem + 0.2037vw, 1.0417rem);
+  --text-base: clamp(1rem, 0.9333rem + 0.3333vw, 1.25rem);
+  --text-lg: clamp(1.125rem, 1.025rem + 0.5vw, 1.5rem);
+  --text-xl: clamp(1.2656rem, 1.1231rem + 0.7125vw, 1.8rem);
+  --text-2xl: clamp(1.4238rem, 1.2275rem + 0.9816vw, 2.16rem);
+  --text-3xl: clamp(1.6018rem, 1.3378rem + 1.3203vw, 2.592rem);
+  --text-4xl: clamp(1.802rem, 1.4531rem + 1.7445vw, 3.1104rem);
+  --text-5xl: clamp(2.0273rem, 1.5726rem + 2.2736vw, 3.7325rem);
 }
