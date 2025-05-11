@@ -1,4 +1,6 @@
 ---
+import FontPreload from "./FontPreload.astro";
+
 import "../styles/global.css";
 ---
 
@@ -9,12 +11,9 @@ import "../styles/global.css";
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
     <meta content={Astro.generator} name="generator" />
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
-      rel="stylesheet"
-    />
+
+    <FontPreload />
+
     <title>Przestrzeń</title>
   </head>
   <body>
