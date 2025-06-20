@@ -1,0 +1,18 @@
+---
+import { tw } from "@utils/index.ts";
+
+interface Props {
+  className?: string;
+  children: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+}
+
+const { className = "" } = Astro.props;
+
+const baseClasses = tw(
+  "font-serif text-5xl leading-[1.1] text-balance text-deep-green italic",
+);
+---
+
+<p class:list={tw(baseClasses, className)}>
+  <slot />
+</p>
