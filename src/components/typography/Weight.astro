@@ -1,0 +1,15 @@
+---
+interface Props {
+  type?: "medium" | "bold";
+  children: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+}
+
+const { type = "bold" } = Astro.props;
+
+const weightClasses = {
+  medium: "font-medium",
+  bold: "font-bold",
+};
+---
+
+<span class:list={weightClasses[type]}><slot /></span>
