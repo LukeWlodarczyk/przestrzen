@@ -15,7 +15,7 @@ const baseClasses = tw("relative px-(--space-m-3xl) py-(--space-2xl-4xl)");
 
 <Tag class:list={tw(baseClasses, className)} {...attrs}>
   {Astro.slots.has("background") && <slot name="background" />}
-  <div class:list="relative z-1">
+  <div class="relative z-1">
     <slot />
   </div>
 </Tag>
