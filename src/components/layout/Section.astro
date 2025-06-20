@@ -1,0 +1,21 @@
+---
+import type { HTMLTag, Polymorphic } from "astro/types";
+import { tw } from "@utils/index.ts";
+
+type Props<Tag extends HTMLTag> = Polymorphic<{
+  as: Tag;
+  className?: string;
+  children: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+}>;
+
+const { as: Tag = "section", className = "", ...attrs } = Astro.props;
+
+const baseClasses = tw("relative px-(--space-m-3xl) py-(--space-2xl-4xl)");
+---
+
+<Tag class:list={tw(baseClasses, className)} {...attrs}>
+  {Astro.slots.has("background") && <slot name="background" />}
+  <div class:list="relative z-1">
+    <slot />
+  </div>
+</Tag>
