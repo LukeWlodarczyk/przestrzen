@@ -1,0 +1,16 @@
+---
+import { tw } from "@utils/index.ts";
+
+interface Props {
+  className?: string;
+  children: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+}
+
+const { className = "" } = Astro.props;
+
+const baseClasses = tw("mx-auto max-w-(--container-width)");
+---
+
+<div class:list={tw(baseClasses, className)}>
+  <slot />
+</div>
