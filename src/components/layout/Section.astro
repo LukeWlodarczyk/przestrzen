@@ -2,20 +2,30 @@
 import type { HTMLTag, Polymorphic } from "astro/types";
 import { tw } from "@utils/index.ts";
 
+import Container from "./Container.astro";
+
 type Props<Tag extends HTMLTag> = Polymorphic<{
   as: Tag;
   className?: string;
+  containerClassName?: string;
   children: any; // eslint-disable-line @typescript-eslint/no-explicit-any
 }>;
 
-const { as: Tag = "section", className = "", ...attrs } = Astro.props;
+const {
+  as: Tag = "section",
+  className = "",
+  containerClassName,
+  ...attrs
+} = Astro.props;
 
 const baseClasses = tw("relative px-(--space-m-3xl) py-(--space-2xl-4xl)");
+
+const containerBaseClasses = tw("relative z-1");
 ---
 
 <Tag class:list={tw(baseClasses, className)} {...attrs}>
   {Astro.slots.has("background") && <slot name="background" />}
-  <div class="relative z-1">
+  <Container className={tw(containerBaseClasses, containerClassName)}>
     <slot />
-  </div>
+  </Container>
 </Tag>
