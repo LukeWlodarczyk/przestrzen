@@ -1,10 +1,9 @@
 ---
-import { tw } from "@utils/index.ts";
+import { tw, type PropsWithChildren } from "@utils/index.ts";
 
-interface Props {
+type Props = PropsWithChildren<{
   className?: string;
-  children: any; // eslint-disable-line @typescript-eslint/no-explicit-any
-}
+}>;
 
 const { className = "" } = Astro.props;
 
