@@ -1,8 +1,9 @@
 ---
-interface Props {
+import type { PropsWithChildren } from "@utils/index";
+
+type Props = PropsWithChildren<{
   type?: "medium" | "bold";
-  children: any; // eslint-disable-line @typescript-eslint/no-explicit-any
-}
+}>;
 
 const { type = "bold" } = Astro.props;
 
