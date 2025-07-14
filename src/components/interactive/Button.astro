@@ -1,0 +1,68 @@
+---
+import type { JSX } from "astro/jsx-runtime";
+
+import { tw, type PropsWithChildren } from "@utils/index.ts";
+
+type AllowedTags = "a" | "button";
+
+type Variant = "primary" | "secondary" | "tertiary";
+type Size = "medium" | "large";
+
+interface BaseProps {
+  variant?: Variant;
+  size?: Size;
+  className?: string;
+}
+
+export type Props<Tag extends AllowedTags = "a"> =
+  PropsWithChildren<BaseProps> &
+    Omit<JSX.IntrinsicElements[Tag], "class"> & {
+      as?: Tag;
+    };
+
+const {
+  as: Tag = "a",
+  variant = "primary",
+  size = "medium",
+  className,
+  ...attrs
+} = Astro.props;
+
+const baseClasses = tw(
+  "block w-fit cursor-pointer rounded-2xl text-center select-none",
+);
+
+const sizeClasses = {
+  medium: "px-(--space-m) py-(--space-2xs)",
+  large: "px-(--space-l-xl) py-(--space-2xs)",
+};
+
+const variantClasses = {
+  primary:
+    "group noise-10 bg-deep-green tracking-widest text-bright-yellow outline-offset-2 outline-deep-green",
+  secondary:
+    "noise-10 bg-dark-beige/60 font-light tracking-wide text-charcoal/80 outline-offset-2 outline-dark-beige/80 hover:bg-dark-beige/80 focus:bg-dark-beige/80",
+  tertiary:
+    "tracking-widest text-deep-green outline-offset-2 outline-forest-green hover:text-forest-green hover:underline focus:text-forest-green focus:underline",
+};
+---
+
+<Tag
+  class:list={tw(
+    baseClasses,
+    variantClasses[variant],
+    sizeClasses[size],
+    className,
+  )}
+  {...attrs}
+>
+  {
+    variant === "primary" ? (
+      <span class="group-hover:shine group-focus:shine">
+        <slot />
+      </span>
+    ) : (
+      <slot />
+    )
+  }
+</Tag>
