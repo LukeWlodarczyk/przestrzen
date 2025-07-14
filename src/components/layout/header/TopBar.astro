@@ -1,0 +1,42 @@
+---
+import Section from "@components/layout/Section.astro";
+
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+---
+
+<Section
+  as="div"
+  className="noise-30 isolate flex h-(--app-header-top-bar-height) border-b border-deep-green/10 bg-muted-green py-0"
+  containerClassName="flex items-center"
+  id={id}
+>
+  <a
+    class="sr-only text-xs text-deep-green outline-none focus:not-sr-only focus:text-warm-yellow"
+    href="#main"
+  >
+    Przejdź do treści głównej
+  </a>
+
+  <div class="ml-auto flex flex-wrap items-center gap-x-(--space-xs)">
+    <p class="text-xs text-deep-green">ul. Słoneczna 16, Myślenice</p>
+    <p class="hidden text-xs text-deep-green md:inline-block">
+      <span class="hidden lg:inline-block">tel:</span>
+      <a
+        class="outline-none hover:text-warm-yellow focus:text-warm-yellow"
+        href={`tel:888777666`}>888-777-666</a
+      >
+    </p>
+    <p class="hidden text-xs text-deep-green lg:inline-block">
+      <span class="hidden lg:inline-block">email:</span>
+      <a
+        class="outline-none hover:text-warm-yellow focus:text-warm-yellow"
+        href={`mailto:kontakt@gabinetprzestrzen.pl`}
+        >kontakt@gabinetprzestrzen.pl</a
+      >
+    </p>
+  </div>
+</Section>
