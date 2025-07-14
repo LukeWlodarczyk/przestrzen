@@ -1,0 +1,80 @@
+---
+import Section from "@components/layout/Section.astro";
+
+import Button from "@components/interactive/Button.astro";
+
+import Hamburger from "./Hamburger.astro";
+
+const NAV_LINKS = [
+  {
+    label: "O mnie",
+    href: "/architekt",
+  },
+  {
+    label: "Oferta",
+    href: "/oferta",
+  },
+  {
+    label: "Blog",
+    href: "/blog",
+  },
+  {
+    label: "Kontakt",
+    href: "/kontakt",
+  },
+];
+
+const CTA_LINK = {
+  label: "Zarezerwuj wizytę",
+  href: "/rezerwacja",
+};
+
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+---
+
+<Section
+  as="div"
+  className="h-auto border-b border-dark-beige/60 bg-warm-white/80 py-0 backdrop-blur-md has-aria-expanded:h-[calc(100dvh-var(--app-header-top-bar-height))] has-aria-expanded:bg-warm-white/90"
+  id={id}
+>
+  <nav
+    class="flex h-full w-full flex-col py-(--space-s) text-charcoal lg:flex-row lg:justify-between"
+  >
+    <div class="peer flex items-center justify-between">
+      <a aria-current="page" href="/">Przestrzeń</a>
+      <Hamburger className="lg:hidden" id="mobile-menu-button" />
+    </div>
+
+    <ul
+      class="hidden w-full flex-grow flex-col peer-has-aria-expanded:my-(--space-2xl) peer-has-aria-expanded:flex lg:flex lg:w-auto lg:flex-grow-0 lg:flex-row lg:justify-between lg:gap-(--space-m-l)"
+      role="list"
+    >
+      {
+        NAV_LINKS.map((link) => (
+          <li class="border-b border-b-deep-green first:border-t lg:border-0 lg:first:border-0">
+            <Button
+              className="w-full py-(--space-m-l) duration-300 px-0 text-lg hover:no-underline focus:no-underline tracking-wider outline-none hover:text-warm-yellow focus:text-warm-yellow lg:py-(--space-2xs) lg:text-sm"
+              href={link.href}
+              variant="tertiary"
+            >
+              {link.label}
+            </Button>
+          </li>
+        ))
+      }
+      <!-- group-peer-has-aria-expanded:order-first -->
+      <li class="mt-auto lg:mt-auto">
+        <Button
+          className="w-full text-lg tracking-wider lg:text-sm"
+          href={CTA_LINK.href}
+        >
+          {CTA_LINK.label}
+        </Button>
+      </li>
+    </ul>
+  </nav>
+</Section>

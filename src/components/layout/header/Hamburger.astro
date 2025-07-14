@@ -1,0 +1,47 @@
+---
+import { tw } from "@utils/index";
+
+interface Props {
+  className?: string;
+  id: string;
+}
+
+const { className = "", id } = Astro.props;
+
+const baseClasses = tw(
+  "group block size-8 cursor-pointer outline-warm-yellow transition-colors duration-300 hover:text-warm-yellow focus:outline-warm-yellow",
+);
+---
+
+<button
+  aria-expanded="false"
+  aria-label="Otwórz menu nawigacyjne"
+  class:list={tw(baseClasses, className)}
+  id={id}
+>
+  <svg
+    aria-hidden
+    class="block scale-x-100 opacity-100 transition-transform duration-300 group-aria-expanded:hidden starting:scale-x-0 starting:opacity-0"
+    fill="none"
+    stroke="currentColor"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="1.5"
+    viewBox="0 0 24 24"
+  >
+    <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+  </svg>
+  <svg
+    aria-hidden
+    class="hidden scale-100 opacity-100 transition-transform duration-300 group-aria-expanded:block starting:scale-0 starting:opacity-0"
+    fill="none"
+    stroke="currentColor"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="1.5"
+    viewBox="0 0 24 24"
+  >
+    <path d="M6 6l12 12"></path>
+    <path d="M6 18L18 6"></path>
+  </svg>
+</button>

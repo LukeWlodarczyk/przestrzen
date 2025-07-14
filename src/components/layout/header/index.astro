@@ -1,0 +1,78 @@
+---
+import TopBar from "./TopBar.astro";
+import NavBar from "./NavBar.astro";
+---
+
+<header class="fixed top-0 z-10 flex w-full flex-col" id="header">
+  <TopBar id="top-bar" />
+  <NavBar id="nav-bar" />
+</header>
+
+<style>
+  :root {
+    --app-header-top-bar-height: 40px;
+  }
+</style>
+
+<script>
+  import * as focusTrap from "focus-trap";
+
+  import { getRequiredElement } from "@utils/index";
+
+  import initMobileMenu from "./script/mobileMenu";
+  import initAnimation from "./script/animation";
+
+  const config = {
+    BREAKPOINT_LG: 1024,
+    FIRST_HIDE_DELAY: 600,
+  } as const;
+
+  const header = getRequiredElement("#header");
+  const topbar = getRequiredElement("#top-bar");
+  const nav = getRequiredElement("#nav-bar");
+  const mobileMenuBtn = getRequiredElement("#mobile-menu-button");
+
+  const navFocusTrap = focusTrap.createFocusTrap(nav);
+
+  const mobileMenu = initMobileMenu(mobileMenuBtn, navFocusTrap);
+
+  const headerAnimation = initAnimation(header);
+
+  setInitialState();
+
+  headerAnimation.setupScrollTrigger({ initialDelay: config.FIRST_HIDE_DELAY });
+
+  window.addEventListener("resize", setInitialState);
+
+  mobileMenuBtn.addEventListener("click", mobileMenu.toggle);
+
+  header.addEventListener("focusin", handleHeaderFocusIn);
+
+  function setInitialState() {
+    headerAnimation.setState({
+      lastDirection: null,
+      hideOffset: isDesktop() ? -topbar.clientHeight : -header.clientHeight,
+    });
+
+    if (isDesktop()) mobileMenu.close();
+
+    headerAnimation.animateIn();
+  }
+
+  function handleHeaderFocusIn(event: FocusEvent) {
+    const target = event.target as HTMLElement;
+
+    const isMobileFocus = !isDesktop();
+    const isDesktopFocusInsideTopBar =
+      isDesktop() && target.closest("#top-bar");
+
+    if (isDesktopFocusInsideTopBar || isMobileFocus) {
+      headerAnimation.setState({ lastDirection: null });
+      headerAnimation.animateIn();
+    }
+  }
+
+  function isDesktop() {
+    return config.BREAKPOINT_LG <= document.body.clientWidth;
+  }
+</script>
