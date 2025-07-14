@@ -6,6 +6,7 @@
 @import "./spacing.css";
 @import "./container.css";
 @import "./noise";
+@import "./shine";
 
 @layer base {
   body {

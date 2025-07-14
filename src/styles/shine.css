@@ -1,0 +1,16 @@
+@theme {
+  @keyframes shine {
+    from {
+      mask-position: 150%;
+    }
+    to {
+      mask-position: -50%;
+    }
+  }
+}
+
+@utility shine {
+  mask-image: linear-gradient(-75deg, #000 30%, #00000099 50%, #000 70%);
+  mask-size: 200%;
+  animation: shine 2s infinite;
+}
