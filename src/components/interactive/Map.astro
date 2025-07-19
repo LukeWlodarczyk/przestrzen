@@ -1,0 +1,98 @@
+---
+import { type LngLatLike } from "maplibre-gl";
+
+import { tw } from "@utils/index";
+
+interface Props {
+  className?: string;
+  location: LngLatLike;
+}
+
+const { className, location } = Astro.props;
+
+const baseClasses = tw(
+  "relative h-full w-full overflow-hidden rounded-2xl border border-warm-yellow outline-offset-2 has-focus-visible:outline-2 has-focus-visible:outline-warm-yellow",
+);
+
+const uniqueId = `map-${crypto.randomUUID()}`;
+---
+
+<div class:list={tw(baseClasses, className)}>
+  <!-- z-100000 is applied because .maplibregl-cooperative-gesture-screen has z-index: 99999; -->
+  <div
+    class="noise-15 absolute inset-0 z-100000 rounded-2xl bg-warm-yellow"
+    id={`placeholder-${uniqueId}`}
+  >
+  </div>
+
+  <div
+    class="h-full w-full rounded-2xl"
+    data-location={JSON.stringify(location)}
+    id={uniqueId}
+  >
+  </div>
+</div>
+
+<style is:global>
+  .maplibregl-canvas {
+    outline: none;
+  }
+</style>
+
+<script>
+  import maplibregl, { type LngLatLike } from "maplibre-gl";
+
+  import { getRequiredCssVariable, getRequiredElement } from "@utils/index";
+
+  import { gsap } from "@utils/gsap";
+
+  const markerColor = getRequiredCssVariable("--color-deep-green");
+
+  loadMapStyles();
+
+  const mapContainers = document.querySelectorAll(
+    "[id^='map-']",
+  ) as NodeListOf<HTMLElement>;
+
+  mapContainers.forEach((map) =>
+    initMap({
+      id: map.id,
+      location: JSON.parse(map.dataset.location as string) as LngLatLike,
+    }),
+  );
+
+  function initMap({ id, location }: { id: string; location: LngLatLike }) {
+    const map = new maplibregl.Map({
+      style: "https://tiles.openfreemap.org/styles/bright",
+      center: location,
+      zoom: 14,
+      container: id,
+      cooperativeGestures: true,
+    });
+
+    map.on("load", () => {
+      new maplibregl.Marker({ color: markerColor })
+        .setLngLat(location)
+        .addTo(map);
+
+      hidePlaceholder(id);
+    });
+  }
+
+  function hidePlaceholder(id: string) {
+    const placeholder = getRequiredElement(`#placeholder-${id}`);
+
+    gsap.to(placeholder, {
+      opacity: 0,
+      duration: 0.5,
+      onComplete: () => placeholder.remove(),
+    });
+  }
+
+  function loadMapStyles() {
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "https://unpkg.com/maplibre-gl@^5.6.1/dist/maplibre-gl.css";
+    document.head.appendChild(link);
+  }
+</script>
