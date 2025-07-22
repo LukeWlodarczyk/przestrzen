@@ -1,0 +1,60 @@
+---
+import CompanyDetails from "@features/contact/components/CompanyDetails.astro";
+
+import Section from "@components/layout/Section.astro";
+
+import Headline from "@components/typography/Headline.astro";
+
+import Map from "@components/interactive/Map.astro";
+
+import Copyright from "@components/layout/footer/Copyright.astro";
+import Nav from "@components/layout/footer/Nav.astro";
+
+const NAV_ITEMS = [
+  { label: "O mnie", href: "/architekt" },
+  { label: "Oferta", href: "/oferta" },
+  { label: "Blog", href: "/blog" },
+  { label: "Kontakt", href: "/kontakt" },
+  { label: "Rezerwacja", href: "/rezerwacja" },
+];
+
+const COMPANY_DETAILS = {
+  name: "Przestrzeń – Gabinet Pomocy Psychologicznej Mateusz Pietrzkiewicz",
+  streetAddress: "ul. Słoneczna 16",
+  postalCode: "32-400",
+  addressLocality: "Myślenice",
+  telephone: "731-245-342",
+  email: "kontakt@gabinetprzestrzen.pl",
+  taxId: "3939809584",
+};
+---
+
+<Section
+  as="footer"
+  className="noise-20 bg-night-green last-of-type:pb-(--space-m-3xl)"
+>
+  <Headline className="text-center text-xl text-warm-white">
+    Miejsce na Twoją opowieść.<br /> Gabinet pomocy psychologicznej w nurcie <br
+    /> poznawczo-behawioralnym.
+  </Headline>
+
+  <article
+    aria-label="Dane firmy i kontakt"
+    class="mt-(--space-2xl-4xl) flex w-full flex-col items-center gap-(--space-2xl-3xl) lg:flex-row"
+  >
+    <Map
+      className="aspect-square max-w-[500px] lg:w-1/2"
+      location={[19.950430288569066, 49.83178335891374]}
+    />
+
+    <CompanyDetails
+      className="text-warm-white"
+      details={COMPANY_DETAILS}
+      withScope
+    />
+  </article>
+
+  <Nav items={NAV_ITEMS} />
+
+  <Copyright>© 2025 Przestrzeń</Copyright>
+</Section>
