@@ -40,7 +40,12 @@ import NavBar from "./NavBar.astro";
 
   setInitialState();
 
-  headerAnimation.setupScrollTrigger({ initialDelay: config.FIRST_HIDE_DELAY });
+  const firstMainSection = getRequiredElement("#main > section");
+
+  headerAnimation.setupScrollTrigger({
+    initialDelay: config.FIRST_HIDE_DELAY,
+    threshold: firstMainSection.offsetHeight / 2,
+  });
 
   window.addEventListener("resize", setInitialState);
 

@@ -31,15 +31,16 @@ function initAnimation(element: HTMLElement) {
     });
   };
 
-  const setupScrollTrigger = ({ initialDelay = 0 } = {}) => {
+  const setupScrollTrigger = ({ initialDelay = 0, threshold = 0 } = {}) => {
     setTimeout(() => {
       ScrollTrigger.create({
         start: 0,
         end: "max",
         onUpdate: (self) => {
           const direction = self.direction;
+          const scrollY = self.scroll();
 
-          if (direction !== state.lastDirection) {
+          if (direction !== state.lastDirection && scrollY > threshold) {
             if (direction === 1) animateOut(state.hideOffset);
             else animateIn();
 
