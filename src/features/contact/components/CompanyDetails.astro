@@ -1,0 +1,90 @@
+---
+import { tw } from "@utils/index";
+
+interface CompanyDetails {
+  name: string;
+  streetAddress: string;
+  postalCode: string;
+  addressLocality: string;
+  telephone: string;
+  email: string;
+  taxId: string;
+}
+
+interface Props {
+  withScope?: boolean;
+  className?: string;
+  details: CompanyDetails;
+}
+
+const { details, withScope = false, className } = Astro.props;
+
+const baseClasses = tw(
+  "@container flex w-full flex-col items-center justify-center gap-y-(--space-xs-s) text-center font-light lg:w-1/2 lg:items-start lg:text-left",
+);
+
+const rootAttributes = withScope
+  ? {
+      itemscope: true,
+      itemtype: "https://schema.org/LocalBusiness",
+    }
+  : {};
+---
+
+<dl {...rootAttributes} class:list={tw(baseClasses, className)}>
+  <div class="flex font-medium text-pretty text-warm-yellow">
+    <dt class="sr-only">Nazwa</dt>
+    <dd {...withScope && { itemprop: "name" }}>{details.name}</dd>
+  </div>
+
+  <div class="flex w-fit gap-2">
+    <dt class="hidden @sm:block">Adres:</dt>
+    <dd>
+      <address
+        class="not-italic"
+        {...withScope && {
+          itemprop: "address",
+          itemscope: true,
+          itemtype: "https://schema.org/PostalAddress",
+        }}
+      >
+        <span {...withScope && { itemprop: "streetAddress" }}>
+          {details.streetAddress}
+        </span>,
+        <span {...withScope && { itemprop: "postalCode" }}
+          >{details.postalCode}</span
+        >
+        <span {...withScope && { itemprop: "addressLocality" }}>
+          {details.addressLocality}
+        </span>
+      </address>
+    </dd>
+  </div>
+
+  <div class="flex w-fit gap-2">
+    <dt class="hidden @sm:block">Telefon:</dt>
+    <dd>
+      <a
+        class="outline-none hover:text-warm-yellow hover:underline focus:text-warm-yellow focus:underline"
+        href=`tel:${details.telephone}`
+        {...withScope && { itemprop: "telephone" }}>{details.telephone}</a
+      >
+    </dd>
+  </div>
+
+  <div class="flex w-fit gap-2">
+    <dt class="hidden @sm:block">Email:</dt>
+    <dd>
+      <a
+        class="outline-none hover:text-warm-yellow hover:underline focus:text-warm-yellow focus:underline"
+        href=`mailto:${details.email}`
+        {...withScope && { itemprop: "email" }}>{details.email}</a
+      >
+    </dd>
+  </div>
+
+  <div class="flex w-fit gap-2">
+    <dt>NIP:</dt>
+    <dd {...withScope && { itemprop: "taxID" }}>{details.taxId}</dd>
+  </div>
+</dl>
