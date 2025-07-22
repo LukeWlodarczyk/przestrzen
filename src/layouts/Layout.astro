@@ -2,6 +2,8 @@
 import FontPreload from "./FontPreload.astro";
 
 import "../styles/global.css";
+import Header from "@components/layout/header/index.astro";
+import Footer from "@components/layout/footer/index.astro";
 ---
 
 <!doctype html>
@@ -17,7 +19,11 @@ import "../styles/global.css";
     <title>Przestrzeń</title>
   </head>
   <body>
-    <slot />
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>
 
