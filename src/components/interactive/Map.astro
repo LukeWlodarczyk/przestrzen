@@ -71,11 +71,8 @@ const uniqueId = `map-${crypto.randomUUID()}`;
     });
 
     map.on("load", () => {
-      new maplibregl.Marker({ color: markerColor })
-        .setLngLat(location)
-        .addTo(map);
-
       hidePlaceholder(id);
+      addMarker({ location, map });
     });
   }
 
@@ -87,6 +84,29 @@ const uniqueId = `map-${crypto.randomUUID()}`;
       duration: 0.5,
       onComplete: () => placeholder.remove(),
     });
+  }
+
+  function addMarker({
+    location,
+    map,
+  }: {
+    location: LngLatLike;
+    map: maplibregl.Map;
+  }) {
+    const marker = new maplibregl.Marker({ color: markerColor })
+      .setLngLat(location)
+      .addTo(map);
+
+    gsap.fromTo(
+      marker.getElement().firstChild,
+      {
+        opacity: 0,
+        y: -10,
+        scale: 0,
+        transformOrigin: "bottom center",
+      },
+      { opacity: 1, y: 0, scale: 1, delay: 0.3, duration: 0.3 },
+    );
   }
 
   function loadMapStyles() {
