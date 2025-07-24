@@ -5,7 +5,7 @@ import Section from "@components/layout/Section.astro";
 
 import Headline from "@components/typography/Headline.astro";
 
-import Map from "@components/interactive/Map.astro";
+import Map from "@components/interactive/Map";
 
 import Copyright from "@components/layout/footer/Copyright.astro";
 import Nav from "@components/layout/footer/Nav.astro";
@@ -44,6 +44,7 @@ const COMPANY_DETAILS = {
   >
     <Map
       className="aspect-square max-w-[500px] lg:w-1/2"
+      client:visible
       location={[19.950430288569066, 49.83178335891374]}
     />
 
