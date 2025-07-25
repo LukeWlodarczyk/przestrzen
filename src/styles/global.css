@@ -11,6 +11,6 @@
 @layer base {
   body {
     font-size: var(--text-base);
-    color: var(--text-charcoal);
+    color: var(--color-charcoal);
   }
 }

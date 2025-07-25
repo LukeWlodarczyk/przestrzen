@@ -1,4 +1,4 @@
-function getRequiredElement<T extends HTMLElement>(
+function getRequiredElement<T extends Element = HTMLElement>(
   selector: string,
   node: ParentNode = document,
 ): T {
