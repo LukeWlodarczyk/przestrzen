@@ -22,6 +22,7 @@ import NavBar from "./NavBar.astro";
 
   import {
     combineTraps,
+    createAriaTrap,
     createScrollLock,
     createFocusTrap,
   } from "@utils/traps";
@@ -37,11 +38,12 @@ import NavBar from "./NavBar.astro";
   const mobileMenuBtn = getRequiredElement("#mobile-menu-button");
 
   const navFocusTrap = createFocusTrap(nav);
+  const ariaNavTrap = createAriaTrap(nav);
   const scrollLock = createScrollLock();
 
   const mobileMenu = initMobileMenu(
     mobileMenuBtn,
-    combineTraps(navFocusTrap, scrollLock),
+    combineTraps(navFocusTrap, ariaNavTrap, scrollLock),
   );
 
   const headerAnimation = initAnimation(header);
