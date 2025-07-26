@@ -15,12 +15,16 @@ import NavBar from "./NavBar.astro";
 </style>
 
 <script>
-  import * as focusTrap from "focus-trap";
-
   import { getRequiredElement } from "@utils/index";
 
   import initMobileMenu from "./script/mobileMenu";
   import initAnimation from "./script/animation";
+
+  import {
+    combineTraps,
+    createScrollLock,
+    createFocusTrap,
+  } from "@utils/traps";
 
   const config = {
     BREAKPOINT_LG: 1024,
@@ -32,9 +36,13 @@ import NavBar from "./NavBar.astro";
   const nav = getRequiredElement("#nav-bar");
   const mobileMenuBtn = getRequiredElement("#mobile-menu-button");
 
-  const navFocusTrap = focusTrap.createFocusTrap(nav);
+  const navFocusTrap = createFocusTrap(nav);
+  const scrollLock = createScrollLock();
 
-  const mobileMenu = initMobileMenu(mobileMenuBtn, navFocusTrap);
+  const mobileMenu = initMobileMenu(
+    mobileMenuBtn,
+    combineTraps(navFocusTrap, scrollLock),
+  );
 
   const headerAnimation = initAnimation(header);
 

@@ -1,14 +1,11 @@
-import * as focusTrap from "focus-trap";
+import type { Trap } from "@utils/traps";
 
 const mobileMenuAriaLabel = {
   open: "Otwórz menu nawigacyjne",
   close: "Zamknij menu nawigacyjne",
 };
 
-function initMobileMenu(
-  mobileMenuBtn: HTMLElement,
-  focusTrap: focusTrap.FocusTrap,
-) {
+function initMobileMenu(mobileMenuBtn: HTMLElement, trap: Trap) {
   function toggleMobileMenu() {
     if (getMobileMenuState()) closeMobileMenu();
     else openMobileMenu();
@@ -32,10 +29,9 @@ function initMobileMenu(
       "aria-label",
       isOpen ? mobileMenuAriaLabel.close : mobileMenuAriaLabel.open,
     );
-    document.body.classList.toggle("overflow-hidden", isOpen);
 
-    if (isOpen) focusTrap.activate();
-    else focusTrap.deactivate();
+    if (isOpen) trap.activate();
+    else trap.deactivate();
   }
 
   return {
