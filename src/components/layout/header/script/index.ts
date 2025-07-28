@@ -25,13 +25,13 @@ const initHeader = () => {
     mobileMenuBtn: getRequiredElement("#mobile-menu-button", header),
   };
 
-  const navFocusTrap = createFocusTrap(elements.nav);
-  const ariaNavTrap = createAriaTrap(elements.nav);
-  const scrollLock = createScrollLock();
-
   const mobileMenu = initMobileMenu(
     elements.mobileMenuBtn,
-    combineTraps(navFocusTrap, ariaNavTrap, scrollLock),
+    combineTraps(
+      createFocusTrap(elements.nav),
+      createAriaTrap(elements.nav),
+      createScrollLock(),
+    ),
   );
 
   const headerAnimation = initAnimation(elements.header);
