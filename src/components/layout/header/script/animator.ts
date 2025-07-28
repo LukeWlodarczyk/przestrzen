@@ -5,7 +5,7 @@ interface State {
   hideOffset: number;
 }
 
-function initAnimation(element: HTMLElement) {
+function initAnimator(element: HTMLElement) {
   let state: State = {
     lastDirection: null,
     hideOffset: 0,
@@ -19,7 +19,6 @@ function initAnimation(element: HTMLElement) {
     gsap.to(element, {
       y: 0,
       ease: "power4.out",
-      overwrite: true,
     });
   };
 
@@ -27,7 +26,6 @@ function initAnimation(element: HTMLElement) {
     gsap.to(element, {
       y: offset,
       ease: "power4.out",
-      overwrite: true,
     });
   };
 
@@ -59,4 +57,4 @@ function initAnimation(element: HTMLElement) {
   };
 }
 
-export default initAnimation;
+export default initAnimator;
