@@ -1,7 +1,7 @@
 import { getRequiredCssVariable, getRequiredElement } from "@utils/index";
 
 import initMobileMenu from "./mobileMenu";
-import initAnimation from "./animation";
+import initHeaderAnimator from "./animator";
 
 import {
   combineTraps,
@@ -35,13 +35,13 @@ const initHeader = () => {
     ),
   );
 
-  const headerAnimation = initAnimation(elements.header);
+  const headerAnimator = initHeaderAnimator(elements.header);
 
   setInitialState();
 
   const firstMainSection = getRequiredElement("#main > section");
 
-  headerAnimation.setupScrollTrigger({
+  headerAnimator.setupScrollTrigger({
     initialDelay: config.FIRST_HIDE_DELAY,
     threshold: firstMainSection.offsetHeight / 2,
   });
@@ -53,7 +53,7 @@ const initHeader = () => {
   elements.header.addEventListener("focusin", handleHeaderFocusIn);
 
   function setInitialState() {
-    headerAnimation.setState({
+    headerAnimator.setState({
       lastDirection: null,
       hideOffset: isDesktop()
         ? -elements.topbar.clientHeight
@@ -62,7 +62,7 @@ const initHeader = () => {
 
     if (isDesktop()) mobileMenu.close();
 
-    headerAnimation.animateIn();
+    headerAnimator.animateIn();
   }
 
   function handleHeaderFocusIn(event: FocusEvent) {
@@ -73,8 +73,8 @@ const initHeader = () => {
       isDesktop() && target.closest("#top-bar");
 
     if (isDesktopFocusInsideTopBar || isMobileFocus) {
-      headerAnimation.setState({ lastDirection: null });
-      headerAnimation.animateIn();
+      headerAnimator.setState({ lastDirection: null });
+      headerAnimator.animateIn();
     }
   }
 
