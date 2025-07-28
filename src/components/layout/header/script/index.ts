@@ -17,20 +17,24 @@ const config = {
 
 const initHeader = () => {
   const header = getRequiredElement("#header");
-  const topbar = getRequiredElement("#top-bar");
-  const nav = getRequiredElement("#nav-bar");
-  const mobileMenuBtn = getRequiredElement("#mobile-menu-button");
 
-  const navFocusTrap = createFocusTrap(nav);
-  const ariaNavTrap = createAriaTrap(nav);
+  const elements = {
+    header,
+    topbar: getRequiredElement("#top-bar", header),
+    nav: getRequiredElement("#nav-bar", header),
+    mobileMenuBtn: getRequiredElement("#mobile-menu-button", header),
+  };
+
+  const navFocusTrap = createFocusTrap(elements.nav);
+  const ariaNavTrap = createAriaTrap(elements.nav);
   const scrollLock = createScrollLock();
 
   const mobileMenu = initMobileMenu(
-    mobileMenuBtn,
+    elements.mobileMenuBtn,
     combineTraps(navFocusTrap, ariaNavTrap, scrollLock),
   );
 
-  const headerAnimation = initAnimation(header);
+  const headerAnimation = initAnimation(elements.header);
 
   setInitialState();
 
@@ -43,14 +47,16 @@ const initHeader = () => {
 
   window.addEventListener("resize", setInitialState, { passive: true });
 
-  mobileMenuBtn.addEventListener("click", mobileMenu.toggle);
+  elements.mobileMenuBtn.addEventListener("click", mobileMenu.toggle);
 
-  header.addEventListener("focusin", handleHeaderFocusIn);
+  elements.header.addEventListener("focusin", handleHeaderFocusIn);
 
   function setInitialState() {
     headerAnimation.setState({
       lastDirection: null,
-      hideOffset: isDesktop() ? -topbar.clientHeight : -header.clientHeight,
+      hideOffset: isDesktop()
+        ? -elements.topbar.clientHeight
+        : -elements.header.clientHeight,
     });
 
     if (isDesktop()) mobileMenu.close();
