@@ -19,7 +19,6 @@ function initAnimation(element: HTMLElement) {
     gsap.to(element, {
       y: 0,
       ease: "power4.out",
-      overwrite: true,
     });
   };
 
@@ -27,7 +26,6 @@ function initAnimation(element: HTMLElement) {
     gsap.to(element, {
       y: offset,
       ease: "power4.out",
-      overwrite: true,
     });
   };
 
