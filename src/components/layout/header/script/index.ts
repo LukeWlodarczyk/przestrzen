@@ -1,4 +1,4 @@
-import { getRequiredElement } from "@utils/index";
+import { getRequiredCssVariable, getRequiredElement } from "@utils/index";
 
 import initMobileMenu from "./mobileMenu";
 import initAnimation from "./animation";
@@ -10,8 +10,9 @@ import {
   createFocusTrap,
 } from "@utils/traps";
 
+const BREAKPOINT_LG = getRequiredCssVariable("--breakpoint-lg");
+
 const config = {
-  BREAKPOINT_LG: 1024,
   FIRST_HIDE_DELAY: 600,
 } as const;
 
@@ -78,7 +79,7 @@ const initHeader = () => {
   }
 
   function isDesktop() {
-    return config.BREAKPOINT_LG <= document.body.clientWidth;
+    return window.matchMedia(`(min-width: ${BREAKPOINT_LG})`).matches;
   }
 };
 
