@@ -1,0 +1,82 @@
+---
+import Section from "@components/layout/Section.astro";
+
+import Heading from "@components/typography/Heading.astro";
+import Headline from "@components/typography/Headline.astro";
+import Paragraph from "@components/typography/Paragraph.astro";
+import Weight from "@components/typography/Weight.astro";
+
+import Button from "@components/interactive/Button.astro";
+
+import Video from "@components/media/Video/Video.astro";
+
+import generateLQIP from "@utils/generateLQIP";
+
+import BREAKPOINTS from "@styles/breakpoints/breakpoints";
+
+const talkingHandsVideoPosterUrl =
+  "https://res.cloudinary.com/deztubtmt/video/upload/q_auto,f_auto,so_0/v1753079618/hero_dkynm7.jpeg";
+
+const talkingHandsVideoPosterLqipDataUrl = await generateLQIP(
+  talkingHandsVideoPosterUrl,
+);
+
+const talkingHandsVideoSources = [
+  {
+    src: "https://res.cloudinary.com/deztubtmt/video/upload/q_auto:best,f_auto/v1753079618/hero_dkynm7.mp4",
+    type: "video/mp4",
+    media: `(min-width: ${BREAKPOINTS.xl}) and (prefers-reduced-motion: no-preference)`,
+    isHighBandwidth: true,
+  },
+  {
+    src: "https://res.cloudinary.com/deztubtmt/video/upload/q_auto:eco,f_auto/v1753079618/hero_dkynm7.mp4",
+    type: "video/mp4",
+    media: `(prefers-reduced-motion: no-preference)`,
+    isHighBandwidth: true,
+  },
+  {
+    src: "https://res.cloudinary.com/deztubtmt/video/upload/q_auto,f_auto,so_0,du_0.01/v1753079618/hero_dkynm7.mp4",
+    type: "video/mp4",
+  },
+];
+---
+
+<Section
+  className="noise-35 bg-sand-beige pt-(--space-5xl-6xl)"
+  containerClassName="flex flex-col items-center xl:flex-row"
+>
+  <div class="flex flex-col items-center xl:mr-(--space-l)">
+    <Heading className="sr-only" level={1}>
+      Pomoc psychologiczna | Myślenice, okolice i online | Terapia
+      poznawczo-behawioralna</Heading
+    >
+    <Headline className="text-center xl:text-left">
+      <Weight>Opowieść</Weight>, którą w sobie nosisz, ma tutaj swoją
+      <Weight>przestrzeń</Weight> by wybrzmieć
+    </Headline>
+    <Paragraph
+      className="mt-(--space-xs-s) text-center font-extralight text-balance xl:text-left"
+    >
+      Towarzyszymy w pracy nad emocjami, myślami i codziennymi wyzwaniami w
+      duchu terapi poznawczo-behawioralnej.
+    </Paragraph>
+    <Button
+      className="mt-(--space-m-l) xl:mr-auto"
+      href="/rezerwacja"
+      size="large"
+    >
+      Zarezerwuj wizytę
+    </Button>
+  </div>
+
+  <Video
+    alt=""
+    autoplay
+    className="noise-20 mt-(--space-xl-2xl) block aspect-[5/2.5] sm:aspect-[5/1.5] xl:mt-0 xl:aspect-[5/4]"
+    loop
+    lqipDataUrl={talkingHandsVideoPosterLqipDataUrl}
+    poster={talkingHandsVideoPosterUrl}
+    preload="auto"
+    sources={talkingHandsVideoSources}
+  />
+</Section>
