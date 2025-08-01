@@ -1,0 +1,97 @@
+---
+import { tw } from "@utils/index.ts";
+
+export interface VideoSource {
+  src: string;
+  type: string;
+  media?: string;
+  isHighBandwidth?: boolean;
+}
+
+interface Props {
+  className?: string;
+  videoClassName?: string;
+  placeholderClassName?: string;
+  sources: VideoSource[];
+  lqipDataUrl?: string;
+  poster?: string;
+  alt: string;
+  caption?: string;
+  autoplay?: boolean;
+  muted?: boolean;
+  loop?: boolean;
+  playsinline?: boolean;
+  preload?: "none" | "metadata" | "auto";
+  id?: string;
+}
+
+const {
+  className,
+  videoClassName,
+  placeholderClassName,
+  sources,
+  lqipDataUrl,
+  poster,
+  autoplay = false,
+  loop = false,
+  muted = true,
+  playsinline = true,
+  preload = "metadata",
+  alt,
+  caption,
+  id = crypto.randomUUID(),
+  ...attr
+} = Astro.props;
+
+const baseClasses = tw(
+  "relative w-full overflow-hidden rounded-(--space-3xl-5xl)",
+);
+
+const baseSources = sources.filter((source) => !source.isHighBandwidth);
+
+const highBandwidthSources = sources.filter((source) => source.isHighBandwidth);
+---
+
+<figure aria-label={alt} class:list={tw(baseClasses, className)} {...attr}>
+  <div
+    aria-hidden="true"
+    class:list={tw(
+      "absolute inset-0 bg-deep-green",
+      lqipDataUrl ? "scale-105 bg-cover bg-center blur-xs" : "",
+      placeholderClassName,
+    )}
+    data-placeholder-id={id}
+    style={lqipDataUrl ? `background-image: url('${lqipDataUrl}');` : ""}
+  >
+  </div>
+  <div class="hidden" data-high-bandwidth-sources={id}>
+    {
+      highBandwidthSources.map((source) => (
+        <source media={source.media} src={source.src} type={source.type} />
+      ))
+    }
+  </div>
+  <video
+    autoplay={autoplay}
+    class:list={tw("h-full w-full object-cover", videoClassName)}
+    data-id={id}
+    loop={loop}
+    muted={muted}
+    playsinline={playsinline}
+    poster={poster || lqipDataUrl}
+    preload={preload}
+  >
+    {
+      baseSources.map((source) => (
+        <source media={source.media} src={source.src} type={source.type} />
+      ))
+    }
+  </video>
+  {caption && <figcaption class="sr-only">{caption}</figcaption>}
+</figure>
+
+<script>
+  import initVideo from "./script/video";
+
+  initVideo();
+</script>
