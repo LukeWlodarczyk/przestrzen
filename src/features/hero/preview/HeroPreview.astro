@@ -10,32 +10,35 @@ import Button from "@components/interactive/Button.astro";
 
 import Video from "@components/media/Video/Video.astro";
 
+import cldVideoHelper from "@utils/cloudinary/video";
 import generateLQIP from "@utils/generateLQIP";
 
 import BREAKPOINTS from "@styles/breakpoints/breakpoints";
 
-const talkingHandsVideoPosterUrl =
-  "https://res.cloudinary.com/deztubtmt/video/upload/q_auto,f_auto,so_0/v1753079618/hero_dkynm7.jpeg";
+const HERO_CLD_PUBLIC_ID = "hero_dkynm7";
 
-const talkingHandsVideoPosterLqipDataUrl = await generateLQIP(
-  talkingHandsVideoPosterUrl,
+const heroPosterImageUrl = cldVideoHelper.buildPosterImageUrl(
+  HERO_CLD_PUBLIC_ID,
+  0,
 );
 
-const talkingHandsVideoSources = [
+const heroLqipDataUrl = await generateLQIP(heroPosterImageUrl);
+
+const heroVideoSources = [
   {
-    src: "https://res.cloudinary.com/deztubtmt/video/upload/q_auto:best,f_auto/v1753079618/hero_dkynm7.mp4",
+    src: cldVideoHelper.buildOptimizedVideoUrl(HERO_CLD_PUBLIC_ID, "best"),
     type: "video/mp4",
     media: `(min-width: ${BREAKPOINTS.xl}) and (prefers-reduced-motion: no-preference)`,
     isHighBandwidth: true,
   },
   {
-    src: "https://res.cloudinary.com/deztubtmt/video/upload/q_auto:eco,f_auto/v1753079618/hero_dkynm7.mp4",
+    src: cldVideoHelper.buildOptimizedVideoUrl(HERO_CLD_PUBLIC_ID, "eco"),
     type: "video/mp4",
     media: `(prefers-reduced-motion: no-preference)`,
     isHighBandwidth: true,
   },
   {
-    src: "https://res.cloudinary.com/deztubtmt/video/upload/q_auto,f_auto,so_0,du_0.01/v1753079618/hero_dkynm7.mp4",
+    src: cldVideoHelper.buildSnapshotClipUrl(HERO_CLD_PUBLIC_ID, 0),
     type: "video/mp4",
   },
 ];
@@ -74,9 +77,9 @@ const talkingHandsVideoSources = [
     autoplay
     className="noise-20 mt-(--space-xl-2xl) block aspect-[5/2.5] sm:aspect-[5/1.5] xl:mt-0 xl:aspect-[5/4]"
     loop
-    lqipDataUrl={talkingHandsVideoPosterLqipDataUrl}
-    poster={talkingHandsVideoPosterUrl}
+    lqipDataUrl={heroLqipDataUrl}
+    poster={heroPosterImageUrl}
     preload="auto"
-    sources={talkingHandsVideoSources}
+    sources={heroVideoSources}
   />
 </Section>
