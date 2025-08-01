@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+@import "./breakpoints/breakpoints.css";
 @import "./fonts.css";
 @import "./typography.css";
 @import "./colors.css";
