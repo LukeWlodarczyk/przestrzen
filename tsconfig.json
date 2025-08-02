@@ -9,6 +9,7 @@
       "@components/*": ["src/components/*"],
       "@layouts/*": ["src/layouts/*"],
       "@utils/*": ["src/utils/*"],
+      "@lib/*": ["src/lib/*"],
       "@styles/*": ["src/styles/*"]
     },
     "jsx": "react-jsx",
