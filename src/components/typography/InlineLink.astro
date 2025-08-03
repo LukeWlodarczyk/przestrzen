@@ -1,0 +1,25 @@
+---
+import { tw, type PropsWithChildren } from "@utils/index.ts";
+
+const isExternalURL = (url: string) =>
+  new URL(url).origin !== import.meta.env.PUBLIC_SITE_URL;
+
+type Props = PropsWithChildren<{
+  className?: string;
+  href: string;
+}>;
+
+const { className, href } = Astro.props;
+
+const isExternal = isExternalURL(href);
+
+const externalAttrs = isExternal
+  ? { target: "_blank", rel: "noopener noreferrer" }
+  : {};
+
+const baseClasses = tw("text-deep-green hover:underline");
+---
+
+<a href={href} {...externalAttrs} class:list={tw(baseClasses, className)}>
+  <slot />
+</a>
