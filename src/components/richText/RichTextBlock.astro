@@ -1,0 +1,60 @@
+---
+import { experimental_AstroContainer } from "astro/container";
+import {
+  BLOCKS,
+  INLINES,
+  MARKS,
+  type Document,
+} from "@contentful/rich-text-types";
+
+import Paragraph from "@components/typography/Paragraph.astro";
+import InlineLink from "@components/typography/InlineLink.astro";
+import Weight from "@components/typography/Weight.astro";
+
+import { tw } from "@utils/index";
+
+import documentToHtmlString, { type Options } from "./documentToHtmlString";
+
+const container = await experimental_AstroContainer.create();
+
+interface Props {
+  containerClassName?: string;
+  className?: string;
+  document: Document;
+}
+
+const { document, className, containerClassName } = Astro.props;
+
+const hasMultipleNodes = document.content.length > 1;
+
+const options: Options = {
+  renderMark: {
+    [MARKS.BOLD]: (text) =>
+      container.renderToString(Weight, {
+        props: { type: "medium" },
+        slots: { default: text },
+      }),
+  },
+  renderNode: {
+    [BLOCKS.PARAGRAPH]: async (node, next) =>
+      container.renderToString(Paragraph, {
+        props: {
+          className: tw(className, !hasMultipleNodes && containerClassName),
+        },
+        slots: { default: await next(node.content) },
+      }),
+    [INLINES.HYPERLINK]: async (node, next) =>
+      container.renderToString(InlineLink, {
+        props: { href: node.data.uri },
+        slots: { default: await next(node.content) },
+      }),
+  },
+};
+
+const Tag = hasMultipleNodes ? "div" : Fragment;
+
+const richTextBlockhHtml = await documentToHtmlString(document, options);
+---
+
+{/* eslint-disable-next-line astro/no-set-html-directive */}
+<Tag class:list={containerClassName} set:html={richTextBlockhHtml} />
