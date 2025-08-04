@@ -1,0 +1,80 @@
+---
+import Section from "@components/layout/Section.astro";
+
+import Heading from "@components/typography/Heading.astro";
+
+import RichHeadline from "@components/richText/RichHeadline.astro";
+import RichTextBlock from "@components/richText/RichTextBlock.astro";
+
+import Button from "@components/interactive/Button.astro";
+
+import Video from "@components/media/Video/Video.astro";
+
+import cldVideoHelper from "@utils/cloudinary/video";
+import generateLQIP from "@utils/generateLQIP";
+
+import BREAKPOINTS from "@styles/breakpoints/breakpoints";
+
+import loadData from "./loader";
+
+const data = await loadData();
+
+const aboutMePosterImageUrl = cldVideoHelper.buildPosterImageUrl(
+  data.cldVideoPublicId,
+  12,
+);
+const aboutMeVideoPosterLqipDataUrl = await generateLQIP(aboutMePosterImageUrl);
+
+const aboutMeVideoSources = [
+  {
+    src: cldVideoHelper.buildRawVideoUrl(data.cldVideoPublicId),
+    type: "video/mp4",
+    media: `(min-width: ${BREAKPOINTS.sm}) and (prefers-reduced-motion: no-preference)`,
+  },
+  {
+    src: cldVideoHelper.buildSnapshotClipUrl(data.cldVideoPublicId, 12),
+    type: "video/mp4",
+  },
+];
+---
+
+<Section className="relative bg-night-green" id="about-me">
+  <Video
+    alt=""
+    aria-hidden="true"
+    className="noise-30 absolute inset-0 rounded-none"
+    id="about-me"
+    lqipDataUrl={aboutMeVideoPosterLqipDataUrl}
+    poster={aboutMePosterImageUrl}
+    slot="background"
+    sources={aboutMeVideoSources}
+  />
+
+  <div
+    class="noise-15 max-w-[60rem] rounded-2xl bg-warm-white/78 p-(--space-s-m) py-(--space-m) backdrop-blur-xs"
+  >
+    <Heading className="text-left" level={2}>{data.heading}</Heading>
+    <RichHeadline
+      className="mt-(--space-s-m) text-left"
+      document={data.headline}
+    />
+    <RichTextBlock
+      className="max-w-prose text-left text-forest-green"
+      containerClassName="my-(--space-s-m)"
+      document={data.description}
+    />
+    <Button
+      className="ml-auto tracking-widest"
+      href="/o-mnie"
+      variant="tertiary"
+    >
+      {data.ctaLabel}
+    </Button>
+  </div>
+</Section>
+
+<script>
+  import initAboutMe from "./script/aboutMe";
+
+  initAboutMe();
+</script>
