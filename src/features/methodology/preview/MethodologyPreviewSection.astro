@@ -1,0 +1,75 @@
+---
+import Section from "@components/layout/Section.astro";
+
+import Heading from "@components/typography/Heading.astro";
+
+import RichHeadline from "@components/richText/RichHeadline.astro";
+import RichTextBlock from "@components/richText/RichTextBlock.astro";
+
+import Image from "@components/media/Image/Image.astro";
+
+import { resolveAssetUrl } from "@lib/contentful";
+
+import MethodologyItem from "../components/MethodologyItem.astro";
+
+import laodData from "./loader";
+
+const data = await laodData();
+---
+
+<Section className="bg-warm-white">
+  <div class="flex lg:items-center lg:gap-(--space-l-xl)">
+    <Image
+      alt=""
+      className="hidden w-[300px] lg:flex"
+      placeholderClassName="noise-10"
+      sizes="400px"
+      src={resolveAssetUrl(data.headerImage)}
+      widths={[400]}
+    />
+
+    <div class="flex flex-1 flex-col">
+      <Heading className="text-center lg:text-left" level={2}
+        >{data.heading}</Heading
+      >
+      <RichHeadline
+        className="mt-(--space-s-m) text-center lg:text-left"
+        document={data.headline}
+      />
+
+      <RichTextBlock
+        className="mx-auto mt-(--space-s-m) text-justify [--link-color:var(--color-deep-green)] lg:ml-0"
+        document={data.headingDescription}
+      />
+    </div>
+  </div>
+  <div
+    class="mx-auto my-(--space-3xl-4xl) grid w-full grid-cols-1 justify-items-center gap-(--space-xl-2xl) min-[500px]:grid-cols-2 lg:grid-cols-4"
+  >
+    {
+      data.items.map((item) => (
+        <MethodologyItem
+          className="max-w-[250px]"
+          description={item.description}
+          imgSrc={resolveAssetUrl(item.image)}
+          label={item.heading}
+        />
+      ))
+    }
+  </div>
+
+  <div class="flex lg:items-center lg:justify-between lg:gap-(--space-l-xl)">
+    <RichTextBlock
+      className="mx-auto flex-1 text-justify [--weight-color:var(--color-deep-green)] lg:ml-0"
+      document={data.footerDescription}
+    />
+    <Image
+      alt=""
+      className="hidden w-[300px] lg:flex"
+      placeholderClassName="noise-10 h-auto"
+      sizes="400px"
+      src={resolveAssetUrl(data.footerImage)}
+      widths={[400]}
+    />
+  </div>
+</Section>
