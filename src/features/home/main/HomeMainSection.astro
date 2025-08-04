@@ -2,9 +2,9 @@
 import Section from "@components/layout/Section.astro";
 
 import Heading from "@components/typography/Heading.astro";
-import Headline from "@components/typography/Headline.astro";
-import Paragraph from "@components/typography/Paragraph.astro";
-import Weight from "@components/typography/Weight.astro";
+
+import RichHeadline from "@components/richText/RichHeadline.astro";
+import RichTextBlock from "@components/richText/RichTextBlock.astro";
 
 import Button from "@components/interactive/Button.astro";
 
@@ -15,10 +15,12 @@ import generateLQIP from "@utils/generateLQIP";
 
 import BREAKPOINTS from "@styles/breakpoints/breakpoints";
 
-const HERO_CLD_PUBLIC_ID = "hero_dkynm7";
+import loadData from "./loader";
+
+const data = await loadData();
 
 const heroPosterImageUrl = cldVideoHelper.buildPosterImageUrl(
-  HERO_CLD_PUBLIC_ID,
+  data.cldVideoPublicId,
   0,
 );
 
@@ -26,19 +28,19 @@ const heroLqipDataUrl = await generateLQIP(heroPosterImageUrl);
 
 const heroVideoSources = [
   {
-    src: cldVideoHelper.buildOptimizedVideoUrl(HERO_CLD_PUBLIC_ID, "best"),
+    src: cldVideoHelper.buildOptimizedVideoUrl(data.cldVideoPublicId, "best"),
     type: "video/mp4",
     media: `(min-width: ${BREAKPOINTS.xl}) and (prefers-reduced-motion: no-preference)`,
     isHighBandwidth: true,
   },
   {
-    src: cldVideoHelper.buildOptimizedVideoUrl(HERO_CLD_PUBLIC_ID, "eco"),
+    src: cldVideoHelper.buildOptimizedVideoUrl(data.cldVideoPublicId, "eco"),
     type: "video/mp4",
     media: `(prefers-reduced-motion: no-preference)`,
     isHighBandwidth: true,
   },
   {
-    src: cldVideoHelper.buildSnapshotClipUrl(HERO_CLD_PUBLIC_ID, 0),
+    src: cldVideoHelper.buildSnapshotClipUrl(data.cldVideoPublicId, 0),
     type: "video/mp4",
   },
 ];
@@ -49,26 +51,22 @@ const heroVideoSources = [
   containerClassName="flex flex-col items-center xl:flex-row"
 >
   <div class="flex flex-col items-center xl:mr-(--space-l)">
-    <Heading className="sr-only" level={1}>
-      Pomoc psychologiczna | Myślenice, okolice i online | Terapia
-      poznawczo-behawioralna</Heading
-    >
-    <Headline className="text-center xl:text-left">
-      <Weight>Opowieść</Weight>, którą w sobie nosisz, ma tutaj swoją
-      <Weight>przestrzeń</Weight> by wybrzmieć
-    </Headline>
-    <Paragraph
-      className="mt-(--space-xs-s) text-center font-extralight text-balance xl:text-left"
-    >
-      Towarzyszymy w pracy nad emocjami, myślami i codziennymi wyzwaniami w
-      duchu terapi poznawczo-behawioralnej.
-    </Paragraph>
+    <Heading className="sr-only" level={1}>{data.heading}</Heading>
+    <RichHeadline
+      className="text-center xl:text-left"
+      document={data.headline}
+    />
+    <RichTextBlock
+      className="text-center font-extralight text-balance xl:text-left"
+      containerClassName="mt-(--space-xs-s)"
+      document={data.description}
+    />
     <Button
       className="mt-(--space-m-l) xl:mr-auto"
       href="/rezerwacja"
       size="large"
     >
-      Zarezerwuj wizytę
+      {data.ctaLabel}
     </Button>
   </div>
 
