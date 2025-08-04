@@ -1,0 +1,47 @@
+---
+import Image from "@components/media/Image/Image.astro";
+
+import Heading from "@components/typography/Heading.astro";
+import Paragraph from "@components/typography/Paragraph.astro";
+
+import { tw } from "@utils/index";
+
+interface Props {
+  className?: string;
+  label: string;
+  description: string;
+  imgSrc: string;
+  imgLQIPData?: string;
+}
+
+const { className, label, description, imgSrc, imgLQIPData } = Astro.props;
+
+const baseClasses = tw("w-full");
+---
+
+<div class:list={tw(baseClasses, className)}>
+  <Image
+    alt=""
+    className="noise-35 aspect-square border border-dark-beige bg-sand-beige"
+    imgClassName="object-contain z-1 relative p-(--space-m)"
+    lqipDataUrl={imgLQIPData}
+    placeholderClassName="z-10 noise-10"
+    sizes="250px"
+    src={imgSrc}
+    widths={[250]}
+  />
+
+  <div class="mt-(--space-s-m) flex flex-col px-(--space-2xs)">
+    <Heading
+      className="text-center text-base font-normal tracking-normal text-charcoal"
+      level={3}
+    >
+      {label}
+    </Heading>
+    <Paragraph
+      className="mt-(--space-2xs) block text-justify text-sm text-pretty text-charcoal"
+    >
+      {description}
+    </Paragraph>
+  </div>
+</div>
