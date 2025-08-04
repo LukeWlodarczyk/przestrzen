@@ -1,0 +1,76 @@
+---
+import { Picture } from "astro:assets";
+
+import { tw } from "@utils/index.ts";
+
+interface Props {
+  className?: string;
+  imgClassName?: string;
+  placeholderClassName?: string;
+  src: string;
+  lqipDataUrl?: string;
+  alt: string;
+  caption?: string;
+  widths?: number[];
+  formats?: ("avif" | "webp" | "jpeg" | "png")[];
+  sizes: string;
+  loading?: "eager" | "lazy";
+  fetchpriority?: "high" | "low" | "auto";
+  decoding?: "sync" | "async" | "auto";
+}
+
+const {
+  className,
+  imgClassName,
+  placeholderClassName,
+  src,
+  lqipDataUrl,
+  alt = "",
+  caption,
+  widths = [400, 600, 800, 1200],
+  formats = ["avif", "webp", "jpeg"],
+  sizes,
+  loading = "lazy",
+  fetchpriority = "auto",
+  decoding = "async",
+  ...attr
+} = Astro.props;
+
+const baseClasses = tw("relative w-full rounded-2xl");
+
+const uniqueId = crypto.randomUUID();
+---
+
+<figure aria-label={alt} class:list={tw(baseClasses, className)} {...attr}>
+  <div
+    aria-hidden="true"
+    class:list={tw(
+      "absolute inset-0 rounded-2xl bg-deep-green",
+      lqipDataUrl ? "scale-105 bg-cover bg-center blur-xs" : "",
+      placeholderClassName,
+    )}
+    data-placeholder-id={`${uniqueId}`}
+    style={lqipDataUrl ? `background-image: url('${lqipDataUrl}');` : ""}
+  >
+  </div>
+  <Picture
+    alt={alt}
+    class:list={tw("h-full w-full object-cover", imgClassName)}
+    data-id={uniqueId}
+    decoding={decoding}
+    fetchpriority={fetchpriority}
+    formats={formats}
+    inferSize
+    loading={loading}
+    sizes={sizes}
+    src={src}
+    widths={widths}
+  />
+  {caption && <figcaption class="sr-only">{caption}</figcaption>}
+</figure>
+
+<script>
+  import initImage from "./script/image";
+
+  initImage();
+</script>
