@@ -1,0 +1,38 @@
+---
+import { experimental_AstroContainer } from "astro/container";
+import { BLOCKS, MARKS, type Document } from "@contentful/rich-text-types";
+
+import Weight from "@components/typography/Weight.astro";
+import Headline from "@components/typography/Headline.astro";
+
+import documentToHtmlString, { type Options } from "./documentToHtmlString";
+
+const container = await experimental_AstroContainer.create();
+
+interface Props {
+  className: string;
+  document: Document;
+}
+
+const options: Options = {
+  renderMark: {
+    [MARKS.BOLD]: (text) =>
+      container.renderToString(Weight, {
+        props: { type: "bold" },
+        slots: { default: text },
+      }),
+  },
+  renderNode: {
+    [BLOCKS.PARAGRAPH]: (node, next) => next(node.content),
+  },
+};
+
+const { document, className } = Astro.props;
+
+const richHeadlineHtml = documentToHtmlString(document, options);
+---
+
+<Headline className={className}>
+  {/* eslint-disable-next-line astro/no-set-html-directive */}
+  <Fragment set:html={richHeadlineHtml} />
+</Headline>
