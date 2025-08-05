@@ -10,7 +10,7 @@ interface MethodologyItem {
   };
 }
 
-interface HomePage {
+interface MethodologyPreview {
   contentTypeId: "methodologyPreview";
   fields: {
     headerImage: EntryFieldTypes.AssetLink;
@@ -25,10 +25,12 @@ interface HomePage {
 
 const loadData = async () => {
   const entries =
-    await contentfulClient.withoutUnresolvableLinks.getEntries<HomePage>({
-      content_type: "methodologyPreview",
-      limit: 1,
-    });
+    await contentfulClient.withoutUnresolvableLinks.getEntries<MethodologyPreview>(
+      {
+        content_type: "methodologyPreview",
+        limit: 1,
+      },
+    );
 
   const [data] = entries.items;
 

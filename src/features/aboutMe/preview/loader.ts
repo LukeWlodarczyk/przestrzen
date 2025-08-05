@@ -1,7 +1,7 @@
 import type { EntryFieldTypes } from "contentful";
 import contentfulClient from "@lib/contentful";
 
-interface HomePage {
+interface AboutMePreview {
   contentTypeId: "aboutMePreview";
   fields: {
     heading: EntryFieldTypes.Text;
@@ -13,7 +13,7 @@ interface HomePage {
 }
 
 const loadData = async () => {
-  const entries = await contentfulClient.getEntries<HomePage>({
+  const entries = await contentfulClient.getEntries<AboutMePreview>({
     content_type: "aboutMePreview",
     limit: 1,
   });
