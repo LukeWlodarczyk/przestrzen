@@ -1,0 +1,75 @@
+---
+/* eslint-disable astro/no-unused-css-selector */
+import Section from "@components/layout/Section.astro";
+
+import Heading from "@components/typography/Heading.astro";
+
+import RichHeadline from "@components/richText/RichHeadline.astro";
+import RichTextBlock from "@components/richText/RichTextBlock.astro";
+
+import Widget from "@features/reservation/components/Widget";
+import List from "@features/reservation/components/List.astro";
+
+import loadWidgetData from "@features/reservation/loaders/widgetLoader";
+import loadOfficesData from "@features/reservation/loaders/officesLoader";
+import loadData from "./loader";
+
+const data = await loadData();
+const widgetData = await loadWidgetData();
+const officesData = await loadOfficesData();
+---
+
+<Section
+  className="reservation-preview-wrapper bg-soft-beige"
+  containerClassName="flex flex-col lg:grid lg:grid-cols-(--two-col-grid) lg:gap-(--space-m-l)"
+>
+  <div class="w-full">
+    <Heading className="text-center lg:text-left" level={2}
+      >{data.heading}</Heading
+    >
+    <RichHeadline
+      className="mt-(--space-s-m) text-center lg:text-left"
+      document={data.headline}
+    />
+    <RichTextBlock
+      className="text-center lg:ml-0 lg:text-left"
+      containerClassName="mx-auto mt-(--space-s-m)"
+      document={data.description}
+    />
+    <List
+      aria-label={officesData.label}
+      className="mx-auto mt-(--space-l-xl) hidden grid-cols-(--fluid-reservation-grid) gap-(--space-m-l) lg:grid"
+      offices={officesData.list}
+    />
+  </div>
+  <div
+    class="mx-auto mt-(--space-l-xl) grid w-full grid-cols-(--fluid-reservation-grid) gap-(--space-m-l) lg:order-first lg:mt-0 lg:grid-cols-1"
+  >
+    <List
+      aria-label={officesData.label}
+      className="mx-auto grid auto-rows-min grid-cols-(--fluid-reservation-grid) gap-(--space-m-l) lg:hidden"
+      offices={officesData.list}
+    />
+    <Widget
+      className="mx-auto h-full max-h-(--widget-max-height) min-h-(--widget-min-height) w-full min-[746px]:order-first"
+      client:visible={{ rootMargin: "800px" }}
+      therapistId={widgetData.therapistId}
+    />
+  </div>
+</Section>
+
+<style>
+  .reservation-preview-wrapper {
+    --widget-min-height: 752px;
+    --widget-max-height: 793px;
+
+    --min-reservation-col-width: 300px;
+    --max-reservation-col-width: 380px;
+
+    --fluid-reservation-grid: repeat(
+      auto-fill,
+      minmax(min(var(--min-reservation-col-width), 100%), 1fr)
+    );
+    --two-col-grid: var(--max-reservation-col-width) 1fr;
+  }
+</style>

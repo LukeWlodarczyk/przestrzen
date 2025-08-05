@@ -1,0 +1,46 @@
+---
+import { tw } from "@utils/index.ts";
+
+import OfficeCard from "./OfficeCard.astro";
+
+interface Office {
+  name: string;
+  fullName: string;
+  slug: string;
+  telephone: string;
+  email: string;
+  website: string;
+  coordinates: { lat: number; lon: number };
+  streetAddress: string;
+  postalCode: string;
+  addressLocality: string;
+  taxId: string;
+  main: boolean;
+}
+
+interface Props {
+  className?: string;
+  offices: Office[];
+}
+
+const { className, offices, ...attrs } = Astro.props;
+
+const baseClasses = tw("w-full");
+---
+
+<ul class:list={tw(baseClasses, className)} role="list" {...attrs}>
+  {
+    offices.map((office) => (
+      <li class="w-full">
+        <OfficeCard
+          address={`${office.streetAddress}, ${office.addressLocality}`}
+          email={office.email}
+          href={`/rezerwacja/gabinet/${office.slug}`}
+          name={office.name}
+          phone={office.telephone}
+          website={office.website}
+        />
+      </li>
+    ))
+  }
+</ul>
