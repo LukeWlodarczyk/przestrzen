@@ -10,8 +10,8 @@ import Map from "@components/interactive/Map";
 import loadMainOffice from "@features/contact/loaders/mainOfficeLoader";
 import loadData from "./loader";
 
-import Copyright from "./Copyright.astro";
-import Nav from "./Nav.astro";
+import Copyright from "./components/Copyright.astro";
+import Nav from "./components/Nav.astro";
 
 const data = await loadData();
 const mainOffice = await loadMainOffice();
