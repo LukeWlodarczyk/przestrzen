@@ -5,6 +5,10 @@ import Button from "@components/interactive/Button.astro";
 
 import Hamburger from "./Hamburger.astro";
 
+import loadHomeMainData from "@features/home/main/loader";
+
+const data = await loadHomeMainData();
+
 const NAV_LINKS = [
   {
     label: "O mnie",
@@ -25,7 +29,7 @@ const NAV_LINKS = [
 ];
 
 const CTA_LINK = {
-  label: "Zarezerwuj wizytę",
+  label: data.ctaLabel,
   href: "/rezerwacja",
 };
 
