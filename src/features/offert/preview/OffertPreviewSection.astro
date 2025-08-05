@@ -1,0 +1,138 @@
+---
+import Section from "@components/layout/Section.astro";
+
+import Heading from "@components/typography/Heading.astro";
+
+import RichHeadline from "@components/richText/RichHeadline.astro";
+import RichTextBlock from "@components/richText/RichTextBlock.astro";
+
+import Badge from "@components/interactive/Badge.astro";
+
+import Video from "@components/media/Video/Video.astro";
+
+import FormOfSupportCard from "@features/offert/components/FormOfSupportCard.astro";
+
+import { resolveAssetUrl } from "@lib/contentful";
+
+import cldVideoHelper from "@utils/cloudinary/video";
+import generateLQIP from "@utils/generateLQIP";
+
+import BREAKPOINTS from "@styles/breakpoints/breakpoints";
+
+import loadAreasOfSupportData from "@features/offert/loaders/areasOfSupportLoader";
+import loadFormsOfSupportData from "@features/offert/loaders/formsOfSupportLoader";
+
+import loadData from "./loader";
+
+const data = await loadData();
+
+const formsOfSupport = await loadFormsOfSupportData();
+const areasOfSupport = await loadAreasOfSupportData();
+
+const offertVideoPosterUrl = cldVideoHelper.buildPosterImageUrl(
+  data.cldVideoPublicId,
+  4.4,
+);
+const offertVideoPosterLqipDataUrl = await generateLQIP(offertVideoPosterUrl);
+
+const offertVideoSources = [
+  {
+    src: cldVideoHelper.buildRawVideoUrl(data.cldVideoPublicId),
+    type: "video/mp4",
+    media: `(min-width: ${BREAKPOINTS.sm}) and (prefers-reduced-motion: no-preference)`,
+    isHighBandwidth: true,
+  },
+  {
+    src: cldVideoHelper.buildSnapshotClipUrl(data.cldVideoPublicId, 4.4),
+    type: "video/mp4",
+  },
+];
+---
+
+<Section className="noise-30 bg-muted-green" id="offert">
+  <Heading className="text-center" level={2}>{data.heading}</Heading>
+  <RichHeadline
+    className="mt-(--space-s-m) text-center"
+    document={data.headline}
+  />
+  <Heading className="sr-only" level={3}>{data.areasOfSupportHeading}</Heading>
+  <RichTextBlock
+    className="text-center text-balance text-muted-teal"
+    containerClassName="mx-auto mt-(--space-s-m)"
+    document={data.areasOfSupportDescription}
+  />
+
+  <ul
+    aria-label={data.areasOfSupportHeading}
+    class="mt-(--space-l-xl) flex flex-wrap justify-center gap-x-(--space-s) gap-y-(--space-xs)"
+    role="list"
+  >
+    {
+      areasOfSupport.map((item) => (
+        <li>
+          <Badge
+            as="a"
+            className="hover:border-warm-yellow transition-colors outline-none hover:text-warm-yellow focus:border-warm-yellow focus:text-warm-yellow"
+            href={`/oferta/obszary-wsparcia/${item.slug}`}
+          >
+            {item.name}
+          </Badge>
+        </li>
+      ))
+    }
+  </ul>
+
+  <Video
+    alt=""
+    aria-hidden="true"
+    className="noise-30 my-(--space-2xl-3xl) aspect-[5/2.3] sm:aspect-[5/1.3]"
+    id="offert"
+    lqipDataUrl={offertVideoPosterLqipDataUrl}
+    poster={offertVideoPosterUrl}
+    sources={offertVideoSources}
+    videoClassName="object-[50%_30%]"
+  />
+
+  <Heading className="sr-only" level={3}>{data.formsOfSupportHeading}</Heading>
+  <RichTextBlock
+    className="text-center text-balance text-muted-teal"
+    containerClassName="mx-auto"
+    document={data.formsOfSupportDescription}
+  />
+
+  <ul
+    aria-label={data.formsOfSupportHeading}
+    class="mt-(--space-xl-2xl) grid auto-rows-auto grid-cols-(--fluid-form-of-support-grid) gap-(--space-m-l)"
+    role="list"
+  >
+    {
+      formsOfSupport.map((item) => (
+        <li>
+          <FormOfSupportCard
+            description={item.description}
+            imgSrc={resolveAssetUrl(item.image)}
+            label={item.name}
+            slug={item.slug}
+          />
+        </li>
+      ))
+    }
+  </ul>
+</Section>
+
+<style>
+  :root {
+    --min-form-of-support-col-width: 300px;
+
+    --fluid-form-of-support-grid: repeat(
+      auto-fill,
+      minmax(min(var(--min-form-of-support-col-width), 100%), 1fr)
+    );
+  }
+</style>
+
+<script>
+  import initOffert from "./script/offert";
+
+  initOffert();
+</script>
