@@ -1,11 +1,15 @@
 ---
 import Section from "@components/layout/Section.astro";
 
+import loadMainOffice from "@features/contact/loaders/mainOfficeLoader";
+
 interface Props {
   id: string;
 }
 
 const { id } = Astro.props;
+
+const mainOffice = await loadMainOffice();
 ---
 
 <Section
@@ -22,20 +26,25 @@ const { id } = Astro.props;
   </a>
 
   <div class="ml-auto flex flex-wrap items-center gap-x-(--space-xs)">
-    <p class="text-xs text-deep-green">ul. Słoneczna 16, Myślenice</p>
+    <p class="text-xs text-deep-green">
+      <a
+        class="outline-none hover:text-warm-yellow hover:underline focus:text-warm-yellow focus:underline"
+        href={`/kontakt`}
+        >{mainOffice.streetAddress}, {mainOffice.addressLocality}</a
+      >
+    </p>
     <p class="hidden text-xs text-deep-green md:inline-block">
       <span class="hidden lg:inline-block">tel:</span>
       <a
         class="outline-none hover:text-warm-yellow hover:underline focus:text-warm-yellow focus:underline"
-        href={`tel:888777666`}>888-777-666</a
+        href={`tel:${mainOffice.telephone}`}>{mainOffice.telephone}</a
       >
     </p>
     <p class="hidden text-xs text-deep-green lg:inline-block">
       <span class="hidden lg:inline-block">email:</span>
       <a
         class="outline-none hover:text-warm-yellow hover:underline focus:text-warm-yellow focus:underline"
-        href={`mailto:kontakt@gabinetprzestrzen.pl`}
-        >kontakt@gabinetprzestrzen.pl</a
+        href={`mailto:${mainOffice.email}`}>{mainOffice.email}</a
       >
     </p>
   </div>

@@ -1,7 +1,7 @@
 import type { EntryFieldTypes } from "contentful";
 import contentfulClient from "@lib/contentful";
 
-interface Office {
+export interface Office {
   contentTypeId: "office";
   fields: {
     name: EntryFieldTypes.Text;
