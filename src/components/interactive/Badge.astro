@@ -1,0 +1,20 @@
+---
+import type { HTMLTag, Polymorphic } from "astro/types";
+
+import { tw, type PropsWithChildren } from "@utils/index";
+
+type Props<Tag extends HTMLTag> = Polymorphic<
+  PropsWithChildren<{
+    as: Tag;
+    className?: string;
+  }>
+>;
+
+const { as: Tag = "a", className = "", ...attrs } = Astro.props;
+
+const baseClasses = tw(
+  "block rounded-2xl border border-forest-green px-(--space-s) py-(--space-3xs) font-extralight whitespace-nowrap text-forest-green",
+);
+---
+
+<Tag class:list={tw(baseClasses, className)} {...attrs}><slot /></Tag>
