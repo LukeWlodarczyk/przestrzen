@@ -1,7 +1,7 @@
 import { getRequiredCssVariable, getRequiredElement } from "@utils/index";
 
 import initMobileMenu from "./mobileMenu";
-import initHeaderAnimator from "./animator";
+import initHeaderAnimator from "./headerAnimator";
 
 import {
   combineTraps,
