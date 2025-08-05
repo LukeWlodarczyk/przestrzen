@@ -14,6 +14,7 @@
   "dependencies": {
     "@astrojs/react": "^4.3.0",
     "@contentful/rich-text-html-renderer": "^17.1.0",
+    "@contentful/rich-text-plain-text-renderer": "^17.1.0",
     "@tailwindcss/vite": "^4.1.5",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
