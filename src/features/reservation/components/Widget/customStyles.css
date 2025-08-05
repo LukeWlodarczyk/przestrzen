@@ -1,0 +1,114 @@
+div.tp-widget {
+  background-color: #fffefc !important;
+  max-width: unset !important;
+
+  @container (min-width: 360px) {
+    padding-inline: 10px;
+  }
+
+  border-radius: 16px !important;
+
+  .tp-widget__top {
+    display: none;
+  }
+
+  .tp-widget__select {
+    margin-top: 20px !important;
+  }
+
+  .tp-widget-select__dropdown-button {
+    padding: 10px 15px !important;
+  }
+
+  .tp-widget-select__selected-item-subtitle {
+    display: none;
+  }
+
+  .tp-widget__calendar > div:first-child {
+    min-width: 100%;
+  }
+
+  .tp-widget__calendar-error {
+    color: var(--color-earth-red) !important;
+  }
+
+  .tp-widget__calendar-header {
+    place-items: center !important;
+    display: block !important;
+    margin-top: 50px !important;
+    position: relative;
+  }
+
+  .tp-widget__calendar-header-button {
+    position: absolute;
+    padding: 0 !important;
+    justify-content: center;
+    background-color: var(--color-deep-green) !important;
+
+    &:hover {
+      background-color: var(--color-deep-green) !important;
+      filter: brightness(0.8) !important;
+    }
+  }
+
+  @container (min-width: 330px) {
+    .tp-widget__calendar-header-button {
+      position: static;
+    }
+
+    .tp-widget__calendar-header {
+      display: grid !important;
+      margin-top: 8px !important;
+    }
+  }
+
+  .tp-widget__calendar-header-button {
+    .tp-widget__calendar-show-more-arrow-path {
+      stroke: var(--color-bright-yellow) !important;
+    }
+  }
+
+  .tp-widget__calendar-header-button--left {
+    top: -40px;
+    left: 7%;
+  }
+
+  .tp-widget__calendar-header-button--right {
+    top: -40px;
+    right: 7%;
+  }
+
+  .tp-widget__calendar-slots {
+    scrollbar-gutter: stable both-edges;
+  }
+
+  .tp-widget__calendar-hour-container {
+    grid-template-columns: 46px 46px 46px 46px !important;
+    justify-content: center !important;
+    gap: 14px;
+  }
+
+  .tp-widget__calendar-hour-container > div:first-child,
+  .tp-widget__calendar-hour-container > div:last-child {
+    display: none !important;
+  }
+
+  .tp-widget__calendar-hour-container-day-container-hour-div {
+    color: var(--color-deep-green) !important;
+    background-color: var(--color-bright-yellow) !important;
+    font-weight: 400 !important;
+  }
+
+  .tp-widget__empty {
+    min-height: unset !important;
+  }
+
+  .tp-widget__calendar-show-more {
+    width: 95% !important;
+    margin-inline: auto !important;
+  }
+
+  .tp-widget__button-wrapper-icon {
+    margin-right: 10px !important;
+  }
+}
