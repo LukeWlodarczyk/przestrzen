@@ -3,12 +3,18 @@ import CompanyDetails from "@features/contact/components/CompanyDetails.astro";
 
 import Section from "@components/layout/Section.astro";
 
-import Headline from "@components/typography/Headline.astro";
+import RichHeadline from "@components/richText/RichHeadline.astro";
 
 import Map from "@components/interactive/Map";
 
-import Copyright from "@components/layout/footer/Copyright.astro";
-import Nav from "@components/layout/footer/Nav.astro";
+import loadMainOffice from "@features/contact/loaders/mainOfficeLoader";
+import loadData from "./loader";
+
+import Copyright from "./Copyright.astro";
+import Nav from "./Nav.astro";
+
+const data = await loadData();
+const mainOffice = await loadMainOffice();
 
 const NAV_ITEMS = [
   { label: "O mnie", href: "/o-mnie" },
@@ -18,25 +24,14 @@ const NAV_ITEMS = [
   { label: "Rezerwacja", href: "/rezerwacja" },
 ];
 
-const COMPANY_DETAILS = {
-  name: "Przestrzeń – Gabinet Pomocy Psychologicznej Mateusz Pietrzkiewicz",
-  streetAddress: "ul. Słoneczna 16",
-  postalCode: "32-400",
-  addressLocality: "Myślenice",
-  telephone: "731-245-342",
-  email: "kontakt@gabinetprzestrzen.pl",
-  taxId: "3939809584",
-};
+const currentYear = new Date().getFullYear();
 ---
 
-<Section
-  as="footer"
-  className="noise-20 bg-night-green last-of-type:pb-(--space-m-3xl)"
->
-  <Headline className="text-center text-xl text-warm-white">
-    Miejsce na Twoją opowieść.<br /> Gabinet pomocy psychologicznej w nurcie <br
-    /> poznawczo-behawioralnym.
-  </Headline>
+<Section as="footer" className="noise-20 bg-night-green pb-(--space-m-3xl)">
+  <RichHeadline
+    className="text-center text-xl text-warm-white"
+    document={data.headline}
+  />
 
   <article
     aria-label="Dane firmy i kontakt"
@@ -45,17 +40,17 @@ const COMPANY_DETAILS = {
     <Map
       className="aspect-square max-w-[500px] lg:w-1/2"
       client:visible
-      location={[19.950430288569066, 49.83178335891374]}
+      location={mainOffice.coordinates}
     />
 
     <CompanyDetails
       className="text-warm-white"
-      details={COMPANY_DETAILS}
+      details={mainOffice}
       withScope
     />
   </article>
 
   <Nav items={NAV_ITEMS} />
 
-  <Copyright>© 2025 Przestrzeń</Copyright>
+  <Copyright>© {currentYear} Przestrzeń</Copyright>
 </Section>
