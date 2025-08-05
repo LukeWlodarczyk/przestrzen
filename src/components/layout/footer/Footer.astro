@@ -7,14 +7,14 @@ import RichHeadline from "@components/richText/RichHeadline.astro";
 
 import Map from "@components/interactive/Map";
 
-import loadMainOffice from "@features/contact/loaders/mainOfficeLoader";
+import loadCompanyDetails from "@features/contact/loaders/companyDetailsLoader";
 import loadData from "./loader";
 
 import Copyright from "./components/Copyright.astro";
 import Nav from "./components/Nav.astro";
 
 const data = await loadData();
-const mainOffice = await loadMainOffice();
+const companyDetails = await loadCompanyDetails();
 
 const NAV_ITEMS = [
   { label: "O mnie", href: "/o-mnie" },
@@ -34,18 +34,18 @@ const currentYear = new Date().getFullYear();
   />
 
   <article
-    aria-label="Dane firmy i kontakt"
+    aria-label={companyDetails.label}
     class="mt-(--space-2xl-4xl) flex w-full flex-col items-center gap-(--space-2xl-3xl) lg:flex-row"
   >
     <Map
       className="aspect-square max-w-[500px] lg:w-1/2"
       client:visible
-      location={mainOffice.coordinates}
+      location={companyDetails.office.coordinates}
     />
 
     <CompanyDetails
       className="text-warm-white"
-      details={mainOffice}
+      details={companyDetails.office}
       withScope
     />
   </article>

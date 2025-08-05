@@ -2,7 +2,7 @@
 import { tw } from "@utils/index";
 
 interface CompanyDetails {
-  name: string;
+  fullName: string;
   streetAddress: string;
   postalCode: string;
   addressLocality: string;
@@ -34,7 +34,7 @@ const rootAttributes = withScope
 <dl {...rootAttributes} class:list={tw(baseClasses, className)}>
   <div class="flex font-medium text-pretty text-warm-yellow">
     <dt class="sr-only">Nazwa</dt>
-    <dd {...withScope && { itemprop: "name" }}>{details.name}</dd>
+    <dd {...withScope && { itemprop: "name" }}>{details.fullName}</dd>
   </div>
 
   <div class="flex w-fit gap-2">
