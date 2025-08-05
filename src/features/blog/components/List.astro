@@ -1,0 +1,52 @@
+---
+import type { Asset } from "contentful";
+import { type Document } from "@contentful/rich-text-types";
+
+import { resolveAssetUrl } from "@lib/contentful";
+
+import PostCard from "@features/blog/components/PostCard.astro";
+
+import { tw } from "@utils/index.ts";
+
+interface BlogPost {
+  title: string;
+  slug: string;
+  description: string;
+  image: Asset<"WITHOUT_UNRESOLVABLE_LINKS", string> | undefined;
+  body: Document;
+  timeToRead: number;
+}
+
+interface Props {
+  className?: string;
+  posts: BlogPost[];
+}
+
+const { className, posts, ...attrs } = Astro.props;
+
+const baseClasses = tw("grid gap-(--space-m-l) xl:grid-cols-2");
+
+const isTotalEven = posts.length % 2 === 0;
+---
+
+<ul class:list={tw(baseClasses, className)} {...attrs}>
+  {
+    posts.map((post) => (
+      <li
+        class:list={tw(
+          "group xl:first:col-span-2",
+          isTotalEven && "xl:last:col-span-2",
+        )}
+      >
+        <PostCard
+          className="group-even:group"
+          description={post.description}
+          href={`blog/${post.slug}`}
+          imgSrc={resolveAssetUrl(post.image)}
+          timeToRead={post.timeToRead}
+          title={post.title}
+        />
+      </li>
+    ))
+  }
+</ul>

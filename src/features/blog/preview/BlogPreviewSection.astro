@@ -1,0 +1,39 @@
+---
+import Section from "@components/layout/Section.astro";
+
+import Heading from "@components/typography/Heading.astro";
+
+import RichHeadline from "@components/richText/RichHeadline.astro";
+import RichTextBlock from "@components/richText/RichTextBlock.astro";
+
+import Button from "@components/interactive/Button.astro";
+
+import List from "@features/blog/components/List.astro";
+
+import loadData from "./loader";
+
+const data = await loadData();
+---
+
+<Section className="bg-warm-white">
+  <Heading className="text-left" level={2}>{data.heading}</Heading>
+  <RichHeadline
+    className="mt-(--space-s-m) text-left"
+    document={data.headline}
+  />
+  <RichTextBlock
+    className="text-left"
+    containerClassName="mt-(--space-s-m)"
+    document={data.description}
+  />
+  <List
+    aria-label="Polecane publikacje"
+    className="mt-(--space-l-xl)"
+    posts={data.recomendedBlogPosts}
+  />
+  <Button
+    className="mx-auto mt-(--space-m-l) w-full"
+    href="/blog"
+    variant="secondary">{data.ctaLabel}</Button
+  >
+</Section>
