@@ -15,7 +15,6 @@ export interface Office {
     postalCode: EntryFieldTypes.Text;
     addressLocality: EntryFieldTypes.Text;
     taxId: EntryFieldTypes.Text;
-    main: EntryFieldTypes.Boolean;
   };
 }
 
