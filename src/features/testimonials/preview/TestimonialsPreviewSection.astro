@@ -1,0 +1,61 @@
+---
+import Section from "@components/layout/Section.astro";
+
+import Heading from "@components/typography/Heading.astro";
+
+import RichHeadline from "@components/richText/RichHeadline.astro";
+
+import Carousel from "@features/testimonials/components/Carousel/Carousel.astro";
+
+import cldVideoHelper from "@utils/cloudinary/video";
+import generateLQIP from "@utils/generateLQIP";
+
+import BREAKPOINTS from "@styles/breakpoints/breakpoints";
+
+import loadData from "./loader";
+
+const data = await loadData();
+
+const carouselViedoSources = [
+  {
+    src: cldVideoHelper.buildOptimizedVideoUrl(data.cldVideoPublicId, "best"),
+    type: "video/mp4",
+    media: `(min-width: ${BREAKPOINTS.xl}) and (prefers-reduced-motion: no-preference)`,
+    isHighBandwidth: true,
+  },
+  {
+    src: cldVideoHelper.buildOptimizedVideoUrl(data.cldVideoPublicId, "eco"),
+    type: "video/mp4",
+    media: `(prefers-reduced-motion: no-preference)`,
+    isHighBandwidth: true,
+  },
+  {
+    src: cldVideoHelper.buildSnapshotClipUrl(data.cldVideoPublicId, 0),
+    type: "video/mp4",
+  },
+];
+
+const posterImageUrl = cldVideoHelper.buildPosterImageUrl(
+  data.cldVideoPublicId,
+  0,
+);
+
+const lqipDataUrl = await generateLQIP(posterImageUrl);
+---
+
+<Section className="noise-16 bg-muted-teal" id="testimonials-preview">
+  <Heading className="text-center" level={2}>{data.heading}</Heading>
+  <RichHeadline
+    className="mt-(--space-s-m) text-center text-warm-white"
+    document={data.headline}
+  />
+
+  <Carousel
+    className="mt-(--space-2xl-3xl)"
+    items={data.testimonials}
+    label={data.carouselLabel}
+    videoLqip={lqipDataUrl}
+    videoPoster={posterImageUrl}
+    videoSources={carouselViedoSources}
+  />
+</Section>
