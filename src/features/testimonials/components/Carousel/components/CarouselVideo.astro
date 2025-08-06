@@ -1,0 +1,23 @@
+---
+import Video from "@components/media/Video/Video.astro";
+
+import type { Props as CarouseProps } from "../Carousel.astro";
+
+type Props = Pick<CarouseProps, "videoSources" | "videoPoster" | "videoLqip">;
+
+const { videoSources, videoPoster, videoLqip } = Astro.props;
+---
+
+<div
+  class="relative mx-auto aspect-square w-(--testimonials-carousel-video-width) overflow-hidden rounded-full bg-sand-beige"
+>
+  <Video
+    alt=""
+    aria-hidden="true"
+    className="video noise-15 h-max w-max rounded-none"
+    loop
+    lqipDataUrl={videoLqip}
+    poster={videoPoster}
+    sources={videoSources}
+  />
+</div>
