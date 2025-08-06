@@ -1,0 +1,45 @@
+---
+import Paragraph from "@components/typography/Paragraph.astro";
+import { tw } from "@utils/index";
+
+import type { Props as CarouselProps } from "../Carousel.astro";
+
+interface Props {
+  items: CarouselProps["items"];
+}
+
+const { items } = Astro.props;
+---
+
+<div aria-live="polite" class="relative mx-auto h-[300px] w-full max-w-[500px]">
+  {
+    items.map((item, index) => (
+      <figure
+        aria-hidden={index !== 0}
+        aria-labelledby={item.id}
+        aria-roledescription="Slajd"
+        class:list={tw(
+          "carousel-slide invisible absolute inset-0 w-full opacity-0 select-none",
+          index === 0 ? "visible opacity-100" : "",
+        )}
+        data-video-transform={JSON.stringify(item.videoTransform)}
+        role="group"
+      >
+        <span class="sr-only">
+          Slajd {index + 1} z {items.length}
+        </span>
+        <blockquote class="mt-(--space-m-l)">
+          <Paragraph className="text-justify tracking-widest text-sand-beige">
+            "{item.body}"
+          </Paragraph>
+        </blockquote>
+        <figcaption
+          class="mt-(--space-xs-s) text-right font-bold text-sand-beige"
+          id={item.id}
+        >
+          {item.author}
+        </figcaption>
+      </figure>
+    ))
+  }
+</div>

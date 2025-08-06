@@ -1,0 +1,22 @@
+---
+import Arrow from "../assets/arrow.svg";
+---
+
+<div
+  aria-label="Kontrola pokazu slajdów"
+  class="right-0 left-0 mx-auto flex w-full max-w-[850px] justify-between md:absolute md:top-[calc(var(--testimonials-carousel-video-width)*0.5)] md:-translate-y-1/2"
+  role="group"
+>
+  <button
+    aria-label="Poprzedni slajd"
+    class="carousel-control prev w-(--space-5xl) scale-x-[-1] cursor-pointer text-warm-white transition-colors outline-none hover:text-warm-yellow focus-visible:text-warm-yellow active:text-warm-yellow"
+  >
+    <Arrow />
+  </button>
+  <button
+    aria-label="Następny slajd"
+    class="carousel-control next w-(--space-5xl) cursor-pointer text-warm-white transition-colors outline-none hover:text-warm-yellow focus-visible:text-warm-yellow active:text-warm-yellow"
+  >
+    <Arrow />
+  </button>
+</div>

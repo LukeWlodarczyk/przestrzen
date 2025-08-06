@@ -1,0 +1,69 @@
+---
+import { tw } from "@utils/index.ts";
+
+import { type VideoSource } from "@components/media/Video/Video.astro";
+
+import CarouselSlides from "./components/CarouselSlides.astro";
+import CarouselIndicators from "./components/CarouselIndicators.astro";
+import CarouselVideo from "./components/CarouselVideo.astro";
+import CarouselControls from "./components/CarouselControls.astro";
+
+interface Testimonial {
+  id: string;
+  author: string;
+  body: string;
+  videoTransform: {
+    x: number;
+    y: number;
+    scale: number;
+  };
+}
+
+export interface Props {
+  className?: string;
+  label: string;
+  items: Testimonial[];
+  videoSources: VideoSource[];
+  videoLqip: string;
+  videoPoster: string;
+}
+
+const { className, label, items, videoSources, videoLqip, videoPoster } =
+  Astro.props;
+
+const baseClasses = tw(
+  "carousel relative cursor-grab focus:outline-0 active:cursor-grabbing",
+);
+---
+
+<div
+  aria-label={label}
+  aria-roledescription="Pokaz slajdów"
+  class:list={tw(baseClasses, className)}
+  role="group"
+  tabindex="0"
+>
+  <CarouselVideo
+    videoLqip={videoLqip}
+    videoPoster={videoPoster}
+    videoSources={videoSources}
+  />
+
+  <CarouselIndicators length={items.length} />
+
+  <CarouselSlides items={items} />
+
+  <CarouselControls />
+</div>
+
+<style>
+  .carousel {
+    --testimonials-carousel-video-width: 220px;
+  }
+</style>
+
+<script>
+  import initCarousel from "./script/carousel";
+
+  initCarousel(".carousel");
+</script>

@@ -1,0 +1,48 @@
+---
+import { tw } from "@utils/index";
+
+import Leaf from "../assets/leaf.svg";
+
+interface Props {
+  length: number;
+}
+
+const { length } = Astro.props;
+---
+
+<div
+  aria-hidden="true"
+  class="carousel-indicators-wrapper relative top-[-160px] mx-auto flex cursor-auto justify-center gap-(--space-xs)"
+>
+  {
+    Array.from({ length }).map((_item, index) => (
+      <div class="carousel-indicator absolute" style={{ "--i": index }}>
+        <Leaf
+          class:list={tw(
+            "carousel-indicator-icon",
+            "w-5 text-warm-white",
+            index + 1 > length / 2 ? "scale-x-[-1]" : "",
+            index === 0 ? "text-warm-yellow" : "",
+          )}
+        />
+      </div>
+    ))
+  }
+</div>
+
+<style define:vars={{ length }}>
+  .carousel-indicators-wrapper {
+    --total: var(--length);
+    --radius: calc(var(--testimonials-carousel-video-width) / 2);
+    --arc: 90deg;
+    --start-angle: -45deg;
+  }
+
+  .carousel-indicator {
+    --angle: calc(
+      var(--start-angle) + (var(--arc) / (var(--total) - 1)) * var(--i)
+    );
+
+    transform: rotate(var(--angle)) translateY(calc(-1 * var(--radius)));
+  }
+</style>
