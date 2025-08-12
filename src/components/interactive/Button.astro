@@ -1,12 +1,13 @@
 ---
+/* eslint-disable astro/no-exports-from-components */
 import type { JSX } from "astro/jsx-runtime";
 
 import { tw, type PropsWithChildren } from "@utils/index.ts";
 
 type AllowedTags = "a" | "button";
 
-type Variant = "primary" | "secondary" | "tertiary";
-type Size = "medium" | "large";
+export type Variant = "primary" | "secondary" | "tertiary";
+export type Size = "medium" | "large";
 
 interface BaseProps {
   variant?: Variant;
@@ -28,16 +29,16 @@ const {
   ...attrs
 } = Astro.props;
 
-const baseClasses = tw(
+export const baseClasses = tw(
   "block w-fit cursor-pointer rounded-2xl text-center select-none",
 );
 
-const sizeClasses = {
+export const sizeClasses = {
   medium: "px-(--space-m) py-(--space-2xs)",
   large: "px-(--space-l-xl) py-(--space-2xs)",
 };
 
-const variantClasses = {
+export const variantClasses = {
   primary:
     "group noise-10 bg-deep-green tracking-widest text-bright-yellow outline-offset-2 outline-deep-green",
   secondary:
