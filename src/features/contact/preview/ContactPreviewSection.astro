@@ -1,0 +1,30 @@
+---
+import Section from "@components/layout/Section.astro";
+
+import Heading from "@components/typography/Heading.astro";
+
+import RichHeadline from "@components/richText/RichHeadline.astro";
+import RichTextBlock from "@components/richText/RichTextBlock.astro";
+
+import ContactForm from "@features/contact/components/ContactForm/ContactForm";
+
+import loadData from "./loader";
+
+const data = await loadData();
+---
+
+<Section
+  className="bg-soft-beige"
+  containerClassName="flex flex-col items-center"
+>
+  <Heading className="text-center" level={2}>{data.heading}</Heading>
+  <RichHeadline
+    className="mt-(--space-s-m) text-center"
+    document={data.headline}
+  />
+  <RichTextBlock
+    className="mt-(--space-s-m) text-center"
+    document={data.description}
+  />
+  <ContactForm className="mt-(--space-l-xl)" client:visible />
+</Section>
