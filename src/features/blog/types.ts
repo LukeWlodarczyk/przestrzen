@@ -1,5 +1,6 @@
 import type { EntryFieldTypes } from "contentful";
-import contentfulClient, { timeToRead } from "@lib/contentful";
+
+import loadPreviewData from "@features/blog/loaders/previewLoader";
 
 export interface BlogPost {
   contentTypeId: "blogPost";
@@ -12,7 +13,7 @@ export interface BlogPost {
   };
 }
 
-interface BlogPreview {
+export interface BlogPreview {
   contentTypeId: "blogPreview";
   fields: {
     heading: EntryFieldTypes.Text;
@@ -25,22 +26,6 @@ interface BlogPreview {
   };
 }
 
-const loadData = async () => {
-  const entries =
-    await contentfulClient.withoutUnresolvableLinks.getEntries<BlogPreview>({
-      content_type: "blogPreview",
-      limit: 1,
-    });
-
-  const [data] = entries.items;
-
-  return {
-    ...data.fields,
-    recomendedBlogPosts: data.fields.recomendedBlogPosts
-      .map((post) => post?.fields)
-      .filter((post) => !!post)
-      .map((post) => ({ ...post, timeToRead: timeToRead(post.body) })),
-  };
-};
-
-export default loadData;
+export type BlogPostFields = Awaited<
+  ReturnType<typeof loadPreviewData>
+>["recomendedBlogPosts"][number];
