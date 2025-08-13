@@ -1,14 +1,8 @@
-import type { EntryFieldTypes } from "contentful";
 import contentfulClient from "@lib/contentful";
 
-interface Widget {
-  contentTypeId: "widget";
-  fields: {
-    therapistId: EntryFieldTypes.Text;
-  };
-}
+import type { Widget } from "@features/reservation/types";
 
-const loadData = async () => {
+const loadWidgetData = async () => {
   const entries = await contentfulClient.getEntries<Widget>({
     content_type: "widget",
     limit: 1,
@@ -19,4 +13,4 @@ const loadData = async () => {
   return data.fields;
 };
 
-export default loadData;
+export default loadWidgetData;
