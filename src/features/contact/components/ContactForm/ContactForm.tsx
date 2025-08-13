@@ -8,16 +8,21 @@ import Input from "@components/form/Input";
 import Textarea from "@components/form/Textarea";
 import SubmitButton from "@components/form/SubmitButton";
 
+import submitContactForm from "./api";
+
 import { ContactFormSchema, type ContactFormFields } from "./schema";
 
 interface ContactFormProps {
   className?: string;
 }
 
+const FORM_NAME = "contact";
+
 const baseClasses = tw("@container w-full max-w-prose");
 
 const ContactForm: FC<ContactFormProps> = ({ className }) => {
   const {
+    reset,
     register,
     handleSubmit,
     formState: { errors, touchedFields },
@@ -27,8 +32,19 @@ const ContactForm: FC<ContactFormProps> = ({ className }) => {
     defaultValues: { name: "", email: "", message: "" },
   });
 
-  const onSubmit: SubmitHandler<ContactFormFields> = (data) => {
-    console.log("Success: ", data);
+  const onSubmit: SubmitHandler<ContactFormFields> = async (data) => {
+    try {
+      await submitContactForm({
+        ...data,
+        "form-name": FORM_NAME,
+        subject: `Nowa wiadomość od ${data.name}`,
+      });
+
+      reset();
+      // window.location.href = "/kontakt/sukces";
+    } catch (error) {
+      console.error("Błąd: " + error);
+    }
   };
 
   return (
@@ -37,10 +53,15 @@ const ContactForm: FC<ContactFormProps> = ({ className }) => {
       onSubmit={handleSubmit(onSubmit)}
       autoComplete="off"
       noValidate={true}
+      data-netlify="true"
+      netlify-honeypot="botTrap"
+      name={FORM_NAME}
     >
       <fieldset className="flex flex-wrap gap-(--space-m)">
         <legend className="sr-only">Formularz kontaktowy</legend>
         <div className="flex w-full flex-col gap-(--space-m) @xl:flex-row">
+          <input className="hidden" name="subject" />
+          <input className="hidden" {...register("botTrap")} />
           <Input
             aria-required
             hint="Wprowadź imię o długości od 3 do 16 znaków."
