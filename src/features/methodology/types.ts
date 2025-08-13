@@ -1,5 +1,4 @@
 import type { EntryFieldTypes } from "contentful";
-import contentfulClient from "@lib/contentful";
 
 interface MethodologyItem {
   contentTypeId: "methodologyItem";
@@ -10,7 +9,7 @@ interface MethodologyItem {
   };
 }
 
-interface MethodologyPreview {
+export interface MethodologyPreview {
   contentTypeId: "methodologyPreview";
   fields: {
     headerImage: EntryFieldTypes.AssetLink;
@@ -22,24 +21,3 @@ interface MethodologyPreview {
     footerImage: EntryFieldTypes.AssetLink;
   };
 }
-
-const loadData = async () => {
-  const entries =
-    await contentfulClient.withoutUnresolvableLinks.getEntries<MethodologyPreview>(
-      {
-        content_type: "methodologyPreview",
-        limit: 1,
-      },
-    );
-
-  const [data] = entries.items;
-
-  return {
-    ...data.fields,
-    items: data.fields.items
-      .map((item) => item?.fields)
-      .filter((item) => !!item),
-  };
-};
-
-export default loadData;

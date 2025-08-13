@@ -10,9 +10,9 @@ import Image from "@components/media/Image/Image.astro";
 
 import { resolveAssetUrl } from "@lib/contentful";
 
-import MethodologyItem from "../components/MethodologyItem.astro";
+import MethodologyItem from "@features/methodology/components/MethodologyItem.astro";
 
-import laodData from "./loader";
+import laodData from "@features/methodology/loaders/previewLoader";
 
 const data = await laodData();
 ---
