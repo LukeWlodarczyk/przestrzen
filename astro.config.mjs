@@ -15,5 +15,8 @@ export default defineConfig({
     // @ts-expect-error
     plugins: [tailwindcss()],
   },
+  image: {
+    domains: ["images.ctfassets.net"],
+  },
   integrations: [react()],
 });
