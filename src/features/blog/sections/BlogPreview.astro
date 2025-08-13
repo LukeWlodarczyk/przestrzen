@@ -8,9 +8,9 @@ import RichTextBlock from "@components/richText/RichTextBlock.astro";
 
 import Button from "@components/interactive/Button.astro";
 
-import List from "@features/blog/components/List.astro";
+import BlogPostList from "@features/blog/components/BlogPostList.astro";
 
-import loadData from "./loader";
+import loadData from "@features/blog/loaders/previewLoader";
 
 const data = await loadData();
 ---
@@ -26,7 +26,7 @@ const data = await loadData();
     containerClassName="mt-(--space-s-m)"
     document={data.description}
   />
-  <List
+  <BlogPostList
     aria-label="Polecane publikacje"
     className="mt-(--space-l-xl)"
     posts={data.recomendedBlogPosts}

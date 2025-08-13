@@ -1,21 +1,11 @@
 ---
-import type { Asset } from "contentful";
-import { type Document } from "@contentful/rich-text-types";
-
 import { resolveAssetUrl } from "@lib/contentful";
-
-import PostCard from "@features/blog/components/PostCard.astro";
 
 import { tw } from "@utils/index.ts";
 
-interface BlogPost {
-  title: string;
-  slug: string;
-  description: string;
-  image: Asset<"WITHOUT_UNRESOLVABLE_LINKS", string> | undefined;
-  body: Document;
-  timeToRead: number;
-}
+import BlogPostCard from "@features/blog/components/BlogPostCard.astro";
+
+import type { BlogPostFields as BlogPost } from "@features/blog/types";
 
 interface Props {
   className?: string;
@@ -38,7 +28,7 @@ const isTotalEven = posts.length % 2 === 0;
           isTotalEven && "xl:last:col-span-2",
         )}
       >
-        <PostCard
+        <BlogPostCard
           className="group-even:group"
           description={post.description}
           href={`blog/${post.slug}`}
