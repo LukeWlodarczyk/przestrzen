@@ -1,24 +1,6 @@
-import type { EntryFieldTypes } from "contentful";
 import contentfulClient from "@lib/contentful";
 
-interface FormOfSupport {
-  contentTypeId: "formOfSupport";
-  fields: {
-    name: EntryFieldTypes.Text;
-    slug: EntryFieldTypes.Text;
-    description: EntryFieldTypes.Text;
-    image: EntryFieldTypes.AssetLink;
-  };
-}
-
-interface FormsOfSupportList {
-  contentTypeId: "formsOfSupportList";
-  fields: {
-    listInOrder: EntryFieldTypes.Array<
-      EntryFieldTypes.EntryLink<FormOfSupport>
-    >;
-  };
-}
+import type { FormsOfSupportList } from "@features/offert/types";
 
 const loadDataOrdered = async () => {
   const entries =
