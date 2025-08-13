@@ -1,17 +1,8 @@
-import type { EntryFieldTypes } from "contentful";
 import contentfulClient from "@lib/contentful";
 
-import type { Office } from "@features/reservation/loaders/officesLoader";
+import type { CompanyDetails } from "@features/contact/types";
 
-interface CompanyDetails {
-  contentTypeId: "companyDetails";
-  fields: {
-    label: EntryFieldTypes.Text;
-    office: EntryFieldTypes.EntryLink<Office>;
-  };
-}
-
-const loadData = async () => {
+const loadCompanyDetailsData = async () => {
   const entries =
     await contentfulClient.withoutUnresolvableLinks.getEntries<CompanyDetails>({
       content_type: "companyDetails",
@@ -28,4 +19,4 @@ const loadData = async () => {
   };
 };
 
-export default loadData;
+export default loadCompanyDetailsData;
