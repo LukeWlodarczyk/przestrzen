@@ -1,19 +1,10 @@
 ---
 import { tw } from "@utils/index";
-
-interface CompanyDetails {
-  fullName: string;
-  streetAddress: string;
-  postalCode: string;
-  addressLocality: string;
-  telephone: string;
-  email: string;
-  taxId: string;
-}
+import type { CompanyDetailsFields as CompanyDetails } from "../types";
 
 interface Props {
-  withScope?: boolean;
   className?: string;
+  withScope?: boolean;
   details: CompanyDetails;
 }
 

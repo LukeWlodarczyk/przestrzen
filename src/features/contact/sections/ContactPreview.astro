@@ -8,7 +8,7 @@ import RichTextBlock from "@components/richText/RichTextBlock.astro";
 
 import ContactForm from "@features/contact/components/ContactForm/ContactForm";
 
-import loadData from "./loader";
+import loadData from "@features/contact/loaders/previewLoader";
 
 const data = await loadData();
 ---
