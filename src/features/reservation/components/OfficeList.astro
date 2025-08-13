@@ -1,22 +1,9 @@
 ---
 import { tw } from "@utils/index.ts";
 
-import OfficeCard from "./OfficeCard.astro";
+import OfficeCard from "@features/reservation/components/OfficeCard.astro";
 
-interface Office {
-  name: string;
-  fullName: string;
-  slug: string;
-  telephone: string;
-  email: string;
-  website: string;
-  coordinates: { lat: number; lon: number };
-  streetAddress: string;
-  postalCode: string;
-  addressLocality: string;
-  taxId: string;
-  main: boolean;
-}
+import type { OfficeFields as Office } from "@features/reservation/types";
 
 interface Props {
   className?: string;

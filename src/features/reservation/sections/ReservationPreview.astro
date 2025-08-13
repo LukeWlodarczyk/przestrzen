@@ -8,11 +8,11 @@ import RichHeadline from "@components/richText/RichHeadline.astro";
 import RichTextBlock from "@components/richText/RichTextBlock.astro";
 
 import Widget from "@features/reservation/components/Widget";
-import List from "@features/reservation/components/List.astro";
+import OfficeList from "@features/reservation/components/OfficeList.astro";
 
+import loadData from "@features/reservation/loaders/previewLoader";
 import loadWidgetData from "@features/reservation/loaders/widgetLoader";
 import loadOfficesData from "@features/reservation/loaders/officesLoader";
-import loadData from "./loader";
 
 const data = await loadData();
 const widgetData = await loadWidgetData();
@@ -36,7 +36,7 @@ const officesData = await loadOfficesData();
       containerClassName="mx-auto mt-(--space-s-m)"
       document={data.description}
     />
-    <List
+    <OfficeList
       aria-label={officesData.label}
       className="mx-auto mt-(--space-l-xl) hidden grid-cols-(--fluid-reservation-grid) gap-(--space-m-l) lg:grid"
       offices={officesData.list}
@@ -45,7 +45,7 @@ const officesData = await loadOfficesData();
   <div
     class="mx-auto mt-(--space-l-xl) grid w-full grid-cols-(--fluid-reservation-grid) gap-(--space-m-l) lg:order-first lg:mt-0 lg:grid-cols-1"
   >
-    <List
+    <OfficeList
       aria-label={officesData.label}
       className="mx-auto grid auto-rows-min grid-cols-(--fluid-reservation-grid) gap-(--space-m-l) lg:hidden"
       offices={officesData.list}
