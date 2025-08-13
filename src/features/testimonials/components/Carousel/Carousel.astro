@@ -3,21 +3,12 @@ import { tw } from "@utils/index.ts";
 
 import { type VideoSource } from "@components/media/Video/Video.astro";
 
+import type { TestimonailFields as Testimonial } from "@features/testimonials/types";
+
 import CarouselSlides from "./components/CarouselSlides.astro";
 import CarouselIndicators from "./components/CarouselIndicators.astro";
 import CarouselVideo from "./components/CarouselVideo.astro";
 import CarouselControls from "./components/CarouselControls.astro";
-
-interface Testimonial {
-  id: string;
-  author: string;
-  body: string;
-  videoTransform: {
-    x: number;
-    y: number;
-    scale: number;
-  };
-}
 
 export interface Props {
   className?: string;

@@ -1,5 +1,6 @@
 import type { EntryFieldTypes } from "contentful";
-import contentfulClient from "@lib/contentful";
+
+import loadPreviewData from "@features/testimonials/loaders/previewLoader";
 
 interface Testimonial {
   contentTypeId: "testimonialsPreview";
@@ -14,7 +15,7 @@ interface Testimonial {
   };
 }
 
-interface TestimonialsPreview {
+export interface TestimonialsPreview {
   contentTypeId: "testimonialsPreview";
   fields: {
     heading: EntryFieldTypes.Text;
@@ -25,26 +26,6 @@ interface TestimonialsPreview {
   };
 }
 
-const loadData = async () => {
-  const entries =
-    await contentfulClient.withoutUnresolvableLinks.getEntries<TestimonialsPreview>(
-      {
-        content_type: "testimonialsPreview",
-        limit: 1,
-      },
-    );
-
-  const [data] = entries.items;
-
-  return {
-    ...data.fields,
-    testimonials: data.fields.testimonials
-      .filter((testimonial) => !!testimonial)
-      .map((testimonial) => ({
-        ...testimonial.fields,
-        id: testimonial.sys.id,
-      })),
-  };
-};
-
-export default loadData;
+export type TestimonailFields = Awaited<
+  ReturnType<typeof loadPreviewData>
+>["testimonials"][number];
