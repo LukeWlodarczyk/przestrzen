@@ -1,4 +1,5 @@
 ---
+/* eslint-disable astro/no-unused-css-selector */
 import Section from "@components/layout/Section.astro";
 
 import Heading from "@components/typography/Heading.astro";
@@ -22,9 +23,9 @@ import BREAKPOINTS from "@styles/breakpoints/breakpoints";
 import loadAreasOfSupportData from "@features/offert/loaders/areasOfSupportLoader";
 import loadFormsOfSupportData from "@features/offert/loaders/formsOfSupportLoader";
 
-import loadData from "./loader";
+import loadPreviewData from "@features/offert/loaders/previewLoader";
 
-const data = await loadData();
+const data = await loadPreviewData();
 
 const formsOfSupport = await loadFormsOfSupportData();
 const areasOfSupport = await loadAreasOfSupportData();
@@ -49,7 +50,7 @@ const offertVideoSources = [
 ];
 ---
 
-<Section className="noise-30 bg-muted-green" id="offert">
+<Section className="offert-preview-wrapper noise-30 bg-muted-green" id="offert">
   <Heading className="text-center" level={2}>{data.heading}</Heading>
   <RichHeadline
     className="mt-(--space-s-m) text-center"
@@ -121,7 +122,7 @@ const offertVideoSources = [
 </Section>
 
 <style>
-  :root {
+  .offert-preview-wrapper {
     --min-form-of-support-col-width: 300px;
 
     --fluid-form-of-support-grid: repeat(
