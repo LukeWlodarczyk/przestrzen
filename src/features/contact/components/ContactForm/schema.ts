@@ -15,6 +15,7 @@ export const ContactFormSchema = z.object({
     .nonempty("Wiadomość jest wymagana")
     .min(10, "Wiadomość: 10 - 200 znaków.")
     .max(200, "Wiadomość: 10 - 200 znaków."),
+  botTrap: z.string().optional(),
 });
 
 export type ContactFormFields = z.infer<typeof ContactFormSchema>;
