@@ -12,6 +12,8 @@ import submitContactForm from "./api";
 
 import { ContactFormSchema, type ContactFormFields } from "./schema";
 
+import { redirectToSuccessPage, setContactRootErrorMessage } from "./utils";
+
 interface ContactFormProps {
   className?: string;
 }
@@ -25,6 +27,8 @@ const ContactForm: FC<ContactFormProps> = ({ className }) => {
     reset,
     register,
     handleSubmit,
+    setError,
+    clearErrors,
     formState: { errors, touchedFields },
   } = useForm<ContactFormFields>({
     mode: "onTouched",
@@ -34,6 +38,8 @@ const ContactForm: FC<ContactFormProps> = ({ className }) => {
 
   const onSubmit: SubmitHandler<ContactFormFields> = async (data) => {
     try {
+      clearErrors("root");
+
       await submitContactForm({
         ...data,
         "form-name": FORM_NAME,
@@ -41,9 +47,12 @@ const ContactForm: FC<ContactFormProps> = ({ className }) => {
       });
 
       reset();
-      // window.location.href = "/kontakt/sukces";
+
+      redirectToSuccessPage();
     } catch (error) {
-      console.error("Błąd: " + error);
+      setError(`root`, {
+        message: setContactRootErrorMessage(error),
+      });
     }
   };
 
@@ -105,6 +114,17 @@ const ContactForm: FC<ContactFormProps> = ({ className }) => {
       >
         Wyślij
       </SubmitButton>
+
+      <span
+        className={tw(
+          "pointer-events-none absolute right-0 -bottom-(--space-xl) text-right text-sm font-light text-earth-red opacity-0 transition-opacity duration-300",
+          errors.root ? "opacity-100" : "",
+        )}
+        role="alert"
+        aria-live="polite"
+      >
+        {errors.root?.message}
+      </span>
     </form>
   );
 };
