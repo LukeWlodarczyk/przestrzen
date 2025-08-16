@@ -12,14 +12,22 @@ import {
 
 interface Props {
   children: ReactNode;
+  disabled?: boolean;
   className?: string;
   variant: Variant;
   size: Size;
 }
 
-const SubmitButton: FC<Props> = ({ children, className, variant, size }) => (
+const SubmitButton: FC<Props> = ({
+  children,
+  className,
+  variant,
+  size,
+  disabled,
+}) => (
   <button
     type="submit"
+    disabled={disabled}
     className={tw(
       baseClasses,
       variantClasses[variant],
@@ -28,7 +36,9 @@ const SubmitButton: FC<Props> = ({ children, className, variant, size }) => (
     )}
   >
     {variant === "primary" ? (
-      <span className="group-hover:shine group-focus:shine">{children}</span>
+      <span className="group-focus:shine group-[&:not(:disabled)]:group-hover:shine">
+        {children}
+      </span>
     ) : (
       children
     )}
