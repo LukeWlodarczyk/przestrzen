@@ -29,7 +29,7 @@ const ContactForm: FC<ContactFormProps> = ({ className }) => {
     handleSubmit,
     setError,
     clearErrors,
-    formState: { errors, touchedFields },
+    formState: { errors, touchedFields, isSubmitting },
   } = useForm<ContactFormFields>({
     mode: "onTouched",
     resolver: zodResolver(ContactFormSchema),
@@ -108,17 +108,21 @@ const ContactForm: FC<ContactFormProps> = ({ className }) => {
       </fieldset>
 
       <SubmitButton
+        disabled={isSubmitting}
         variant="secondary"
         size="large"
-        className="mt-(--space-l) ml-auto"
+        className={tw(
+          "mt-(--space-l) ml-auto min-w-[180px]",
+          isSubmitting && "cursor-wait",
+        )}
       >
-        Wyślij
+        {isSubmitting ? "Wysyłanie..." : "Wyślij"}
       </SubmitButton>
 
       <span
         className={tw(
           "pointer-events-none absolute right-0 -bottom-(--space-xl) text-right text-sm font-light text-earth-red opacity-0 transition-opacity duration-300",
-          errors.root ? "opacity-100" : "",
+          errors.root && "opacity-100",
         )}
         role="alert"
         aria-live="polite"
