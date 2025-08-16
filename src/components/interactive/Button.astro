@@ -40,11 +40,11 @@ export const sizeClasses = {
 
 export const variantClasses = {
   primary:
-    "group noise-10 bg-deep-green tracking-widest text-bright-yellow outline-offset-2 outline-deep-green",
+    "group noise-10 bg-deep-green disabled:bg-deep-green/80 tracking-widest text-bright-yellow outline-offset-2 outline-deep-green",
   secondary:
-    "noise-10 bg-dark-beige/60 font-light tracking-wide text-charcoal/80 outline-offset-2 outline-dark-beige/80 hover:bg-dark-beige/80 focus:bg-dark-beige/80",
+    "noise-10 bg-dark-beige/60 disabled:bg-dark-beige/40 disabled:text-charcoal/60 font-light tracking-wide text-charcoal/80 outline-offset-2 outline-dark-beige/80 not-disabled:hover:bg-dark-beige/80 focus:bg-dark-beige/80 ",
   tertiary:
-    "tracking-widest text-deep-green outline-offset-2 outline-forest-green hover:text-forest-green hover:underline focus:text-forest-green focus:underline",
+    "tracking-widest text-deep-green disabled:text-deep-green/60 outline-offset-2 outline-forest-green not-disabled:hover:text-forest-green not-disabled:hover:underline focus:text-forest-green focus:underline",
 };
 ---
 
@@ -59,7 +59,7 @@ export const variantClasses = {
 >
   {
     variant === "primary" ? (
-      <span class="group-hover:shine group-focus:shine">
+      <span class="group-focus:shine group-[&:not(:disabled)]:group-hover:shine">
         <slot />
       </span>
     ) : (
