@@ -6,7 +6,7 @@ import { tw, type PropsWithChildren } from "@utils/index.ts";
 
 type AllowedTags = "a" | "button";
 
-export type Variant = "primary" | "secondary" | "tertiary";
+export type Variant = "primary" | "secondary" | "tertiary" | "nav";
 export type Size = "medium" | "large";
 
 interface BaseProps {
@@ -45,14 +45,15 @@ export const variantClasses = {
     "noise-10 bg-dark-beige/60 disabled:bg-dark-beige/40 disabled:text-charcoal/60 font-light tracking-wide text-charcoal/80 outline-offset-2 outline-dark-beige/80 not-disabled:hover:bg-dark-beige/80 focus:bg-dark-beige/80 ",
   tertiary:
     "tracking-widest text-deep-green disabled:text-deep-green/60 outline-offset-2 outline-forest-green not-disabled:hover:text-forest-green not-disabled:hover:underline focus:text-forest-green focus:underline",
+  nav: "w-full py-(--space-m-l) duration-300 text-deep-green px-0 tracking-wider outline-none not-disabled:hover:text-warm-yellow focus:text-warm-yellow lg:py-(--space-2xs)",
 };
 ---
 
 <Tag
   class:list={tw(
     baseClasses,
-    variantClasses[variant],
     sizeClasses[size],
+    variantClasses[variant],
     className,
   )}
   {...attrs}

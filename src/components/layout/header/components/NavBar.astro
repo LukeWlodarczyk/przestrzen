@@ -61,9 +61,9 @@ const { id } = Astro.props;
         NAV_LINKS.map((link) => (
           <li class="border-b border-b-deep-green first:border-t lg:border-0 lg:first:border-0">
             <Button
-              className="w-full py-(--space-m-l) duration-300 px-0 text-lg hover:no-underline focus:no-underline tracking-wider outline-none hover:text-warm-yellow focus:text-warm-yellow lg:py-(--space-2xs) lg:text-sm"
+              className="text-lg lg:text-sm"
               href={link.href}
-              variant="tertiary"
+              variant="nav"
             >
               {link.label}
             </Button>

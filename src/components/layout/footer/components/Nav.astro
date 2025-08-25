@@ -21,9 +21,9 @@ const { items } = Astro.props;
       items.map((item) => (
         <li>
           <Button
-            className="text-warm-white py-(--space-m) w-full duration-300 hover:text-warm-yellow focus:text-warm-yellow hover:no-underline focus:no-underline tracking-wider outline-none"
+            className="text-warm-white py-(--space-m)"
             href={item.href}
-            variant="tertiary"
+            variant="nav"
           >
             {item.label}
           </Button>
