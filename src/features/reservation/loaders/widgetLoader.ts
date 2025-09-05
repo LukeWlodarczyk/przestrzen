@@ -1,4 +1,4 @@
-import contentfulClient from "@lib/contentful";
+import contentfulClient, { withCache } from "@lib/contentful";
 
 import type { Widget } from "@features/reservation/types";
 
@@ -13,4 +13,4 @@ const loadWidgetData = async () => {
   return data.fields;
 };
 
-export default loadWidgetData;
+export default withCache(loadWidgetData);
