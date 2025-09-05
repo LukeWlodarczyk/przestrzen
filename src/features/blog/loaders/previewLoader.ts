@@ -1,4 +1,4 @@
-import contentfulClient, { timeToRead } from "@lib/contentful";
+import contentfulClient, { timeToRead, withCache } from "@lib/contentful";
 
 import type { BlogPreview } from "@features/blog/types";
 
@@ -20,4 +20,4 @@ const loadPreviewData = async () => {
   };
 };
 
-export default loadPreviewData;
+export default withCache(loadPreviewData);

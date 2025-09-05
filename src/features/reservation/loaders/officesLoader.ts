@@ -1,4 +1,4 @@
-import contentfulClient from "@lib/contentful";
+import contentfulClient, { withCache } from "@lib/contentful";
 
 import type { OfficesList } from "@features/reservation/types";
 
@@ -19,4 +19,4 @@ const loadDataOrdered = async () => {
   };
 };
 
-export default loadDataOrdered;
+export default withCache(loadDataOrdered);

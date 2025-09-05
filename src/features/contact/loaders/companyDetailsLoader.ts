@@ -1,4 +1,4 @@
-import contentfulClient from "@lib/contentful";
+import contentfulClient, { withCache } from "@lib/contentful";
 
 import type { CompanyDetails } from "@features/contact/types";
 
@@ -19,4 +19,4 @@ const loadCompanyDetailsData = async () => {
   };
 };
 
-export default loadCompanyDetailsData;
+export default withCache(loadCompanyDetailsData);

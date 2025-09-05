@@ -1,4 +1,4 @@
-import contentfulClient from "@lib/contentful";
+import contentfulClient, { withCache } from "@lib/contentful";
 
 import type { HomePage } from "@features/home/types";
 
@@ -13,4 +13,4 @@ const loadMainData = async () => {
   return data.fields;
 };
 
-export default loadMainData;
+export default withCache(loadMainData);

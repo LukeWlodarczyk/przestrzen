@@ -1,4 +1,4 @@
-import contentfulClient from "@lib/contentful";
+import contentfulClient, { withCache } from "@lib/contentful";
 
 import type { TestimonialsPreview } from "@features/testimonials/types";
 
@@ -24,4 +24,4 @@ const loadPreviewData = async () => {
   };
 };
 
-export default loadPreviewData;
+export default withCache(loadPreviewData);

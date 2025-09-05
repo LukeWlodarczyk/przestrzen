@@ -1,4 +1,4 @@
-import contentfulClient from "@lib/contentful";
+import contentfulClient, { withCache } from "@lib/contentful";
 
 import type { FormsOfSupportList } from "@features/offert/types";
 
@@ -18,4 +18,4 @@ const loadDataOrdered = async () => {
     .filter((item) => !!item);
 };
 
-export default loadDataOrdered;
+export default withCache(loadDataOrdered);

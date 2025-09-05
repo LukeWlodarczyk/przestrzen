@@ -1,4 +1,4 @@
-import contentfulClient from "@lib/contentful";
+import contentfulClient, { withCache } from "@lib/contentful";
 
 import type { ReservationPreview } from "@features/reservation/types";
 
@@ -13,4 +13,4 @@ const loadPreviewData = async () => {
   return data.fields;
 };
 
-export default loadPreviewData;
+export default withCache(loadPreviewData);
