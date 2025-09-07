@@ -1,5 +1,5 @@
 ---
-import Layout from "@layouts/Layout.astro";
+import HomeMainLayout from "@features/home/layouts/HomeMainLayout.astro";
 
 import HomeMainSection from "@features/home/sections/HomeMain.astro";
 
@@ -12,7 +12,7 @@ import TestimonialsPreviewSection from "@features/testimonials/sections/Testimon
 import ContactPreviewSection from "@features/contact/sections/ContactPreview.astro";
 ---
 
-<Layout>
+<HomeMainLayout>
   <HomeMainSection />
 
   <MethodologyPreviewSection />
@@ -22,4 +22,4 @@ import ContactPreviewSection from "@features/contact/sections/ContactPreview.ast
   <BlogPreviewSection />
   <TestimonialsPreviewSection />
   <ContactPreviewSection />
-</Layout>
+</HomeMainLayout>
