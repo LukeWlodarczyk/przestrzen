@@ -1,0 +1,20 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+import loadData from "@features/contact/loaders/successLoader";
+
+const data = await loadData();
+---
+
+<BaseLayout
+  fontsToPreload={[
+    "cormorant-garamond-italic",
+    "cormorant-garamond-700italic",
+    "poppins-300",
+    "poppins-regular",
+  ]}
+  metaDescription={data.metaDescription}
+  metaTitle={data.metaTitle}
+>
+  <slot />
+</BaseLayout>
