@@ -11,7 +11,7 @@ export interface ReservationPreview {
   };
 }
 
-interface Office {
+export interface Office {
   contentTypeId: "office";
   fields: {
     name: EntryFieldTypes.Text;
@@ -44,5 +44,17 @@ export interface Widget {
   contentTypeId: "widget";
   fields: {
     therapistId: EntryFieldTypes.Text;
+  };
+}
+
+export interface ReservationSuccess {
+  contentTypeId: "reservationSuccessPage";
+  fields: {
+    metaTitle: EntryFieldTypes.Text;
+    metaDescription: EntryFieldTypes.Text;
+    heading: EntryFieldTypes.Text;
+    headline: EntryFieldTypes.RichText;
+    descriptionOne: EntryFieldTypes.RichText;
+    descriptionTwo: EntryFieldTypes.RichText;
   };
 }

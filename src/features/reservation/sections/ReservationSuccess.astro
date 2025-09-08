@@ -1,0 +1,46 @@
+---
+/* eslint-disable astro/no-unused-css-selector */
+import Section from "@components/layout/Section.astro";
+
+import Heading from "@components/typography/Heading.astro";
+import RichHeadline from "@components/richText/RichHeadline.astro";
+import RichTextBlock from "@components/richText/RichTextBlock.astro";
+
+import Button from "@components/interactive/Button.astro";
+
+import loadData from "@features/reservation/loaders/successLoader";
+
+const data = await loadData();
+---
+
+<Section
+  className="reservation-success-wrapper noise-35 bg-sand-beige pt-(--space-5xl-6xl)"
+>
+  <Heading className="text-center" level={1}>{data.heading}</Heading>
+  <RichHeadline
+    className="mt-(--space-s-m) text-center"
+    document={data.headline}
+  />
+
+  <div
+    class="mx-auto mt-(--space-l-xl) grid grid-cols-(--column-repeat) gap-(--space-l-xl)"
+  >
+    <RichTextBlock className="text-justify" document={data.descriptionOne} />
+    <RichTextBlock className="text-justify" document={data.descriptionTwo} />
+  </div>
+
+  <div class="mt-(--space-l-xl) flex flex-wrap justify-center">
+    <Button href="/" variant="tertiary">Strona główna</Button>
+    <Button href="/blog" variant="tertiary">Odwiedź blog</Button>
+  </div>
+</Section>
+
+<style>
+  .reservation-success-wrapper {
+    --grid-min-col-size: 320px;
+    --column-repeat: repeat(
+      auto-fit,
+      minmax(min(var(--grid-min-col-size), 100%), 1fr)
+    );
+  }
+</style>
