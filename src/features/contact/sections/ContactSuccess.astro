@@ -1,0 +1,34 @@
+---
+import Section from "@components/layout/Section.astro";
+
+import Heading from "@components/typography/Heading.astro";
+import RichHeadline from "@components/richText/RichHeadline.astro";
+import RichTextBlock from "@components/richText/RichTextBlock.astro";
+
+import Button from "@components/interactive/Button.astro";
+import GoBack from "@components/interactive/GoBack.astro";
+
+import loadData from "@features/contact/loaders/successLoader";
+
+const data = await loadData();
+---
+
+<Section className="noise-35 bg-sand-beige pt-(--space-5xl-6xl)">
+  <Heading className="text-center" level={1}>{data.heading}</Heading>
+
+  <RichHeadline
+    className="mt-(--space-s-m) text-center"
+    document={data.headline}
+  />
+
+  <RichTextBlock
+    className="mx-auto mt-(--space-s-m) text-center"
+    document={data.description}
+  />
+
+  <div class="mt-(--space-l-xl) flex flex-wrap justify-center">
+    <GoBack>Krok wstecz</GoBack>
+    <Button href="/" variant="tertiary">Strona główna</Button>
+    <Button href="/blog" variant="tertiary">Odwiedź blog</Button>
+  </div>
+</Section>
