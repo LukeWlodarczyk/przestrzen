@@ -1,15 +1,20 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 
-import HomeFontPreload from "@features/home/layouts/HomeFontPreload.astro";
-
 import loadData from "@features/home/loaders/mainLoader";
 
 const data = await loadData();
 ---
 
-<BaseLayout description={data.metaDescription} title={data.metaTitle}>
-  <HomeFontPreload slot="font-preload" />
-
+<BaseLayout
+  fontsToPreload={[
+    "cormorant-garamond-italic",
+    "cormorant-garamond-700italic",
+    "poppins-200",
+    "poppins-regular",
+  ]}
+  metaDescription={data.metaDescription}
+  metaTitle={data.metaTitle}
+>
   <slot />
 </BaseLayout>
