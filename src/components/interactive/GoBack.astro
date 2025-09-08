@@ -1,0 +1,22 @@
+---
+import Button from "./Button.astro";
+
+import { tw, type PropsWithChildren } from "@utils/index.ts";
+
+type Props = PropsWithChildren<{
+  className?: string;
+}>;
+
+const { className } = Astro.props;
+
+const baseClasses = tw("tracking-widest");
+---
+
+<Button
+  as="button"
+  className={tw(baseClasses, className)}
+  onclick="history.back()"
+  variant="tertiary"
+>
+  <slot />
+</Button>
