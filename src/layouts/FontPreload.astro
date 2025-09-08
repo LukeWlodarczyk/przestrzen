@@ -1,0 +1,43 @@
+---
+type Font = (typeof FONTS)[number];
+export type FontName = Font["name"];
+
+interface Props {
+  fontNames: FontName[];
+}
+
+const FONTS = [
+  {
+    name: "cormorant-garamond-italic",
+    href: "/fonts/cormorant-garamond-v19-latin_latin-ext-italic.woff2",
+  },
+  {
+    name: "cormorant-garamond-700italic",
+    href: "/fonts/cormorant-garamond-v19-latin_latin-ext-700italic.woff2",
+  },
+  { name: "poppins-200", href: "/fonts/poppins-v23-latin_latin-ext-200.woff2" },
+  { name: "poppins-300", href: "/fonts/poppins-v23-latin_latin-ext-300.woff2" },
+  { name: "poppins-500", href: "/fonts/poppins-v23-latin_latin-ext-500.woff2" },
+  { name: "poppins-700", href: "/fonts/poppins-v23-latin_latin-ext-700.woff2" },
+  {
+    name: "poppins-regular",
+    href: "/fonts/poppins-v23-latin_latin-ext-regular.woff2",
+  },
+] as const;
+
+const { fontNames: fontsToPreload } = Astro.props;
+
+const shouldPreload = (font: Font) => fontsToPreload.includes(font.name);
+---
+
+{
+  FONTS.filter(shouldPreload).map((font) => (
+    <link
+      as="font"
+      crossorigin="anonymous"
+      href={font.href}
+      rel="preload"
+      type="font/woff2"
+    />
+  ))
+}
