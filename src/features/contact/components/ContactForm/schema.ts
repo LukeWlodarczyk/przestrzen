@@ -1,5 +1,7 @@
 import { z } from "zod/v4";
 
+import { NETLIFY_HONEYPOT_KEY } from "./consts";
+
 export const ContactFormSchema = z.object({
   name: z
     .string()
@@ -15,7 +17,7 @@ export const ContactFormSchema = z.object({
     .nonempty("Wiadomość jest wymagana")
     .min(10, "Wiadomość: 10 - 200 znaków.")
     .max(200, "Wiadomość: 10 - 200 znaków."),
-  botTrap: z.string().optional(),
+  [NETLIFY_HONEYPOT_KEY]: z.string().optional(),
 });
 
 export type ContactFormFields = z.infer<typeof ContactFormSchema>;
