@@ -35,3 +35,13 @@ export interface ContactSuccess {
     description: EntryFieldTypes.RichText;
   };
 }
+
+export interface ContactMain {
+  contentTypeId: "contactMainPage";
+  fields: {
+    metaTitle: EntryFieldTypes.Text;
+    metaDescription: EntryFieldTypes.Text;
+    heading: EntryFieldTypes.Text;
+    description: EntryFieldTypes.RichText;
+  };
+}
