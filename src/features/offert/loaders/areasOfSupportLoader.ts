@@ -13,9 +13,12 @@ const loadDataOrdered = async () => {
 
   const [data] = entries.items;
 
-  return data.fields.listInOrder
-    .map((item) => item?.fields)
-    .filter((item) => !!item);
+  return {
+    label: data.fields.label,
+    list: data.fields.listInOrder
+      .map((item) => item?.fields)
+      .filter((item) => !!item),
+  };
 };
 
 export default withCache(loadDataOrdered);
