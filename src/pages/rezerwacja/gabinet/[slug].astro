@@ -1,0 +1,19 @@
+---
+import ReservationLocationLayout from "@features/reservation/layouts/ReservationLocationLayout.astro";
+
+import ReservationLocationSection from "@features/reservation/sections/ReservationLocation.astro";
+
+import loadOfficesData from "@features/reservation/loaders/officesLoader";
+
+export const getStaticPaths = async () => {
+  const { list } = await loadOfficesData();
+
+  return list.map((office) => ({ params: { slug: office.slug } }));
+};
+
+const { slug } = Astro.params;
+---
+
+<ReservationLocationLayout slug={slug}>
+  <ReservationLocationSection slug={slug} />
+</ReservationLocationLayout>

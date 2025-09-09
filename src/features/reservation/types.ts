@@ -14,6 +14,10 @@ export interface ReservationPreview {
 export interface Office {
   contentTypeId: "office";
   fields: {
+    metaTitle: EntryFieldTypes.Text;
+    metaDescription: EntryFieldTypes.Text;
+    heading: EntryFieldTypes.Text;
+    description: EntryFieldTypes.RichText;
     name: EntryFieldTypes.Text;
     fullName: EntryFieldTypes.Text;
     slug: EntryFieldTypes.Text;
