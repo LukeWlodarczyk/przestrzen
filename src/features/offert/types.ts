@@ -52,3 +52,15 @@ export interface AreasOfSupportList {
     >;
   };
 }
+
+export interface OffertMain {
+  contentTypeId: "offertMainPage";
+  fields: {
+    metaTitle: EntryFieldTypes.Text;
+    metaDescription: EntryFieldTypes.Text;
+    heading: EntryFieldTypes.Text;
+    formsOfSupportDescription: EntryFieldTypes.RichText;
+    ctaLabel: EntryFieldTypes.Text;
+    areasOfSupportDescription: EntryFieldTypes.RichText;
+  };
+}

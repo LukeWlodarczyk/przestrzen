@@ -1,0 +1,102 @@
+---
+/* eslint-disable astro/no-unused-css-selector */
+import FormOfSupportCard from "@features/offert/components/FormOfSupportCard.astro";
+
+import Section from "@components/layout/Section.astro";
+
+import Heading from "@components/typography/Heading.astro";
+import RichTextBlock from "@components/richText/RichTextBlock.astro";
+
+import Badge from "@components/interactive/Badge.astro";
+import Button from "@components/interactive/Button.astro";
+
+import { resolveAssetUrl } from "@lib/contentful";
+
+import loadAreasOfSupportData from "@features/offert/loaders/areasOfSupportLoader";
+import loadFormsOfSupportData from "@features/offert/loaders/formsOfSupportLoader";
+
+import loadData from "@features/offert/loaders/mainLoader";
+
+const data = await loadData();
+
+const formsOfSupport = await loadFormsOfSupportData();
+const areasOfSupport = await loadAreasOfSupportData();
+---
+
+<Section
+  className="offert-main-wrapper noise-30 bg-muted-green pt-(--space-5xl-6xl)"
+>
+  <Heading className="text-center" level={1}>{data.heading}</Heading>
+
+  <Heading className="sr-only" level={2}>{formsOfSupport.label}</Heading>
+  <RichTextBlock
+    className="text-justify text-balance text-muted-teal"
+    containerClassName="mx-auto mt-(--space-xs-s)"
+    document={data.formsOfSupportDescription}
+  />
+
+  <ul
+    aria-label={formsOfSupport.label}
+    class="mt-(--space-xl-2xl) grid auto-rows-auto grid-cols-(--fluid-form-of-support-grid) gap-(--space-m-l)"
+    role="list"
+  >
+    {
+      formsOfSupport.list.map((item) => (
+        <li>
+          <FormOfSupportCard
+            description={item.description}
+            imgSrc={resolveAssetUrl(item.image)}
+            label={item.name}
+            slug={item.slug}
+          />
+        </li>
+      ))
+    }
+  </ul>
+
+  <Button
+    className="my-(--space-2xl-3xl) w-full"
+    href="/rezerwacja"
+    size="large"
+  >
+    {data.ctaLabel}
+  </Button>
+
+  <Heading className="sr-only" level={2}>{areasOfSupport.label}</Heading>
+  <RichTextBlock
+    className="text-justify text-balance text-muted-teal"
+    containerClassName="mx-auto mt-(--space-xs-s)"
+    document={data.areasOfSupportDescription}
+  />
+
+  <ul
+    aria-label={areasOfSupport.label}
+    class="mt-(--space-l-xl) flex flex-wrap justify-center gap-x-(--space-s) gap-y-(--space-xs)"
+    role="list"
+  >
+    {
+      areasOfSupport.list.map((item) => (
+        <li>
+          <Badge
+            as="a"
+            className="hover:border-warm-yellow transition-colors outline-none hover:text-warm-yellow focus:border-warm-yellow focus:text-warm-yellow"
+            href={`/oferta/obszary-wsparcia/${item.slug}`}
+          >
+            {item.name}
+          </Badge>
+        </li>
+      ))
+    }
+  </ul>
+</Section>
+
+<style>
+  .offert-main-wrapper {
+    --min-form-of-support-col-width: 300px;
+
+    --fluid-form-of-support-grid: repeat(
+      auto-fill,
+      minmax(min(var(--min-form-of-support-col-width), 100%), 1fr)
+    );
+  }
+</style>
