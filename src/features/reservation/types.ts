@@ -62,6 +62,8 @@ export interface ReservationSuccess {
 export interface ReservationMain {
   contentTypeId: "reservationMainPage";
   fields: {
+    metaTitle: EntryFieldTypes.Text;
+    metaDescription: EntryFieldTypes.Text;
     heading: EntryFieldTypes.Text;
     description: EntryFieldTypes.RichText;
   };
