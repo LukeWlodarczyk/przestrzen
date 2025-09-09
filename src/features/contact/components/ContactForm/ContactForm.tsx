@@ -1,6 +1,4 @@
 import type { FC } from "react";
-import { useForm, type SubmitHandler } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 import { tw } from "@utils/index";
 
@@ -8,69 +6,38 @@ import Input from "@components/form/Input";
 import Textarea from "@components/form/Textarea";
 import SubmitButton from "@components/form/SubmitButton";
 
-import submitContactForm from "./api";
+import { FORM_NAME, NETLIFY_HONEYPOT_KEY } from "./consts";
 
-import { ContactFormSchema, type ContactFormFields } from "./schema";
-
-import { redirectToSuccessPage, setContactRootErrorMessage } from "./utils";
+import useContactForm from "./useContactForm";
 
 interface ContactFormProps {
   className?: string;
 }
 
-const FORM_NAME = "contact";
-
 const baseClasses = tw("@container w-full max-w-prose");
 
 const ContactForm: FC<ContactFormProps> = ({ className }) => {
   const {
-    reset,
     register,
+    formState: { errors, isValidFilled, isSubmitting },
     handleSubmit,
-    setError,
-    clearErrors,
-    formState: { errors, touchedFields, isSubmitting },
-  } = useForm<ContactFormFields>({
-    mode: "onTouched",
-    resolver: zodResolver(ContactFormSchema),
-    defaultValues: { name: "", email: "", message: "" },
-  });
-
-  const onSubmit: SubmitHandler<ContactFormFields> = async (data) => {
-    try {
-      clearErrors("root");
-
-      await submitContactForm({
-        ...data,
-        "form-name": FORM_NAME,
-        subject: `Nowa wiadomość od ${data.name}`,
-      });
-
-      reset();
-
-      redirectToSuccessPage();
-    } catch (error) {
-      setError(`root`, {
-        message: setContactRootErrorMessage(error),
-      });
-    }
-  };
+  } = useContactForm();
 
   return (
     <form
       className={tw(baseClasses, className)}
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit}
       autoComplete="off"
       noValidate={true}
       data-netlify="true"
-      netlify-honeypot="botTrap"
+      netlify-honeypot={NETLIFY_HONEYPOT_KEY}
       name={FORM_NAME}
     >
       <fieldset className="flex flex-wrap gap-(--space-m)">
         <legend className="sr-only">Formularz kontaktowy</legend>
         <div className="flex w-full flex-col gap-(--space-m) @xl:flex-row">
           <input className="hidden" name="subject" />
-          <input className="hidden" {...register("botTrap")} />
+          <input className="hidden" {...register(NETLIFY_HONEYPOT_KEY)} />
           <Input
             aria-required
             hint="Wprowadź imię o długości od 3 do 16 znaków."
@@ -79,7 +46,7 @@ const ContactForm: FC<ContactFormProps> = ({ className }) => {
             placeholder="Mateusz"
             type="text"
             error={errors.name?.message}
-            isValidFilled={Boolean(touchedFields.name && !errors.name)}
+            isValidFilled={isValidFilled("name")}
             {...register("name")}
           />
           <Input
@@ -90,7 +57,7 @@ const ContactForm: FC<ContactFormProps> = ({ className }) => {
             placeholder="kowalski@domena.com"
             type="email"
             error={errors.email?.message}
-            isValidFilled={Boolean(touchedFields.email && !errors.email)}
+            isValidFilled={isValidFilled("email")}
             {...register("email")}
           />
         </div>
@@ -102,7 +69,7 @@ const ContactForm: FC<ContactFormProps> = ({ className }) => {
           label="Wiadomość"
           placeholder="Wpisz tutaj swoje pytanie lub zostaw wiadomość..."
           error={errors.message?.message}
-          isValidFilled={Boolean(touchedFields.message && !errors.message)}
+          isValidFilled={isValidFilled("message")}
           {...register("message")}
         />
       </fieldset>
