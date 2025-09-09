@@ -58,3 +58,11 @@ export interface ReservationSuccess {
     descriptionTwo: EntryFieldTypes.RichText;
   };
 }
+
+export interface ReservationMain {
+  contentTypeId: "reservationMainPage";
+  fields: {
+    heading: EntryFieldTypes.Text;
+    description: EntryFieldTypes.RichText;
+  };
+}
