@@ -1,0 +1,107 @@
+---
+/* eslint-disable astro/no-unused-css-selector */
+import Section from "@components/layout/Section.astro";
+
+import Heading from "@components/typography/Heading.astro";
+import RichTextBlock from "@components/richText/RichTextBlock.astro";
+
+import Map from "@components/interactive/Map";
+
+import Widget from "@features/reservation/components/Widget";
+import OfficeCard from "@features/reservation/components/OfficeCard.astro";
+
+import loadOfficesData from "@features/reservation/loaders/officesLoader";
+
+import loadCompanyDetails from "@features/contact/loaders/companyDetailsLoader";
+
+import type { OfficeFields } from "@features/reservation/types";
+
+interface Props {
+  slug: string;
+}
+
+const OFFICE_BASE_HREF = "/rezerwacja/gabinet";
+
+const officesData = await loadOfficesData();
+
+const companyDetailsData = await loadCompanyDetails();
+
+const { slug } = Astro.props;
+
+const office = officesData.list.find(
+  (office) => office.slug === slug,
+) as OfficeFields;
+---
+
+<Section
+  className="reservation-location-wrapper bg-soft-beige pt-(--space-5xl-6xl)"
+  containerClassName="flex flex-col lg:grid lg:grid-cols-(--two-col-grid) lg:gap-(--space-m-l)"
+>
+  <div class="flex w-full flex-col">
+    <Heading className="text-center lg:text-left" level={1}>
+      {office.heading}
+    </Heading>
+    <RichTextBlock
+      className="text-center lg:text-left"
+      containerClassName="mx-auto mt-(--space-xs-s) lg:ml-0 "
+      document={office.description}
+    />
+    <OfficeCard
+      address={`${office.streetAddress}, ${office.addressLocality}`}
+      className="mt-(--space-l-xl) hidden lg:block"
+      email={office.email}
+      href={`${OFFICE_BASE_HREF}/${office.slug}`}
+      isLink={false}
+      name={office.name}
+      phone={office.telephone}
+      website={office.website}
+    />
+    <Map
+      className="mt-(--space-m-l) hidden h-fit flex-grow lg:block"
+      client:load
+      location={office.coordinates}
+    />
+  </div>
+  <div
+    class="mx-auto mt-(--space-l-xl) grid w-full grid-cols-(--fluid-reservation-grid) gap-(--space-m-l) lg:order-first lg:mt-0 lg:grid-cols-1"
+  >
+    <div class="flex flex-col lg:hidden!">
+      <OfficeCard
+        address={`${office.streetAddress}, ${office.addressLocality}`}
+        className="block h-fit"
+        email={office.email}
+        href={`${OFFICE_BASE_HREF}/${office.slug}`}
+        isLink={false}
+        name={office.name}
+        phone={office.telephone}
+        website={office.website}
+      />
+      <Map
+        className="mt-(--space-l-xl) block h-[200px] flex-grow"
+        client:load
+        location={office.coordinates}
+      />
+    </div>
+    <Widget
+      className="mx-auto h-full max-h-(--widget-max-height) min-h-(--widget-min-height) w-full min-[746px]:order-first"
+      client:load
+      therapistId={companyDetailsData.therapistId}
+    />
+  </div>
+</Section>
+
+<style>
+  .reservation-location-wrapper {
+    --widget-min-height: 752px;
+    --widget-max-height: 793px;
+
+    --min-reservation-col-width: 300px;
+    --max-reservation-col-width: 380px;
+
+    --fluid-reservation-grid: repeat(
+      auto-fill,
+      minmax(min(var(--min-reservation-col-width), 100%), 1fr)
+    );
+    --two-col-grid: var(--max-reservation-col-width) 1fr;
+  }
+</style>
