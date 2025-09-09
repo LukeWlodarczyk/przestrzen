@@ -17,6 +17,8 @@ export interface CompanyDetails {
   contentTypeId: "companyDetails";
   fields: {
     label: EntryFieldTypes.Text;
+    headline: EntryFieldTypes.RichText;
+    therapistId: EntryFieldTypes.Text;
     office: EntryFieldTypes.EntryLink<Office>;
   };
 }

@@ -9,12 +9,14 @@ import OfficeList from "@features/reservation/components/OfficeList.astro";
 import Widget from "@features/reservation/components/Widget";
 
 import loadData from "@features/reservation/loaders/mainLoader";
-import loadWidgetData from "@features/reservation/loaders/widgetLoader";
 import loadOfficesData from "@features/reservation/loaders/officesLoader";
 
+import loadCompanyDetails from "@features/contact/loaders/companyDetailsLoader";
+
 const data = await loadData();
-const widgetData = await loadWidgetData();
 const officesData = await loadOfficesData();
+
+const companyDetailsData = await loadCompanyDetails();
 ---
 
 <Section
@@ -49,7 +51,7 @@ const officesData = await loadOfficesData();
     <Widget
       className="mx-auto h-full max-h-(--widget-max-height) min-h-(--widget-min-height) w-full min-[746px]:order-first"
       client:load
-      therapistId={widgetData.therapistId}
+      therapistId={companyDetailsData.therapistId}
     />
   </div>
 </Section>
