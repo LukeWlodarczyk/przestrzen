@@ -1,0 +1,51 @@
+---
+import Section from "@components/layout/Section.astro";
+
+import Heading from "@components/typography/Heading.astro";
+import RichTextBlock from "@components/richText/RichTextBlock.astro";
+
+import Map from "@components/interactive/Map/Map.tsx";
+
+import ContactForm from "@features/contact/components/ContactForm/ContactForm";
+import CompanyDetails from "@features/contact/components/CompanyDetails.astro";
+
+import loadCompanyDetails from "@features/contact/loaders/companyDetailsLoader";
+
+import loadData from "@features/contact/loaders/mainLoader";
+
+import Leaves from "@assets/leaves.svg";
+
+const data = await loadData();
+
+const compoanyDetails = await loadCompanyDetails();
+---
+
+<Section
+  className="bg-warm-white pt-(--space-5xl-6xl)"
+  containerClassName="flex flex-col items-center"
+>
+  <Heading className="text-center" level={1}>{data.heading}</Heading>
+  <RichTextBlock
+    className="mt-(--space-xs-s) text-center"
+    document={data.description}
+  />
+
+  <article
+    aria-label={compoanyDetails.label}
+    class="mt-(--space-xl-2xl) flex w-full max-w-prose flex-col items-center gap-(--space-l-xl) lg:flex-row-reverse"
+  >
+    <CompanyDetails details={compoanyDetails.office} />
+    <Map
+      className="h-[300px] w-full max-w-full lg:aspect-square lg:w-1/2 lg:max-w-[500px]"
+      client:load
+      location={compoanyDetails.office.coordinates}
+    />
+  </article>
+
+  <Leaves
+    aria-hidden="true"
+    class="mt-(--space-l-xl) mb-(--space-xs-m) w-[300px] text-warm-yellow"
+  />
+
+  <ContactForm className="mt-(--space-l-xl)" client:visible />
+</Section>
