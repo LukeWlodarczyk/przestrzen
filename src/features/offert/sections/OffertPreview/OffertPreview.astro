@@ -56,7 +56,7 @@ const offertVideoSources = [
     className="mt-(--space-s-m) text-center"
     document={data.headline}
   />
-  <Heading className="sr-only" level={3}>{data.areasOfSupportHeading}</Heading>
+  <Heading className="sr-only" level={3}>{areasOfSupport.label}</Heading>
   <RichTextBlock
     className="text-center text-balance text-muted-teal"
     containerClassName="mx-auto mt-(--space-s-m)"
@@ -64,12 +64,12 @@ const offertVideoSources = [
   />
 
   <ul
-    aria-label={data.areasOfSupportHeading}
+    aria-label={areasOfSupport.label}
     class="mt-(--space-l-xl) flex flex-wrap justify-center gap-x-(--space-s) gap-y-(--space-xs)"
     role="list"
   >
     {
-      areasOfSupport.map((item) => (
+      areasOfSupport.list.map((item) => (
         <li>
           <Badge
             as="a"
@@ -94,7 +94,7 @@ const offertVideoSources = [
     videoClassName="object-[50%_30%]"
   />
 
-  <Heading className="sr-only" level={3}>{data.formsOfSupportHeading}</Heading>
+  <Heading className="sr-only" level={3}>{formsOfSupport.label}</Heading>
   <RichTextBlock
     className="text-center text-balance text-muted-teal"
     containerClassName="mx-auto"
@@ -102,12 +102,12 @@ const offertVideoSources = [
   />
 
   <ul
-    aria-label={data.formsOfSupportHeading}
+    aria-label={formsOfSupport.label}
     class="mt-(--space-xl-2xl) grid auto-rows-auto grid-cols-(--fluid-form-of-support-grid) gap-(--space-m-l)"
     role="list"
   >
     {
-      formsOfSupport.map((item) => (
+      formsOfSupport.list.map((item) => (
         <li>
           <FormOfSupportCard
             description={item.description}
