@@ -1,0 +1,15 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+import loadData from "@features/reservation/loaders/successLoader";
+
+const data = await loadData();
+---
+
+<BaseLayout
+  fontsToPreload={["poppins-200", "poppins-300", "poppins-regular"]}
+  metaDescription={data.metaDescription}
+  metaTitle={data.metaTitle}
+>
+  <slot />
+</BaseLayout>
