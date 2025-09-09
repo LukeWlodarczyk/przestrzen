@@ -17,6 +17,7 @@ export interface CompanyDetails {
   contentTypeId: "companyDetails";
   fields: {
     label: EntryFieldTypes.Text;
+    headline: EntryFieldTypes.RichText;
     office: EntryFieldTypes.EntryLink<Office>;
   };
 }

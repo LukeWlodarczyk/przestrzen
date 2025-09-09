@@ -15,6 +15,7 @@ const loadCompanyDetailsData = async () => {
 
   return {
     label: data.fields.label,
+    headline: data.fields.headline,
     office: data.fields.office.fields,
   };
 };

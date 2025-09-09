@@ -8,12 +8,10 @@ import RichHeadline from "@components/richText/RichHeadline.astro";
 import Map from "@components/interactive/Map";
 
 import loadCompanyDetails from "@features/contact/loaders/companyDetailsLoader";
-import loadData from "./loader";
 
 import Copyright from "./components/Copyright.astro";
 import Nav from "./components/Nav.astro";
 
-const data = await loadData();
 const companyDetails = await loadCompanyDetails();
 
 const NAV_ITEMS = [
@@ -30,7 +28,7 @@ const currentYear = new Date().getFullYear();
 <Section as="footer" className="noise-20 bg-night-green pb-(--space-m-3xl)">
   <RichHeadline
     className="text-center text-xl text-warm-white"
-    document={data.headline}
+    document={companyDetails.headline}
   />
 
   <article
