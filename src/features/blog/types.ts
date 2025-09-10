@@ -29,3 +29,14 @@ export interface BlogPreview {
 export type BlogPostFields = Awaited<
   ReturnType<typeof loadPreviewData>
 >["recomendedBlogPosts"][number];
+
+export interface BlogMain {
+  contentTypeId: "blogMainPage";
+  fields: {
+    metaTitle: EntryFieldTypes.Text;
+    metaDescription: EntryFieldTypes.Text;
+    heading: EntryFieldTypes.Text;
+    description: EntryFieldTypes.RichText;
+    listLabel: EntryFieldTypes.Text;
+  };
+}

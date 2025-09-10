@@ -1,0 +1,31 @@
+---
+import Section from "@components/layout/Section.astro";
+
+import Heading from "@components/typography/Heading.astro";
+import RichTextBlock from "@components/richText/RichTextBlock.astro";
+
+import BlogPostList from "@features/blog/components/BlogPostList.astro";
+
+import loadData from "@features/blog/loaders/mainLoader";
+import loadBlogPosts from "@features/blog/loaders/blogPosts";
+
+const blogPosts = await loadBlogPosts();
+
+const data = await loadData();
+---
+
+<Section className="bg-warm-white pt-(--space-5xl-6xl)">
+  <Heading className="text-left" level={2}>{data.heading}</Heading>
+
+  <RichTextBlock
+    className="text-justify"
+    containerClassName="mt-(--space-s-m)"
+    document={data.description}
+  />
+
+  <BlogPostList
+    aria-label={data.listLabel}
+    className="mt-(--space-l-xl)"
+    posts={blogPosts}
+  />
+</Section>
