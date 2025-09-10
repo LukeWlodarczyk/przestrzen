@@ -1,9 +1,14 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 
-import loadData from "@features/notFound/loaders/mainLoader";
+// 🚧 Contentful loader (currently unused).
+// Page content is hardcoded directly in the view for now.
+// This loader is intentionally kept for potential future use
+// if we move to a higher Contentful plan and want to manage this content in the CMS.
 
-const data = await loadData();
+// import loadData from "@features/notFound/loaders/mainLoader";
+
+// const data = await loadData();
 ---
 
 <BaseLayout
@@ -12,8 +17,8 @@ const data = await loadData();
     "cormorant-garamond-700italic",
     "poppins-regular",
   ]}
-  metaDescription={data.metaDescription}
-  metaTitle={data.metaTitle}
+  metaDescription="Przykro nam, ta strona nie istnieje. Wróć do strony głównej gabinetu psychologicznego Przestrzeń w Myślenicach i znajdź informacje o terapii, konsultacjach i pomocy psychologicznej."
+  metaTitle="Strona nie została znaleziona | Przestrzeń – Psycholog Myślenice"
 >
   <slot />
 </BaseLayout>

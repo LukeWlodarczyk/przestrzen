@@ -2,29 +2,35 @@
 import Section from "@components/layout/Section.astro";
 
 import Heading from "@components/typography/Heading.astro";
-import RichHeadline from "@components/richText/RichHeadline.astro";
+import Headline from "@components/typography/Headline.astro";
+import Weight from "@components/typography/Weight.astro";
 
 import Button from "@components/interactive/Button.astro";
 import GoBack from "@components/interactive/GoBack.astro";
 
-import loadData from "@features/notFound/loaders/mainLoader";
+// 🚧 Contentful loader (currently unused).
+// Page content is hardcoded directly in the view for now.
+// This loader is intentionally kept for potential future use
+// if we move to a higher Contentful plan and want to manage this content in the CMS.
 
-const data = await loadData();
+// import loadData from "@features/notFound/loaders/mainLoader";
+
+// const data = await loadData();
 ---
 
 <Section className="noise-35 bg-sand-beige pt-(--space-5xl-6xl)">
   <Heading className="text-center" level={1}>
-    {data.heading}
+    404 - Strona nie istnieje
   </Heading>
 
-  <RichHeadline
-    className="mt-(--space-s-m) text-center"
-    document={data.headline}
-  />
+  <Headline className="mt-(--space-s-m) text-center"
+    >Błądząc w <Weight>ogrodzie myśli</Weight>, pusta ścieżka może okazać się
+    wskazówką, że <Weight>czas zawrócić</Weight>
 
-  <div class="mt-(--space-l-xl) flex flex-wrap justify-center">
-    <GoBack>Krok wstecz</GoBack>
-    <Button href="/" variant="tertiary">Strona główna</Button>
-    <Button href="/blog" variant="tertiary">Odwiedź blog</Button>
-  </div>
+    <div class="mt-(--space-l-xl) flex flex-wrap justify-center">
+      <GoBack>Krok wstecz</GoBack>
+      <Button href="/" variant="tertiary">Strona główna</Button>
+      <Button href="/blog" variant="tertiary">Odwiedź blog</Button>
+    </div>
+  </Headline>
 </Section>
