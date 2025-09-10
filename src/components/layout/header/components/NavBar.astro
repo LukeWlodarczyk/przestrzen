@@ -3,7 +3,9 @@ import Section from "@components/layout/Section.astro";
 
 import Button from "@components/interactive/Button.astro";
 
-import Hamburger from "./Hamburger.astro";
+import Hamburger from "@components/layout/header/components/Hamburger.astro";
+
+import Logo from "@assets/logo.svg";
 
 import loadHomeMainData from "@features/home/loaders/mainLoader";
 
@@ -46,15 +48,26 @@ const { id } = Astro.props;
   id={id}
 >
   <nav
-    class="flex h-full w-full flex-col py-(--space-s) text-charcoal lg:flex-row lg:justify-between"
+    class="flex h-full w-full flex-col py-(--space-xs) text-charcoal lg:flex-row lg:justify-between lg:py-0"
   >
     <div class="peer flex items-center justify-between">
-      <a aria-current="page" href="/">Przestrzeń</a>
+      <a
+        aria-current="page"
+        aria-label="Strona główna - Przestrzeń"
+        class="group outline-none"
+        href="/"
+      >
+        <Logo
+          aria-hidden="true"
+          class="w-[120px] text-deep-green transition-colors duration-300 group-focus-visible:shine group-focus-visible:text-warm-yellow hover:shine sm:w-[180px]"
+        />
+      </a>
+
       <Hamburger className="lg:hidden" id="mobile-menu-button" />
     </div>
 
     <ul
-      class="hidden w-full flex-grow flex-col peer-has-aria-expanded:my-(--space-2xl) peer-has-aria-expanded:flex lg:flex lg:w-auto lg:flex-grow-0 lg:flex-row lg:justify-between lg:gap-(--space-m-l)"
+      class="hidden w-full flex-grow flex-col py-(--space-s) peer-has-aria-expanded:my-(--space-2xl) peer-has-aria-expanded:flex lg:flex lg:w-auto lg:flex-grow-0 lg:flex-row lg:justify-between lg:gap-(--space-m-l)"
       role="list"
     >
       {
