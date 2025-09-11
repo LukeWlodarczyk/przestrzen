@@ -17,7 +17,9 @@ const externalAttrs = isExternal
   ? { target: "_blank", rel: "noopener noreferrer" }
   : {};
 
-const baseClasses = tw("font-normal text-(--link-color) hover:underline");
+const baseClasses = tw(
+  "font-normal text-deep-green outline-none hover:text-warm-yellow hover:underline focus-visible:text-warm-yellow focus-visible:underline",
+);
 ---
 
 <a href={href} {...externalAttrs} class:list={tw(baseClasses, className)}>
