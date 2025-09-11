@@ -26,7 +26,8 @@ const compoanyDetails = await loadCompanyDetails();
 >
   <Heading className="text-center" level={1}>{data.heading}</Heading>
   <RichTextBlock
-    className="mt-(--space-xs-s) text-center"
+    className="text-center"
+    containerClassName="mt-(--space-xs-s)"
     document={data.description}
   />
 

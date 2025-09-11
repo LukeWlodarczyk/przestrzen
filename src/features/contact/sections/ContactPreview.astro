@@ -23,7 +23,8 @@ const data = await loadData();
     document={data.headline}
   />
   <RichTextBlock
-    className="mt-(--space-s-m) text-center"
+    className="text-center"
+    containerClassName="mt-(--space-s-m)"
     document={data.description}
   />
   <ContactForm className="mt-(--space-l-xl)" client:visible />

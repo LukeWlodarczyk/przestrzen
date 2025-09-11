@@ -38,7 +38,8 @@ const data = await laodData();
       />
 
       <RichTextBlock
-        className="mx-auto mt-(--space-s-m) text-justify lg:ml-0"
+        className="text-justify lg:ml-0"
+        containerClassName="mx-auto mt-(--space-s-m)"
         document={data.headingDescription}
       />
     </div>
@@ -60,7 +61,8 @@ const data = await laodData();
 
   <div class="flex lg:items-center lg:justify-between lg:gap-(--space-l-xl)">
     <RichTextBlock
-      className="mx-auto flex-1 text-justify lg:ml-0"
+      className="text-justify lg:ml-0"
+      containerClassName="mx-auto flex-1"
       document={data.footerDescription}
     />
     <Image
