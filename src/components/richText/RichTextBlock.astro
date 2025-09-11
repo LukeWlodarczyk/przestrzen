@@ -53,8 +53,13 @@ const options: Options = {
 
 const Tag = hasMultipleNodes ? "div" : Fragment;
 
+const baseClassName = "flex flex-col gap-(--space-xs-s)";
+
 const richTextBlockhHtml = await documentToHtmlString(document, options);
 ---
 
-{/* eslint-disable-next-line astro/no-set-html-directive */}
-<Tag class:list={containerClassName} set:html={richTextBlockhHtml} />
+{/* eslint-disable astro/no-set-html-directive */}
+<Tag
+  class:list={tw(baseClassName, containerClassName)}
+  set:html={richTextBlockhHtml}
+/>
