@@ -15,6 +15,7 @@ export default defineConfig({
     // @ts-expect-error
     plugins: [tailwindcss()],
   },
+  site: process.env.PUBLIC_SITE_URL,
   image: {
     domains: ["images.ctfassets.net"],
   },
