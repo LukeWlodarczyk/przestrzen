@@ -2,12 +2,13 @@
 import { tw, type PropsWithChildren } from "@utils/index";
 
 type Props = PropsWithChildren<{
+  className?: string;
   type?: "medium" | "bold";
 }>;
 
-const { type = "bold" } = Astro.props;
+const { type = "bold", className } = Astro.props;
 
-const baseClasses = tw("text-(--weight-color)");
+const baseClasses = tw("");
 
 const weightClasses = {
   medium: "font-medium",
@@ -15,4 +16,6 @@ const weightClasses = {
 };
 ---
 
-<span class:list={tw(baseClasses, weightClasses[type])}><slot /></span>
+<span class:list={tw(baseClasses, weightClasses[type], className)}>
+  <slot />
+</span>

@@ -31,7 +31,7 @@ const options: Options = {
   renderMark: {
     [MARKS.BOLD]: (text) =>
       container.renderToString(Weight, {
-        props: { type: "medium" },
+        props: { type: "medium", className: "text-(--color-deep-green)" },
         slots: { default: text },
       }),
   },
