@@ -79,7 +79,7 @@ const ContactForm: FC<ContactFormProps> = ({ className }) => {
         variant="secondary"
         size="large"
         className={tw(
-          "mt-(--space-l) ml-auto min-w-[180px]",
+          "mt-(--space-l) ml-auto w-full sm:max-w-[240px]",
           isSubmitting && "cursor-wait",
         )}
       >
