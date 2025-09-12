@@ -27,7 +27,7 @@ const data = await loadData();
     document={data.description}
   />
   <BlogPostList
-    aria-label="Polecane publikacje"
+    aria-label={data.recomendedBlogPostsLabel}
     className="mt-(--space-l-xl)"
     posts={data.recomendedBlogPosts}
   />

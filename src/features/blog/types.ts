@@ -19,6 +19,7 @@ export interface BlogPreview {
     heading: EntryFieldTypes.Text;
     headline: EntryFieldTypes.RichText;
     description: EntryFieldTypes.RichText;
+    recomendedBlogPostsLabel: EntryFieldTypes.Text;
     recomendedBlogPosts: EntryFieldTypes.Array<
       EntryFieldTypes.EntryLink<BlogPost>
     >;
