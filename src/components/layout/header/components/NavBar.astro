@@ -9,30 +9,37 @@ import Logo from "@assets/logo.svg";
 
 import loadHomeMainData from "@features/home/loaders/mainLoader";
 
+import ROUTES, { type RouteLink } from "@routes";
+
 const data = await loadHomeMainData();
 
-const NAV_LINKS = [
+const HOME_LINK: RouteLink = {
+  label: "Strona główna - Przestrzeń",
+  href: ROUTES.home,
+};
+
+const NAV_LINKS: RouteLink[] = [
   {
     label: "O mnie",
-    href: "/o-mnie",
+    href: ROUTES.aboutMe,
   },
   {
     label: "Oferta",
-    href: "/oferta",
+    href: ROUTES.offert,
   },
   {
     label: "Blog",
-    href: "/blog",
+    href: ROUTES.blog,
   },
   {
     label: "Kontakt",
-    href: "/kontakt",
+    href: ROUTES.contact,
   },
 ];
 
-const CTA_LINK = {
+const CTA_LINK: RouteLink = {
   label: data.ctaLabel,
-  href: "/rezerwacja",
+  href: ROUTES.reservation,
 };
 
 interface Props {
@@ -52,10 +59,9 @@ const { id } = Astro.props;
   >
     <div class="peer flex items-center justify-between">
       <a
-        aria-current="page"
-        aria-label="Strona główna - Przestrzeń"
+        aria-label={HOME_LINK.label}
         class="group outline-none"
-        href="/"
+        href={HOME_LINK.href}
       >
         <Logo
           aria-hidden="true"
