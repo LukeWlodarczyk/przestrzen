@@ -1,12 +1,15 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 
+import ROUTES from "@routes";
+
 import loadData from "@features/reservation/loaders/successLoader";
 
 const data = await loadData();
 ---
 
 <BaseLayout
+  currentPage={ROUTES.reservation}
   fontsToPreload={[
     "cormorant-garamond-italic",
     "cormorant-garamond-700italic",

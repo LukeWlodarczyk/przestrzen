@@ -7,9 +7,9 @@ import Hamburger from "@components/layout/header/components/Hamburger.astro";
 
 import Logo from "@assets/logo.svg";
 
-import loadHomeMainData from "@features/home/loaders/mainLoader";
+import ROUTES, { type RouteValue, type RouteLink } from "@routes";
 
-import ROUTES, { type RouteLink } from "@routes";
+import loadHomeMainData from "@features/home/loaders/mainLoader";
 
 const data = await loadHomeMainData();
 
@@ -44,9 +44,13 @@ const CTA_LINK: RouteLink = {
 
 interface Props {
   id: string;
+  currentPage: RouteValue;
 }
 
-const { id } = Astro.props;
+const { id, currentPage } = Astro.props;
+
+const isAriaCurrentPage = (href: RouteValue) =>
+  href === currentPage ? "page" : undefined;
 ---
 
 <Section
@@ -59,6 +63,7 @@ const { id } = Astro.props;
   >
     <div class="peer flex items-center justify-between">
       <a
+        aria-current={isAriaCurrentPage(HOME_LINK.href)}
         aria-label={HOME_LINK.label}
         class="group outline-none"
         href={HOME_LINK.href}
@@ -80,6 +85,7 @@ const { id } = Astro.props;
         NAV_LINKS.map((link) => (
           <li class="border-b border-b-deep-green first:border-t lg:border-0 lg:first:border-0">
             <Button
+              aria-current={isAriaCurrentPage(link.href)}
               className="text-lg lg:text-sm"
               href={link.href}
               variant="nav"
@@ -92,6 +98,7 @@ const { id } = Astro.props;
       <!-- group-peer-has-aria-expanded:order-first -->
       <li class="mt-auto lg:mt-auto">
         <Button
+          aria-current={isAriaCurrentPage(CTA_LINK.href)}
           className="w-full text-lg tracking-wider lg:text-sm"
           href={CTA_LINK.href}
         >

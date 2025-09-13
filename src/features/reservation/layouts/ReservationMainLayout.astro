@@ -1,12 +1,15 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 
+import ROUTES from "@routes";
+
 import loadData from "@features/reservation/loaders/mainLoader";
 
 const data = await loadData();
 ---
 
 <BaseLayout
+  currentPage={ROUTES.reservation}
   fontsToPreload={["poppins-200", "poppins-300", "poppins-regular"]}
   metaDescription={data.metaDescription}
   metaTitle={data.metaTitle}

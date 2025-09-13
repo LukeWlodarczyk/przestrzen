@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 
+import ROUTES from "@routes";
+
 import loadOfficesData from "@features/reservation/loaders/officesLoader";
 
 import type { OfficeFields } from "@features/reservation/types";
@@ -19,6 +21,7 @@ const office = officesData.list.find(
 ---
 
 <BaseLayout
+  currentPage={ROUTES.reservation}
   fontsToPreload={[
     "poppins-200",
     "poppins-300",

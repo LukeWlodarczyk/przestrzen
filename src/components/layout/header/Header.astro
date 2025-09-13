@@ -1,11 +1,19 @@
 ---
-import TopBar from "./components/TopBar.astro";
-import NavBar from "./components/NavBar.astro";
+import TopBar from "@components/layout/header/components/TopBar.astro";
+import NavBar from "@components/layout/header/components/NavBar.astro";
+
+import type { RouteValue } from "@routes";
+
+interface Props {
+  currentPage: RouteValue;
+}
+
+const { currentPage } = Astro.props;
 ---
 
 <header class="fixed top-0 z-10 flex w-full flex-col" id="header">
   <TopBar id="top-bar" />
-  <NavBar id="nav-bar" />
+  <NavBar currentPage={currentPage} id="nav-bar" />
 </header>
 
 <style>
