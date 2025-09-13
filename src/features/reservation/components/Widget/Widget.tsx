@@ -1,6 +1,6 @@
 import { useRef, type FC } from "react";
 
-import ROUTES from "@routes";
+import { STATIC_ROUTES } from "@routes";
 
 import { getRequiredElement, hideAndRemove, tw } from "@utils/index";
 
@@ -23,7 +23,7 @@ interface WidgetProps {
 
 const baseClasses = tw("@container relative");
 
-const SUCCESS_RESERVATION_RETURN_URL = `${import.meta.env.PUBLIC_SITE_URL}${ROUTES.contactSuccess}`;
+const SUCCESS_RESERVATION_RETURN_URL = `${import.meta.env.PUBLIC_SITE_URL}${STATIC_ROUTES.contactSuccess}`;
 
 const Widget: FC<WidgetProps> = ({ className, therapistId }) => {
   const widgetRef = useRef<HTMLDivElement>(null);

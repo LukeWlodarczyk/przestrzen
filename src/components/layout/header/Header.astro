@@ -2,10 +2,10 @@
 import TopBar from "@components/layout/header/components/TopBar.astro";
 import NavBar from "@components/layout/header/components/NavBar.astro";
 
-import type { RouteValue } from "@routes";
+import type { StaticRouteValue } from "@routes";
 
 interface Props {
-  currentPage: RouteValue;
+  currentPage: StaticRouteValue;
 }
 
 const { currentPage } = Astro.props;

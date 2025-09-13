@@ -13,6 +13,8 @@ import Video from "@components/media/Video/Video.astro";
 
 import FormOfSupportCard from "@features/offert/components/FormOfSupportCard.astro";
 
+import { DYNAMIC_ROUTES } from "@routes";
+
 import { resolveAssetUrl } from "@lib/contentful";
 
 import cldVideoHelper from "@utils/cloudinary/video";
@@ -74,7 +76,7 @@ const offertVideoSources = [
           <Badge
             as="a"
             className="hover:border-warm-yellow transition-colors outline-none hover:text-warm-yellow focus:border-warm-yellow focus:text-warm-yellow"
-            href={`/oferta/obszary-wsparcia/${item.slug}`}
+            href={DYNAMIC_ROUTES.areaOfSupport(item.slug)}
           >
             {item.name}
           </Badge>
@@ -111,9 +113,9 @@ const offertVideoSources = [
         <li>
           <FormOfSupportCard
             description={item.description}
+            href={DYNAMIC_ROUTES.formOfSupport(item.slug)}
             imgSrc={resolveAssetUrl(item.image)}
             label={item.name}
-            slug={item.slug}
           />
         </li>
       ))

@@ -12,7 +12,7 @@ import BlogPostList from "@features/blog/components/BlogPostList.astro";
 
 import loadData from "@features/blog/loaders/previewLoader";
 
-import ROUTES from "@routes";
+import { STATIC_ROUTES } from "@routes";
 
 const data = await loadData();
 ---
@@ -35,7 +35,7 @@ const data = await loadData();
   />
   <Button
     className="mx-auto mt-(--space-m-l) w-full"
-    href={ROUTES.blog}
+    href={STATIC_ROUTES.blog}
     variant="secondary">{data.ctaLabel}</Button
   >
 </Section>

@@ -1,4 +1,6 @@
 ---
+import { DYNAMIC_ROUTES } from "@routes";
+
 import { resolveAssetUrl } from "@lib/contentful";
 
 import { tw } from "@utils/index.ts";
@@ -31,7 +33,7 @@ const isTotalEven = posts.length % 2 === 0;
         <BlogPostCard
           className="group-even:group"
           description={post.description}
-          href={`blog/${post.slug}`}
+          href={DYNAMIC_ROUTES.blogPost(post.slug)}
           imgSrc={resolveAssetUrl(post.image)}
           timeToRead={post.timeToRead}
           title={post.title}

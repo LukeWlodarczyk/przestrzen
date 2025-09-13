@@ -10,7 +10,7 @@ import GoBack from "@components/interactive/GoBack.astro";
 
 import loadData from "@features/contact/loaders/successLoader";
 
-import ROUTES from "@routes";
+import { STATIC_ROUTES } from "@routes";
 
 const data = await loadData();
 ---
@@ -31,7 +31,7 @@ const data = await loadData();
 
   <div class="mt-(--space-l-xl) flex flex-wrap justify-center">
     <GoBack>Krok wstecz</GoBack>
-    <Button href={ROUTES.home} variant="tertiary">Strona główna</Button>
-    <Button href={ROUTES.blog} variant="tertiary">Odwiedź blog</Button>
+    <Button href={STATIC_ROUTES.home} variant="tertiary">Strona główna</Button>
+    <Button href={STATIC_ROUTES.blog} variant="tertiary">Odwiedź blog</Button>
   </div>
 </Section>

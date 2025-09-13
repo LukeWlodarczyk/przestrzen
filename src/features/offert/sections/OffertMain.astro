@@ -12,6 +12,8 @@ import Button from "@components/interactive/Button.astro";
 
 import { resolveAssetUrl } from "@lib/contentful";
 
+import { DYNAMIC_ROUTES } from "@routes";
+
 import loadAreasOfSupportData from "@features/offert/loaders/areasOfSupportLoader";
 import loadFormsOfSupportData from "@features/offert/loaders/formsOfSupportLoader";
 
@@ -45,9 +47,9 @@ const areasOfSupport = await loadAreasOfSupportData();
         <li>
           <FormOfSupportCard
             description={item.description}
+            href={DYNAMIC_ROUTES.formOfSupport(item.slug)}
             imgSrc={resolveAssetUrl(item.image)}
             label={item.name}
-            slug={item.slug}
           />
         </li>
       ))
@@ -80,7 +82,7 @@ const areasOfSupport = await loadAreasOfSupportData();
           <Badge
             as="a"
             className="hover:border-warm-yellow transition-colors outline-none hover:text-warm-yellow focus:border-warm-yellow focus:text-warm-yellow"
-            href={`/oferta/obszary-wsparcia/${item.slug}`}
+            href={DYNAMIC_ROUTES.areaOfSupport(item.slug)}
           >
             {item.name}
           </Badge>

@@ -1,4 +1,4 @@
-const ROUTES = {
+export const STATIC_ROUTES = {
   home: "/",
   aboutMe: "/o-mnie",
   offert: "/oferta",
@@ -9,12 +9,20 @@ const ROUTES = {
   notFound: "/404",
 } as const;
 
-export type RouteKey = keyof typeof ROUTES;
-export type RouteValue = (typeof ROUTES)[keyof typeof ROUTES];
+export const DYNAMIC_ROUTES = {
+  formOfSupport: (slug: string) =>
+    `${STATIC_ROUTES.offert}/formy-wsparcia/${slug}`,
+  areaOfSupport: (slug: string) =>
+    `${STATIC_ROUTES.offert}/obszary-wsparcia/${slug}`,
+  office: (slug: string) => `${STATIC_ROUTES.reservation}/gabinet/${slug}`,
+  blogPost: (slug: string) => `${STATIC_ROUTES.blog}/${slug}`,
+} as const;
 
-export interface RouteLink {
+export type StaticRouteKey = keyof typeof STATIC_ROUTES;
+export type StaticRouteValue =
+  (typeof STATIC_ROUTES)[keyof typeof STATIC_ROUTES];
+
+export interface StaticRouteLink {
   label: string;
-  href: RouteValue;
+  href: StaticRouteValue;
 }
-
-export default ROUTES;
