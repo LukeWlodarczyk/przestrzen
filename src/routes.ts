@@ -6,6 +6,7 @@ const ROUTES = {
   contact: "/kontakt",
   contactSuccess: "/kontakt/sukces",
   reservation: "/rezerwacja",
+  notFound: "/404",
 } as const;
 
 export type RouteKey = keyof typeof ROUTES;

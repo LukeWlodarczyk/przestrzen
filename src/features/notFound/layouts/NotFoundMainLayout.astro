@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 
+import ROUTES from "@routes";
+
 // 🚧 Contentful loader (currently unused).
 // Page content is hardcoded directly in the view for now.
 // This loader is intentionally kept for potential future use
@@ -12,6 +14,7 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 ---
 
 <BaseLayout
+  currentPage={ROUTES.notFound}
   fontsToPreload={[
     "cormorant-garamond-italic",
     "cormorant-garamond-700italic",
