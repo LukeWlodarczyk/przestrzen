@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 
-import ROUTES from "@routes";
+import { STATIC_ROUTES } from "@routes";
 
 import loadData from "@features/home/loaders/mainLoader";
 
@@ -9,7 +9,7 @@ const data = await loadData();
 ---
 
 <BaseLayout
-  currentPage={ROUTES.home}
+  currentPage={STATIC_ROUTES.home}
   fontsToPreload={[
     "cormorant-garamond-italic",
     "cormorant-garamond-700italic",

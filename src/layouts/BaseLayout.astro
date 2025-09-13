@@ -6,13 +6,13 @@ import Footer from "@components/layout/footer/Footer.astro";
 
 import FontPreload, { type FontName } from "@layouts/FontPreload.astro";
 
-import type { RouteValue } from "@routes";
+import { type StaticRouteValue } from "@routes";
 
 interface Props {
   metaTitle: string;
   metaDescription: string;
   fontsToPreload: FontName[];
-  currentPage: RouteValue;
+  currentPage: StaticRouteValue;
 }
 
 const { metaTitle, metaDescription, fontsToPreload, currentPage } = Astro.props;

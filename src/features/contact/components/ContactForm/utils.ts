@@ -1,7 +1,7 @@
-import ROUTES from "@routes";
+import { STATIC_ROUTES } from "@routes";
 
 export const redirectToSuccessPage = () =>
-  (window.location.href = ROUTES.contactSuccess);
+  (window.location.href = STATIC_ROUTES.contactSuccess);
 
 export const setContactRootErrorMessage = (error: unknown) =>
   error instanceof Error

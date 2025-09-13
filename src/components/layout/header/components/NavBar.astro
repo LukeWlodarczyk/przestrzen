@@ -7,49 +7,53 @@ import Hamburger from "@components/layout/header/components/Hamburger.astro";
 
 import Logo from "@assets/logo.svg";
 
-import ROUTES, { type RouteValue, type RouteLink } from "@routes";
+import {
+  STATIC_ROUTES,
+  type StaticRouteValue,
+  type StaticRouteLink,
+} from "@routes";
 
 import loadHomeMainData from "@features/home/loaders/mainLoader";
 
 const data = await loadHomeMainData();
 
-const HOME_LINK: RouteLink = {
+const HOME_LINK: StaticRouteLink = {
   label: "Strona główna - Przestrzeń",
-  href: ROUTES.home,
+  href: STATIC_ROUTES.home,
 };
 
-const NAV_LINKS: RouteLink[] = [
+const NAV_LINKS: StaticRouteLink[] = [
   {
     label: "O mnie",
-    href: ROUTES.aboutMe,
+    href: STATIC_ROUTES.aboutMe,
   },
   {
     label: "Oferta",
-    href: ROUTES.offert,
+    href: STATIC_ROUTES.offert,
   },
   {
     label: "Blog",
-    href: ROUTES.blog,
+    href: STATIC_ROUTES.blog,
   },
   {
     label: "Kontakt",
-    href: ROUTES.contact,
+    href: STATIC_ROUTES.contact,
   },
 ];
 
-const CTA_LINK: RouteLink = {
+const CTA_LINK: StaticRouteLink = {
   label: data.ctaLabel,
-  href: ROUTES.reservation,
+  href: STATIC_ROUTES.reservation,
 };
 
 interface Props {
   id: string;
-  currentPage: RouteValue;
+  currentPage: StaticRouteValue;
 }
 
 const { id, currentPage } = Astro.props;
 
-const isAriaCurrentPage = (href: RouteValue) =>
+const isAriaCurrentPage = (href: StaticRouteValue) =>
   href === currentPage ? "page" : undefined;
 ---
 
