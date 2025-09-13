@@ -11,7 +11,8 @@
       "@layouts/*": ["src/layouts/*"],
       "@utils/*": ["src/utils/*"],
       "@lib/*": ["src/lib/*"],
-      "@styles/*": ["src/styles/*"]
+      "@styles/*": ["src/styles/*"],
+      "@routes": ["src/routes"],
     },
     "jsx": "react-jsx",
     "jsxImportSource": "react"

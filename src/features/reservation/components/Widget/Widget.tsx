@@ -1,5 +1,7 @@
 import { useRef, type FC } from "react";
 
+import ROUTES from "@routes";
+
 import { getRequiredElement, hideAndRemove, tw } from "@utils/index";
 
 import useWidgetScript from "./hooks/useWidgetScript";
@@ -21,7 +23,7 @@ interface WidgetProps {
 
 const baseClasses = tw("@container relative");
 
-const SUCCESS_RESERVATION_RETURN_URL = `${import.meta.env.PUBLIC_SITE_URL}/rezerwacja/sukces`;
+const SUCCESS_RESERVATION_RETURN_URL = `${import.meta.env.PUBLIC_SITE_URL}${ROUTES.contactSuccess}`;
 
 const Widget: FC<WidgetProps> = ({ className, therapistId }) => {
   const widgetRef = useRef<HTMLDivElement>(null);

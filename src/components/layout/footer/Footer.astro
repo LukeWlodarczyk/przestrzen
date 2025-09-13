@@ -9,17 +9,19 @@ import Map from "@components/interactive/Map";
 
 import loadCompanyDetails from "@features/contact/loaders/companyDetailsLoader";
 
+import ROUTES, { type RouteLink } from "@routes";
+
 import Copyright from "./components/Copyright.astro";
 import Nav from "./components/Nav.astro";
 
 const companyDetails = await loadCompanyDetails();
 
-const NAV_ITEMS = [
-  { label: "O mnie", href: "/o-mnie" },
-  { label: "Oferta", href: "/oferta" },
-  { label: "Blog", href: "/blog" },
-  { label: "Kontakt", href: "/kontakt" },
-  { label: "Rezerwacja", href: "/rezerwacja" },
+const NAV_ITEMS: RouteLink[] = [
+  { label: "O mnie", href: ROUTES.aboutMe },
+  { label: "Oferta", href: ROUTES.offert },
+  { label: "Blog", href: ROUTES.blog },
+  { label: "Kontakt", href: ROUTES.contact },
+  { label: "Rezerwacja", href: ROUTES.reservation },
 ];
 
 const currentYear = new Date().getFullYear();
