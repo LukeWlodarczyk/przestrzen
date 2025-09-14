@@ -11,13 +11,16 @@ interface Props {
 const { currentPage } = Astro.props;
 ---
 
-<header class="fixed top-0 z-10 flex w-full flex-col" id="header">
+<header
+  class="app-header-wrapper fixed top-0 z-10 flex w-full flex-col"
+  id="header"
+>
   <TopBar id="top-bar" />
   <NavBar currentPage={currentPage} id="nav-bar" />
 </header>
 
 <style>
-  :root {
+  .app-header-wrapper {
     --app-header-top-bar-height: 40px;
   }
 </style>
