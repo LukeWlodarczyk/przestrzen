@@ -1,8 +1,7 @@
 ---
 import { tw, type PropsWithChildren } from "@utils/index.ts";
 
-const isExternalURL = (url: string) =>
-  new URL(url).origin !== import.meta.env.PUBLIC_SITE_URL;
+const isInternalURL = (url: string) => url.startsWith("/");
 
 type Props = PropsWithChildren<{
   className?: string;
@@ -11,9 +10,9 @@ type Props = PropsWithChildren<{
 
 const { className, href } = Astro.props;
 
-const isExternal = isExternalURL(href);
+const isInternal = isInternalURL(href);
 
-const externalAttrs = isExternal
+const attrs = !isInternal
   ? { target: "_blank", rel: "noopener noreferrer" }
   : {};
 
@@ -24,4 +23,4 @@ const baseClasses = tw(
 const classList = tw(baseClasses, className);
 ---
 
-<a href={href} {...externalAttrs} class:list={classList}><slot /></a>
+<a href={href} {...attrs} class:list={classList}><slot /></a>
