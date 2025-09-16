@@ -20,8 +20,8 @@ const externalAttrs = isExternal
 const baseClasses = tw(
   "font-normal text-deep-green outline-none hover:text-warm-yellow hover:underline focus-visible:text-warm-yellow focus-visible:underline",
 );
+
+const classList = tw(baseClasses, className);
 ---
 
-<a href={href} {...externalAttrs} class:list={tw(baseClasses, className)}>
-  <slot />
-</a>
+<a href={href} {...externalAttrs} class:list={classList}><slot /></a>
