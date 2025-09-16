@@ -5,13 +5,13 @@ type Props = PropsWithChildren<{
   className?: string;
 }>;
 
-const { className = "" } = Astro.props;
+const { className } = Astro.props;
 
 const baseClasses = tw(
   "max-w-prose text-base leading-[1.6] font-light text-pretty text-charcoal",
 );
+
+const classList = tw(baseClasses, className);
 ---
 
-<p class:list={tw(baseClasses, className)}>
-  <slot />
-</p>
+<p class:list={classList}><slot /></p>

@@ -6,13 +6,13 @@ type Props = PropsWithChildren<{
   className?: string;
 }>;
 
-const { className = "", level } = Astro.props;
+const { className, level } = Astro.props;
 
 const baseClasses = tw("text-base tracking-widest text-warm-yellow");
+
+const classList = tw(baseClasses, className);
 
 const Tag = `h${level}`;
 ---
 
-<Tag class:list={tw(baseClasses, className)}>
-  <slot />
-</Tag>
+<Tag class:list={classList}><slot /></Tag>

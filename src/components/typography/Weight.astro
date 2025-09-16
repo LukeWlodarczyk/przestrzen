@@ -13,9 +13,9 @@ const baseClasses = tw("");
 const weightClasses = {
   medium: "font-medium",
   bold: "font-bold",
-};
+} as const;
+
+const classList = tw(baseClasses, weightClasses[type], className);
 ---
 
-<span class:list={tw(baseClasses, weightClasses[type], className)}>
-  <slot />
-</span>
+<span class:list={classList}><slot /></span>
