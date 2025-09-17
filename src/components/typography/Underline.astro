@@ -1,0 +1,15 @@
+---
+import { tw, type PropsWithChildren } from "@utils/index";
+
+type Props = PropsWithChildren<{
+  className?: string;
+}>;
+
+const { className } = Astro.props;
+
+const baseClasses = tw("underline");
+
+const classList = tw(baseClasses, className);
+---
+
+<span class:list={classList}><slot /></span>
