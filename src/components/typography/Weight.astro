@@ -3,7 +3,7 @@ import { tw, type PropsWithChildren } from "@utils/index";
 
 type Props = PropsWithChildren<{
   className?: string;
-  type?: "medium" | "bold";
+  type?: "normal" | "medium" | "bold";
 }>;
 
 const { type = "bold", className } = Astro.props;
@@ -11,6 +11,7 @@ const { type = "bold", className } = Astro.props;
 const baseClasses = tw("");
 
 const weightClasses = {
+  normal: "font-normal",
   medium: "font-medium",
   bold: "font-bold",
 } as const;
