@@ -1,6 +1,8 @@
 ---
 import Section from "@components/layout/Section.astro";
 
+import { STATIC_ROUTES } from "@routes";
+
 import loadCompanyDetails from "@features/contact/loaders/companyDetailsLoader";
 
 interface Props {
@@ -26,35 +28,43 @@ const { office } = await loadCompanyDetails();
   </a>
 
   <div class="ml-auto flex flex-wrap items-center gap-x-(--space-xs)">
-    <p
-      class="inline-flex items-center gap-(--space-3xs) text-xs text-deep-green"
+    <a
+      class="group inline-flex items-center gap-(--space-3xs) text-xs text-deep-green outline-none"
+      href={STATIC_ROUTES.contact}
     >
       <span aria-label="Adres" class="inline-block text-sm">📍</span>
-      <a
-        class="outline-none hover:text-warm-yellow hover:underline focus:text-warm-yellow focus:underline"
-        href={`/kontakt`}>{office.streetAddress}, {office.addressLocality}</a
+      <span
+        class="group-hover:text-warm-yellow group-hover:underline group-focus:text-warm-yellow group-focus:underline"
       >
-    </p>
-    <p
-      class="hidden items-center gap-(--space-3xs) text-xs text-deep-green sm:inline-flex"
+        {office.streetAddress}, {office.addressLocality}
+      </span>
+    </a>
+
+    <a
+      class="group hidden items-center gap-(--space-3xs) text-xs text-deep-green outline-none sm:inline-flex"
+      href={`tel:${office.telephone}`}
     >
       <span aria-label="Telefon" class="hidden text-sm sm:inline-block">📞</span
       >
-      <a
-        class="outline-none hover:text-warm-yellow hover:underline focus:text-warm-yellow focus:underline"
-        href={`tel:${office.telephone}`}>{office.telephone}</a
+      <span
+        class="group-hover:text-warm-yellow group-hover:underline group-focus:text-warm-yellow group-focus:underline"
       >
-    </p>
-    <p
-      class="hidden items-center gap-(--space-3xs) text-xs text-deep-green lg:inline-flex"
+        {office.telephone}
+      </span>
+    </a>
+
+    <a
+      class="group hidden items-center gap-(--space-3xs) text-xs text-deep-green outline-none lg:inline-flex"
+      href={`mailto:${office.email}`}
     >
       <span aria-label="Email" class="hidden text-base lg:inline-block">
         ✉️
       </span>
-      <a
-        class="outline-none hover:text-warm-yellow hover:underline focus:text-warm-yellow focus:underline"
-        href={`mailto:${office.email}`}>{office.email}</a
+      <span
+        class="group-hover:text-warm-yellow group-hover:underline group-focus:text-warm-yellow group-focus:underline"
       >
-    </p>
+        {office.email}
+      </span>
+    </a>
   </div>
 </Section>
