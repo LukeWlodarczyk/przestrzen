@@ -3,13 +3,23 @@ import {
   type Text,
   type Block,
   type Inline,
+  BLOCKS,
+  INLINES,
 } from "@contentful/rich-text-types";
 
+export type NodeType = BLOCKS | INLINES | "text";
+
 type RenderMarkCallback = (text: string) => Promise<string>;
+
+interface RenderNodeContext {
+  prevNode: Block | Inline | Text;
+  nextNode: Block | Inline | Text;
+}
 
 type RenderNodeCallback = (
   node: Block | Inline,
   next: (nodes: (Block | Inline | Text)[]) => Promise<string>,
+  context: RenderNodeContext,
 ) => Promise<string>;
 
 type RenderMark = Record<string, RenderMarkCallback>;
@@ -20,6 +30,14 @@ export interface Options {
   renderNode: RenderNode;
 }
 
+const createNodeContext = (
+  nodes: (Block | Inline | Text)[],
+  index: number,
+): RenderNodeContext => ({
+  prevNode: nodes[index - 1] || null,
+  nextNode: nodes[index + 1] || null,
+});
+
 const documentToHtmlString = async (document: Document, options: Options) => {
   if (!document || !document.content) {
     return "";
@@ -27,16 +45,25 @@ const documentToHtmlString = async (document: Document, options: Options) => {
 
   const next = async (nodes: (Block | Inline | Text)[]): Promise<string> => {
     const renderedNodes = await Promise.all(
-      nodes.map((node) => renderNode(node)),
+      nodes.map((node, index) => {
+        const context = createNodeContext(nodes, index);
+
+        return renderNode(node, context);
+      }),
     );
+
     return renderedNodes.join("");
   };
 
-  const renderNode = async (node: Block | Inline | Text) => {
+  const renderNode = async (
+    node: Block | Inline | Text,
+    context: RenderNodeContext,
+  ) => {
     if (options.renderNode && options.renderNode[node.nodeType]) {
       const result = options.renderNode[node.nodeType](
         node as Block | Inline,
         next,
+        context,
       );
       return Promise.resolve(result);
     }
@@ -67,5 +94,8 @@ const documentToHtmlString = async (document: Document, options: Options) => {
 
 const getMissingRendererErrorMessage = (type: string) =>
   `Renderer for node type "${type}" not found. You must define a custom renderer for this type.`;
+
+export const includesNodeType = (nodeType: NodeType, nodeTypes: NodeType[]) =>
+  nodeTypes.includes(nodeType);
 
 export default documentToHtmlString;
