@@ -1,0 +1,15 @@
+---
+import { tw } from "@utils/index.ts";
+
+interface Props {
+  className?: string;
+}
+
+const { className } = Astro.props;
+
+const baseClasses = tw("w-full text-charcoal");
+
+const classList = tw(baseClasses, className);
+---
+
+<hr class:list={classList} />
