@@ -1,0 +1,15 @@
+---
+import { tw, type PropsWithChildren } from "@utils/index";
+
+type Props = PropsWithChildren<{
+  className?: string;
+}>;
+
+const { className } = Astro.props;
+
+const baseClasses = tw("");
+
+const classList = tw(baseClasses, className);
+---
+
+<li class:list={classList}><slot /></li>
