@@ -2,6 +2,8 @@
 import TopBar from "@components/layout/header/components/TopBar.astro";
 import NavBar from "@components/layout/header/components/NavBar.astro";
 
+import { ids } from "@components/layout/header/script/config";
+
 import type { StaticRouteValue } from "@routes";
 
 interface Props {
@@ -13,10 +15,10 @@ const { currentPage } = Astro.props;
 
 <header
   class="app-header-wrapper fixed top-0 z-10 flex w-full flex-col"
-  id="header"
+  id={ids.header}
 >
-  <TopBar id="top-bar" />
-  <NavBar currentPage={currentPage} id="nav-bar" />
+  <TopBar id={ids.topBar} />
+  <NavBar currentPage={currentPage} id={ids.navBar} />
 </header>
 
 <style>
