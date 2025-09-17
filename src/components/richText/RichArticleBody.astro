@@ -1,0 +1,163 @@
+---
+import { experimental_AstroContainer } from "astro/container";
+import {
+  BLOCKS,
+  INLINES,
+  MARKS,
+  type Block,
+  type Document,
+  type Text,
+} from "@contentful/rich-text-types";
+
+import Heading from "@components/typography/Heading.astro";
+import Paragraph from "@components/typography/Paragraph.astro";
+
+import InlineLink from "@components/typography/InlineLink.astro";
+
+import Weight from "@components/typography/Weight.astro";
+import Italic from "@components/typography/Italic.astro";
+import Underline from "@components/typography/Underline.astro";
+
+import UnorderedList from "@components/typography/UnorderedList.astro";
+import ListItem from "@components/typography/ListItem.astro";
+
+import BlockQuote from "@components/typography/BlockQuote.astro";
+
+import Image from "@components/media/Image/Image.astro";
+
+import HR from "@components/typography/HR.astro";
+
+import { tw } from "@utils/index";
+
+import { resolveAssetUrl } from "@lib/contentful";
+
+import documentToHtmlString, {
+  includesNodeType,
+  type Options,
+} from "./documentToHtmlString";
+
+const container = await experimental_AstroContainer.create();
+
+interface Props {
+  containerClassName?: string;
+  document: Document;
+}
+
+const { document, containerClassName } = Astro.props;
+
+const hasMultipleNodes = document.content.length > 1;
+
+const options: Options = {
+  renderMark: {
+    [MARKS.BOLD]: (text) =>
+      container.renderToString(Weight, {
+        props: { type: "normal", className: "text-dark-teal" },
+        slots: { default: text },
+      }),
+    [MARKS.ITALIC]: (text) =>
+      container.renderToString(Italic, {
+        slots: { default: text },
+      }),
+    [MARKS.UNDERLINE]: (text) =>
+      container.renderToString(Underline, {
+        slots: { default: text },
+      }),
+  },
+  renderNode: {
+    [BLOCKS.HEADING_2]: async (node, next) =>
+      container.renderToString(Heading, {
+        props: {
+          className: tw(
+            "mt-(--space-l-xl) mb-(--space-xs-s) text-lg font-light text-deep-green",
+          ),
+          level: 2,
+        },
+        slots: { default: await next(node.content) },
+      }),
+    [BLOCKS.HEADING_3]: async (node, next) =>
+      container.renderToString(Heading, {
+        props: {
+          className: tw(
+            "mt-(--space-l-xl) mb-(--space-xs-s) text-lg font-light text-deep-green",
+          ),
+          level: 3,
+        },
+        slots: { default: await next(node.content) },
+      }),
+    [BLOCKS.PARAGRAPH]: async (node, next) =>
+      container.renderToString(Paragraph, {
+        props: {
+          className: tw("my-(--space-xs-s) text-justify"),
+        },
+        slots: { default: await next(node.content) },
+      }),
+    [BLOCKS.QUOTE]: async (node) => {
+      const quote = node.content
+        .slice(0, -1)
+        .flatMap((node) => (node as Block).content)
+        .flatMap((node) => (node as Text).value)
+        .join(" ");
+
+      const author = (node.content.slice(-1).at(0) as Block).content
+        .flatMap((text) => (text as Text).value)
+        .join("");
+
+      return container.renderToString(BlockQuote, {
+        props: {
+          className: tw("mx-auto my-(--space-l-xl)"),
+          author,
+        },
+        slots: { default: quote },
+      });
+    },
+    [BLOCKS.HR]: async () =>
+      container.renderToString(HR, {
+        props: { className: tw("my-(--space-xl-2xl)") },
+      }),
+    [BLOCKS.EMBEDDED_ASSET]: async (node, _, context) => {
+      const isBeforeHeading = includesNodeType(context.prevNode.nodeType, [
+        BLOCKS.HEADING_2,
+        BLOCKS.HEADING_3,
+      ]);
+
+      return container.renderToString(Image, {
+        props: {
+          src: resolveAssetUrl(node.data.target),
+          alt: node.data.target.fields.description,
+          widths: [600, 800, 1000],
+          sizes: "(max-width: 1024px) 100vw, 1000px",
+          className: tw(
+            "noise-20 overflow-hidden rounded-2xl lg:ml-[-4px]",
+            isBeforeHeading ? "mb-(--space-l-xl)" : "my-(--space-xl-2xl)",
+          ),
+        },
+      });
+    },
+    [BLOCKS.UL_LIST]: async (node, next) =>
+      container.renderToString(UnorderedList, {
+        slots: { default: await next(node.content) },
+      }),
+    [BLOCKS.LIST_ITEM]: async (node, next) =>
+      container.renderToString(ListItem, {
+        props: { className: "block [&>*]:list-item" },
+        slots: { default: await next(node.content) },
+      }),
+    [INLINES.HYPERLINK]: async (node, next) =>
+      container.renderToString(InlineLink, {
+        props: { href: node.data.uri },
+        slots: { default: await next(node.content) },
+      }),
+  },
+};
+
+const Tag = hasMultipleNodes ? "div" : Fragment;
+
+const baseClasses = tw("max-w-prose");
+
+const classList = tw(baseClasses, containerClassName);
+
+const richArticleBodyHtml = await documentToHtmlString(document, options);
+---
+
+{/* eslint-disable-next-line astro/no-set-html-directive */}
+<Tag class:list={classList} set:html={richArticleBodyHtml} />
