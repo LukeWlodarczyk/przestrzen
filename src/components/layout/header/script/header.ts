@@ -1,7 +1,6 @@
 import { getRequiredCssVariable, getRequiredElement } from "@utils/index";
 
-import initMobileMenu from "./mobileMenu";
-import initHeaderAnimator from "./headerAnimator";
+import { selectors } from "@components/layout/header/script/config";
 
 import {
   combineTraps,
@@ -10,20 +9,21 @@ import {
   createFocusTrap,
 } from "@utils/traps";
 
+import initMobileMenu from "./mobileMenu";
+import initHeaderAnimator from "./headerAnimator";
+
 const BREAKPOINT_LG = getRequiredCssVariable("--breakpoint-lg");
 
-const config = {
-  FIRST_HIDE_DELAY: 600,
-} as const;
+const FIRST_HIDE_DELAY = 600 as const;
 
 const initHeader = () => {
-  const header = getRequiredElement("#header");
+  const header = getRequiredElement(selectors.header);
 
   const elements = {
     header,
-    topbar: getRequiredElement("#top-bar", header),
-    nav: getRequiredElement("#nav-bar", header),
-    mobileMenuBtn: getRequiredElement("#mobile-menu-button", header),
+    topbar: getRequiredElement(selectors.topBar, header),
+    nav: getRequiredElement(selectors.navBar, header),
+    mobileMenuBtn: getRequiredElement(selectors.mobileMenuButton, header),
   };
 
   const mobileMenu = initMobileMenu(
@@ -42,7 +42,7 @@ const initHeader = () => {
   const firstMainSection = getRequiredElement("#main > section");
 
   headerAnimator.setupScrollTrigger({
-    initialDelay: config.FIRST_HIDE_DELAY,
+    initialDelay: FIRST_HIDE_DELAY,
     threshold: firstMainSection.offsetHeight / 2,
   });
 

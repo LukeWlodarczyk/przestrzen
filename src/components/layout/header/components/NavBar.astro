@@ -5,6 +5,8 @@ import Button from "@components/interactive/Button.astro";
 
 import Hamburger from "@components/layout/header/components/Hamburger.astro";
 
+import { ids } from "@components/layout/header/script/config";
+
 import Logo from "@assets/logo.svg";
 
 import {
@@ -78,7 +80,7 @@ const isAriaCurrentPage = (href: StaticRouteValue) =>
         />
       </a>
 
-      <Hamburger className="lg:hidden" id="mobile-menu-button" />
+      <Hamburger className="lg:hidden" id={ids.mobileMenuButton} />
     </div>
 
     <ul
@@ -99,7 +101,7 @@ const isAriaCurrentPage = (href: StaticRouteValue) =>
           </li>
         ))
       }
-      <!-- group-peer-has-aria-expanded:order-first -->
+
       <li class="mt-auto lg:mt-auto">
         <Button
           aria-current={isAriaCurrentPage(CTA_LINK.href)}
