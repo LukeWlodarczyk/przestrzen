@@ -1,0 +1,25 @@
+---
+import { tw, type PropsWithChildren } from "@utils/index.ts";
+
+type Props = PropsWithChildren<{
+  className?: string;
+  author: string;
+}>;
+
+const { className, author } = Astro.props;
+
+const baseClasses = tw(
+  "max-w-[40ch] font-serif text-3xl leading-[1.4] text-balance text-dark-yellow italic",
+);
+
+const classList = tw(baseClasses, className);
+---
+
+<figure class:list={classList}>
+  <blockquote>
+    "<slot />"
+  </blockquote>
+  <figcaption class="text-right leading-[1.8]">
+    {author}
+  </figcaption>
+</figure>
