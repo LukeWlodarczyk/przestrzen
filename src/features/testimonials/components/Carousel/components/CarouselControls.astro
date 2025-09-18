@@ -1,5 +1,12 @@
 ---
+import { tw } from "@utils/index";
 import Arrow from "../assets/arrow.svg";
+
+import { classes } from "../script/config";
+
+const baseButtonClass = tw(
+  "w-(--space-5xl) cursor-pointer text-warm-white transition-colors outline-none hover:text-warm-yellow focus-visible:text-warm-yellow active:text-warm-yellow",
+);
 ---
 
 <div
@@ -9,13 +16,18 @@ import Arrow from "../assets/arrow.svg";
 >
   <button
     aria-label="Poprzedni slajd"
-    class="carousel-control prev w-(--space-5xl) scale-x-[-1] cursor-pointer text-warm-white transition-colors outline-none hover:text-warm-yellow focus-visible:text-warm-yellow active:text-warm-yellow"
+    class:list={tw(
+      classes.button,
+      classes.prev,
+      baseButtonClass,
+      "scale-x-[-1]",
+    )}
   >
     <Arrow />
   </button>
   <button
     aria-label="Następny slajd"
-    class="carousel-control next w-(--space-5xl) cursor-pointer text-warm-white transition-colors outline-none hover:text-warm-yellow focus-visible:text-warm-yellow active:text-warm-yellow"
+    class:list={tw(classes.button, classes.next, baseButtonClass)}
   >
     <Arrow />
   </button>
