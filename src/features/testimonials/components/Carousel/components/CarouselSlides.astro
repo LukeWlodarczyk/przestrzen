@@ -4,6 +4,8 @@ import { tw } from "@utils/index";
 
 import type { Props as CarouselProps } from "../Carousel.astro";
 
+import { classes } from "../script/config";
+
 interface Props {
   items: CarouselProps["items"];
 }
@@ -19,7 +21,8 @@ const { items } = Astro.props;
         aria-labelledby={item.id}
         aria-roledescription="Slajd"
         class:list={tw(
-          "carousel-slide invisible absolute inset-0 w-full opacity-0 select-none",
+          classes.slide,
+          "invisible absolute inset-0 w-full opacity-0 select-none",
           index === 0 ? "visible opacity-100" : "",
         )}
         data-video-transform={JSON.stringify(item.videoTransform)}

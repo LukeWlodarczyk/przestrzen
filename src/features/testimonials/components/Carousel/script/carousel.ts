@@ -8,17 +8,21 @@ import {
 import createIndexController from "./indexController";
 import createCarouselAnimator from "./carouselAnimator";
 
+import { selectors } from "./config";
+
 const initCarousel = (carouselClass: string) => {
   const carousel = getRequiredElement(carouselClass);
 
   const elements = {
     carousel,
-    video: getRequiredElement(".video", carousel),
-    videoPlayer: getRequiredElement<HTMLVideoElement>(".video video"),
-    slides: getRequiredElements(".carousel-slide", carousel),
-    indicators: getRequiredElements(".carousel-indicator-icon", carousel),
-    prevButton: getRequiredElement(".carousel-control.prev", carousel),
-    nextButton: getRequiredElement(".carousel-control.next", carousel),
+    video: getRequiredElement(selectors.video, carousel),
+    videoPlayer: getRequiredElement<HTMLVideoElement>(
+      `${selectors.video} video`,
+    ),
+    slides: getRequiredElements(selectors.slide, carousel),
+    indicators: getRequiredElements(selectors.indicator, carousel),
+    prevButton: getRequiredElement(selectors.prevButton, carousel),
+    nextButton: getRequiredElement(selectors.nextButton, carousel),
   };
 
   elements.videoPlayer.autoplay = true;

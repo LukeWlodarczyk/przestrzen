@@ -1,5 +1,9 @@
 ---
+import { tw } from "@utils/index";
+
 import Video from "@components/media/Video/Video.astro";
+
+import { classes } from "../script/config";
 
 import type { Props as CarouseProps } from "../Carousel.astro";
 
@@ -14,7 +18,7 @@ const { videoSources, videoPoster, videoLqip } = Astro.props;
   <Video
     alt=""
     aria-hidden="true"
-    className="video noise-15 h-max w-max rounded-none"
+    className={tw(classes.video, "noise-15 h-max w-max rounded-none")}
     loop
     lqipDataUrl={videoLqip}
     poster={videoPoster}
