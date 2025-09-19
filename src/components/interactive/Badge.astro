@@ -10,11 +10,15 @@ type Props<Tag extends HTMLTag> = Polymorphic<
   }>
 >;
 
-const { as: Tag = "a", className = "", ...attrs } = Astro.props;
+const { as: Tag = "a", className, ...attrs } = Astro.props;
 
 const baseClasses = tw(
   "block rounded-2xl border border-forest-green px-(--space-s) py-(--space-3xs) font-extralight whitespace-nowrap text-forest-green",
 );
 ---
 
-<Tag class:list={tw(baseClasses, className)} {...attrs}><slot /></Tag>
+<Tag class:list={tw(baseClasses, className)} {...attrs}>
+  <span class="pr-(--space-2xs">⪻</span>
+  <slot />
+  <span class="pl-(--space-2xs">⪼</span>
+</Tag>
