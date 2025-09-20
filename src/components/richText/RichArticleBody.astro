@@ -45,8 +45,6 @@ interface Props {
 
 const { document, containerClassName } = Astro.props;
 
-const hasMultipleNodes = document.content.length > 1;
-
 const options: Options = {
   renderMark: {
     [MARKS.BOLD]: (text) =>
@@ -98,7 +96,7 @@ const options: Options = {
         .flatMap((node) => (node as Text).value)
         .join(" ");
 
-      const author = (node.content.slice(-1).at(0) as Block).content
+      const author = (node.content.at(-1) as Block).content
         .flatMap((text) => (text as Text).value)
         .join("");
 
@@ -149,6 +147,7 @@ const options: Options = {
       }),
   },
 };
+const hasMultipleNodes = document.content.length > 1;
 
 const Tag = hasMultipleNodes ? "div" : Fragment;
 
