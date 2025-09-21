@@ -10,6 +10,8 @@ import Map from "@components/interactive/Map";
 import Widget from "@features/reservation/components/Widget";
 import OfficeCard from "@features/reservation/components/OfficeCard.astro";
 
+import { DYNAMIC_ROUTES } from "@routes";
+
 import loadOfficesData from "@features/reservation/loaders/officesLoader";
 
 import loadCompanyDetails from "@features/contact/loaders/companyDetailsLoader";
@@ -19,8 +21,6 @@ import type { OfficeFields } from "@features/reservation/types";
 interface Props {
   slug: string;
 }
-
-const OFFICE_BASE_HREF = "/rezerwacja/gabinet";
 
 const officesData = await loadOfficesData();
 
@@ -50,7 +50,7 @@ const office = officesData.list.find(
       address={`${office.streetAddress}, ${office.addressLocality}`}
       className="mt-(--space-l-xl) hidden lg:block"
       email={office.email}
-      href={`${OFFICE_BASE_HREF}/${office.slug}`}
+      href={DYNAMIC_ROUTES.office(office.slug)}
       isLink={false}
       name={office.name}
       phone={office.telephone}
@@ -70,7 +70,7 @@ const office = officesData.list.find(
         address={`${office.streetAddress}, ${office.addressLocality}`}
         className="block h-fit"
         email={office.email}
-        href={`${OFFICE_BASE_HREF}/${office.slug}`}
+        href={DYNAMIC_ROUTES.office(office.slug)}
         isLink={false}
         name={office.name}
         phone={office.telephone}
