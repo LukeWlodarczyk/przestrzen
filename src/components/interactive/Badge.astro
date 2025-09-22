@@ -3,6 +3,8 @@ import type { HTMLTag, Polymorphic } from "astro/types";
 
 import { tw, type PropsWithChildren } from "@utils/index";
 
+const ANCHOR = "a";
+
 type Props<Tag extends HTMLTag> = Polymorphic<
   PropsWithChildren<{
     as: Tag;
@@ -10,14 +12,21 @@ type Props<Tag extends HTMLTag> = Polymorphic<
   }>
 >;
 
-const { as: Tag = "a", className, ...attrs } = Astro.props;
+const { as: Tag = ANCHOR, className, ...attrs } = Astro.props;
+
+const isLink = Tag === ANCHOR;
 
 const baseClasses = tw(
   "block rounded-2xl border border-forest-green px-(--space-s) py-(--space-3xs) font-extralight whitespace-nowrap text-forest-green",
 );
+
+const anchorClasses =
+  "hover:border-warm-yellow transition-colors outline-none hover:text-warm-yellow focus:border-warm-yellow focus:text-warm-yellow";
+
+const classList = tw(baseClasses, className, isLink && anchorClasses);
 ---
 
-<Tag class:list={tw(baseClasses, className)} {...attrs}>
+<Tag class:list={classList} {...attrs}>
   <span class="pr-(--space-2xs">⪻</span>
   <slot />
   <span class="pl-(--space-2xs">⪼</span>
