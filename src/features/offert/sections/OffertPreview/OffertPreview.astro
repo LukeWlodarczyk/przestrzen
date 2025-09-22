@@ -73,11 +73,7 @@ const offertVideoSources = [
     {
       areasOfSupport.list.map((item) => (
         <li>
-          <Badge
-            as="a"
-            className="hover:border-warm-yellow transition-colors outline-none hover:text-warm-yellow focus:border-warm-yellow focus:text-warm-yellow"
-            href={DYNAMIC_ROUTES.areaOfSupport(item.slug)}
-          >
+          <Badge as="a" href={DYNAMIC_ROUTES.areaOfSupport(item.slug)}>
             {item.name}
           </Badge>
         </li>
