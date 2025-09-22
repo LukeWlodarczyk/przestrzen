@@ -70,7 +70,7 @@ const initHeader = () => {
 
     const isMobileFocus = !isDesktop();
     const isDesktopFocusInsideTopBar =
-      isDesktop() && target.closest("#top-bar");
+      isDesktop() && target.closest(selectors.topBar);
 
     if (isDesktopFocusInsideTopBar || isMobileFocus) {
       headerAnimator.setState({ lastDirection: null });
