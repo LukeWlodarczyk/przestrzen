@@ -15,6 +15,7 @@ import initHeaderAnimator from "./headerAnimator";
 const BREAKPOINT_LG = getRequiredCssVariable("--breakpoint-lg");
 
 const FIRST_HIDE_DELAY = 600 as const;
+const HIDE_THRESHOLD = 250 as const;
 
 const initHeader = () => {
   const header = getRequiredElement(selectors.header);
@@ -39,11 +40,9 @@ const initHeader = () => {
 
   setInitialState();
 
-  const firstMainSection = getRequiredElement("#main > section");
-
   headerAnimator.setupScrollTrigger({
     initialDelay: FIRST_HIDE_DELAY,
-    threshold: firstMainSection.offsetHeight / 2,
+    threshold: HIDE_THRESHOLD,
   });
 
   window.addEventListener("resize", setInitialState, { passive: true });
