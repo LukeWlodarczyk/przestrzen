@@ -1,0 +1,18 @@
+---
+import { tw } from "@utils/index";
+
+interface Props {
+  className?: string;
+  minutes: number;
+}
+
+const { minutes, className } = Astro.props;
+
+const baseClasses = tw("text-xs text-charcoal/80");
+
+const classList = tw(baseClasses, className);
+---
+
+<span class:list={classList}>
+  ⏱️ {minutes} min.
+</span>
