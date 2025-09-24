@@ -1,0 +1,24 @@
+---
+import { tw } from "@utils/index";
+
+interface Props {
+  className?: string;
+  date: Date;
+}
+
+const { date, className } = Astro.props;
+
+const baseClasses = tw("text-xs text-charcoal/80");
+
+const classList = tw(baseClasses, className);
+
+const datetime = date.toISOString().split("T").at(0);
+
+const displayDate = date.toLocaleDateString("pl-PL", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
+---
+
+<time class:list={classList} datetime={datetime}>{displayDate}</time>
