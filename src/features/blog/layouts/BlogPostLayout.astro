@@ -1,0 +1,28 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+import { STATIC_ROUTES } from "@routes";
+
+import loadBlogPosts from "@features/blog/loaders/blogPosts";
+
+import type { BlogPostFields } from "@features/blog/types";
+
+const blogPosts = await loadBlogPosts();
+
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props;
+
+const blogPost = blogPosts.find((post) => post.slug === slug) as BlogPostFields;
+---
+
+<BaseLayout
+  currentPage={STATIC_ROUTES.blog}
+  fontsToPreload={["poppins-300", "poppins-500", "poppins-regular"]}
+  metaDescription={blogPost.metaDescription}
+  metaTitle={blogPost.metaTitle}
+>
+  <slot />
+</BaseLayout>

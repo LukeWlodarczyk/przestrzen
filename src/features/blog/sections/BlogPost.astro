@@ -1,0 +1,99 @@
+---
+import Section from "@components/layout/Section.astro";
+import Article from "@components/layout/Article.astro";
+
+import Heading from "@components/typography/Heading.astro";
+import Paragraph from "@components/typography/Paragraph.astro";
+
+import Button from "@components/interactive/Button.astro";
+
+import Image from "@components/media/Image/Image.astro";
+
+import RichArticleBody from "@components/richText/RichArticleBody.astro";
+
+import BlogAside from "@features/blog/components/BlogAside.astro";
+import PublishDate from "@features/blog/components/PublishDate.astro";
+
+import { STATIC_ROUTES } from "@routes";
+
+import { resolveAssetUrl } from "@lib/contentful";
+
+import type { BlogPostFields } from "@features/blog/types";
+
+import loadBlogPosts from "@features/blog/loaders/blogPosts";
+
+const blogPosts = await loadBlogPosts();
+
+const { slug } = Astro.props;
+
+const blogPost = blogPosts.find((blog) => blog.slug === slug) as BlogPostFields;
+---
+
+<Section className="noise-30 bg-warm-white pt-(--space-5xl-6xl)">
+  <Article>
+    <Fragment slot="header">
+      <div class="flex flex-col lg:hidden">
+        <Heading
+          className="mb-(--space-s-m) text-center text-lg font-light text-balance text-warm-yellow/80"
+          level={1}
+        >
+          {blogPost.title}
+        </Heading>
+
+        <PublishDate
+          className="order-first mb-(--space-xs-s) block text-center text-sm font-light"
+          date={blogPost.date}
+        />
+      </div>
+
+      <div
+        class="flex flex-col items-center gap-(--space-s-m) lg:flex-row lg:gap-(--space-xl-2xl)"
+      >
+        <Image
+          alt={blogPost.description}
+          className="noise-30 my-(--space-xs-s) aspect-2/1 w-full max-w-prose overflow-hidden rounded-2xl lg:aspect-3/2 lg:max-w-1/2"
+          sizes="(max-width: 1024px) 100vw, 1000px"
+          src={resolveAssetUrl(blogPost.image)}
+          widths={[600, 800, 1000]}
+        />
+
+        <div class="flex flex-col lg:order-first">
+          <Heading
+            className="mb-(--space-s-m) hidden text-lg font-light text-balance text-warm-yellow/80 lg:block"
+            level={1}>{blogPost.title}</Heading
+          >
+
+          <PublishDate
+            className="order-first mb-(--space-xs-s) hidden text-sm font-light lg:block"
+            date={blogPost.date}
+          />
+
+          <Paragraph className="text-justify">
+            {blogPost.description}
+          </Paragraph>
+        </div>
+      </div>
+    </Fragment>
+
+    <Fragment slot="body">
+      <RichArticleBody document={blogPost.body} />
+
+      <div
+        class="mt-(--space-xl-2xl) mb-(--space-s-m) flex flex-col items-center justify-center gap-(--space-s-m) sm:flex-row"
+      >
+        <Button href={STATIC_ROUTES.offert} variant="tertiary">
+          Poznaj ofertę
+        </Button>
+        <Button href={STATIC_ROUTES.reservation} variant="primary">
+          Zarezerwuj wizytę
+        </Button>
+      </div>
+    </Fragment>
+
+    <BlogAside
+      heading="Moje ostatnie publikacje ✍🏻"
+      posts={blogPosts}
+      slot="aside"
+    />
+  </Article>
+</Section>

@@ -1,19 +1,25 @@
-import contentfulClient, { timeToRead, withCache } from "@lib/contentful";
+import contentfulClient, {
+  timeToRead,
+  withCache,
+  type ExtractEntryFields,
+} from "@lib/contentful";
 
 import type { BlogPost } from "@features/blog/types";
+
+export const enhanceBlogPost = (blogPost: ExtractEntryFields<BlogPost>) => ({
+  ...blogPost,
+  date: new Date(blogPost.date),
+  timeToRead: timeToRead(blogPost.body),
+});
 
 const loadData = async () => {
   const entries =
     await contentfulClient.withoutUnresolvableLinks.getEntries<BlogPost>({
       content_type: "blogPost",
+      order: ["-fields.date"],
     });
 
-  const data = entries.items;
-
-  return data
-    .map((post) => post?.fields)
-    .filter((post) => !!post)
-    .map((post) => ({ ...post, timeToRead: timeToRead(post.body) }));
+  return entries.items.map((entry) => entry.fields).map(enhanceBlogPost);
 };
 
 export default withCache(loadData);
