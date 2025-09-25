@@ -36,6 +36,8 @@ import documentToHtmlString, {
   type Options,
 } from "./documentToHtmlString";
 
+import Scripts from "./Scripts.astro";
+
 const container = await experimental_AstroContainer.create();
 
 interface Props {
@@ -130,6 +132,7 @@ const options: Options = {
 
       return container.renderToString(Image, {
         props: {
+          includeScript: false,
           src: resolveAssetUrl(node.data.target),
           alt: node.data.target.fields.description,
           widths: [600, 800, 1000],
@@ -166,7 +169,12 @@ const baseClasses = tw("max-w-prose");
 const classList = tw(baseClasses, containerClassName);
 
 const richArticleBodyHtml = await documentToHtmlString(document, options);
+
+const hasImage = richArticleBodyHtml.includes("<picture>");
 ---
 
 {/* eslint-disable-next-line astro/no-set-html-directive */}
 <Tag class:list={classList} set:html={richArticleBodyHtml} />
+
+<!-- include scripts manually cause experimental_AstroContainer use invalid path to rendered component script on remote environment -->
+<Scripts hasImage={hasImage} />

@@ -17,6 +17,7 @@ interface Props {
   loading?: "eager" | "lazy";
   fetchpriority?: "high" | "low" | "auto";
   decoding?: "sync" | "async" | "auto";
+  includeScript?: boolean;
 }
 
 const {
@@ -33,6 +34,7 @@ const {
   loading = "lazy",
   fetchpriority = "auto",
   decoding = "async",
+  includeScript = true,
   ...attr
 } = Astro.props;
 
@@ -69,8 +71,8 @@ const uniqueId = crypto.randomUUID();
   {caption && <figcaption class="sr-only">{caption}</figcaption>}
 </figure>
 
-<script>
-  import initImage from "./script/image";
-
-  initImage();
-</script>
+{
+  includeScript && (
+    <script>import initImage from "./script/image"; initImage();</script>
+  )
+}
