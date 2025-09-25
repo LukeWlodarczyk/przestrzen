@@ -10,3 +10,16 @@ export interface AboutMePreview {
     ctaLabel: EntryFieldTypes.Text;
   };
 }
+
+export interface AboutMeMain {
+  contentTypeId: "aboutMeMainPage";
+  fields: {
+    metaTitle: EntryFieldTypes.Text;
+    metaDescription: EntryFieldTypes.Text;
+    heading: EntryFieldTypes.Text;
+    intro: EntryFieldTypes.RichText;
+    description: EntryFieldTypes.RichText;
+    cldVideoPublicId: EntryFieldTypes.Text;
+    body: EntryFieldTypes.RichText;
+  };
+}
