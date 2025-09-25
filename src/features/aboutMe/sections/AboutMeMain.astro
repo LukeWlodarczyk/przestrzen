@@ -1,0 +1,124 @@
+---
+import { STATIC_ROUTES } from "@routes";
+
+import Section from "@components/layout/Section.astro";
+import Article from "@components/layout/Article.astro";
+
+import Heading from "@components/typography/Heading.astro";
+
+import RichTextBlock from "@components/richText/RichTextBlock.astro";
+import RichArticleBody from "@components/richText/RichArticleBody.astro";
+
+import Button from "@components/interactive/Button.astro";
+
+import Video from "@components/media/Video/Video.astro";
+
+import cldVideoHelper from "@utils/cloudinary/video";
+import generateLQIP from "@utils/generateLQIP";
+
+import BREAKPOINTS from "@styles/breakpoints/breakpoints";
+
+import loadData from "@features/aboutMe/loaders/mainLoader";
+
+import loadBlogPosts from "@features/blog/loaders/blogPosts";
+
+import BlogAside from "@features/blog/components/BlogAside.astro";
+
+const blogPosts = await loadBlogPosts();
+
+const data = await loadData();
+
+const aboutMePosterImageUrl = cldVideoHelper.buildPosterImageUrl(
+  data.cldVideoPublicId,
+  6.6,
+);
+
+const aboutMeLqipDataUrl = await generateLQIP(aboutMePosterImageUrl);
+
+const aboutMeVideoSources = [
+  {
+    src: cldVideoHelper.buildOptimizedVideoUrl(data.cldVideoPublicId, "best"),
+    type: "video/mp4",
+    media: `(min-width: ${BREAKPOINTS.sm}) and (prefers-reduced-motion: no-preference)`,
+    isHighBandwidth: true,
+  },
+  {
+    src: cldVideoHelper.buildOptimizedVideoUrl(data.cldVideoPublicId, "eco"),
+    type: "video/mp4",
+    media: `(prefers-reduced-motion: no-preference)`,
+    isHighBandwidth: true,
+  },
+  {
+    src: cldVideoHelper.buildSnapshotClipUrl(data.cldVideoPublicId, 6.6),
+    type: "video/mp4",
+  },
+];
+---
+
+<Section
+  className="noise-30 bg-warm-white pt-(--space-5xl-6xl) lg:pt-(--space-4xl-5xl)"
+>
+  <Article>
+    <Fragment slot="header">
+      <Heading
+        className="mb-(--space-s-m) text-center text-lg font-normal lg:hidden"
+        level={1}
+      >
+        {data.heading}
+      </Heading>
+
+      <div
+        class="flex flex-col items-center gap-(--space-s-m) lg:flex-row lg:gap-(--space-xl-2xl)"
+      >
+        <Video
+          alt=""
+          aria-hidden="true"
+          autoplay
+          className="noise-12 my-(--space-xs-s) aspect-square w-full max-w-[400px] min-w-[300px] lg:aspect-2/3 lg:max-w-[340px]"
+          loop={false}
+          lqipDataUrl={aboutMeLqipDataUrl}
+          preload="auto"
+          sources={aboutMeVideoSources}
+          videoClassName="lg:object-[50%_20%] object-[50%_0%]"
+        />
+
+        <div class="lg:order-first">
+          <Heading
+            className="mb-(--space-s-m) hidden text-lg font-normal lg:block"
+            level={1}
+          >
+            {data.heading}
+          </Heading>
+          <RichTextBlock
+            className="text-center lg:text-left"
+            containerClassName="mb-(--space-xs-s)"
+            document={data.intro}
+          />
+
+          <RichTextBlock className="text-justify" document={data.description} />
+        </div>
+      </div>
+    </Fragment>
+
+    <Fragment slot="body">
+      <RichArticleBody document={data.body} />
+
+      <div
+        class="mt-(--space-xl-2xl) mb-(--space-s-m) flex flex-col items-center justify-center gap-(--space-s-m) sm:flex-row"
+      >
+        <Button href={STATIC_ROUTES.offert} variant="tertiary">
+          Poznaj ofertę
+        </Button>
+        <Button href={STATIC_ROUTES.reservation} variant="primary">
+          Zarezerwuj wizytę
+        </Button>
+      </div>
+    </Fragment>
+
+    <BlogAside
+      heading="Moje ostatnie publikacje ✍🏻"
+      posts={blogPosts}
+      slot="aside"
+    />
+  </Article>
+</Section>

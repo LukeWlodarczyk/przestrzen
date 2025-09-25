@@ -1,0 +1,16 @@
+import contentfulClient, { withCache } from "@lib/contentful";
+
+import type { AboutMeMain } from "@features/aboutMe/types";
+
+const loadMainData = async () => {
+  const entries = await contentfulClient.getEntries<AboutMeMain>({
+    content_type: "aboutMeMainPage",
+    limit: 1,
+  });
+
+  const [data] = entries.items;
+
+  return data.fields;
+};
+
+export default withCache(loadMainData);

@@ -1,0 +1,18 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+import { STATIC_ROUTES } from "@routes";
+
+import loadData from "@features/aboutMe/loaders/mainLoader";
+
+const data = await loadData();
+---
+
+<BaseLayout
+  currentPage={STATIC_ROUTES.aboutMe}
+  fontsToPreload={["poppins-300", "poppins-500", "poppins-regular"]}
+  metaDescription={data.metaDescription}
+  metaTitle={data.metaTitle}
+>
+  <slot />
+</BaseLayout>
