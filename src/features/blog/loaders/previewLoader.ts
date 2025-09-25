@@ -1,4 +1,6 @@
-import contentfulClient, { timeToRead, withCache } from "@lib/contentful";
+import contentfulClient, { withCache } from "@lib/contentful";
+
+import { enhanceBlogPost } from "@features/blog/loaders/blogPosts";
 
 import type { BlogPreview } from "@features/blog/types";
 
@@ -16,7 +18,7 @@ const loadPreviewData = async () => {
     recomendedBlogPosts: data.fields.recomendedBlogPosts
       .map((post) => post?.fields)
       .filter((post) => !!post)
-      .map((post) => ({ ...post, timeToRead: timeToRead(post.body) })),
+      .map(enhanceBlogPost),
   };
 };
 

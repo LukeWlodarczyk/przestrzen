@@ -18,10 +18,12 @@ const { className, posts, ...attrs } = Astro.props;
 
 const baseClasses = tw("grid gap-(--space-m-l) xl:grid-cols-2");
 
+const classlist = tw(baseClasses, className);
+
 const isTotalEven = posts.length % 2 === 0;
 ---
 
-<ul class:list={tw(baseClasses, className)} {...attrs}>
+<ul class:list={classlist} {...attrs}>
   {
     posts.map((post) => (
       <li
@@ -32,10 +34,10 @@ const isTotalEven = posts.length % 2 === 0;
       >
         <BlogPostCard
           className="group-even:group"
+          date={post.date}
           description={post.description}
           href={DYNAMIC_ROUTES.blogPost(post.slug)}
           imgSrc={resolveAssetUrl(post.image)}
-          timeToRead={post.timeToRead}
           title={post.title}
         />
       </li>

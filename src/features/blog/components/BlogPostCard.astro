@@ -1,10 +1,12 @@
 ---
+import { tw } from "@utils/index.ts";
+
 import Heading from "@components/typography/Heading.astro";
 import Paragraph from "@components/typography/Paragraph.astro";
 
 import Image from "@components/media/Image/Image.astro";
 
-import { tw } from "@utils/index.ts";
+import PublishDate from "./PublishDate.astro";
 
 interface PostCard {
   href: string;
@@ -12,30 +14,32 @@ interface PostCard {
   imgLQIPData?: string;
   title: string;
   description: string;
-  timeToRead: number;
+  date: Date;
 }
 
 interface Props extends PostCard {
   className?: string;
 }
 
-const { className, href, imgSrc, imgLQIPData, title, description, timeToRead } =
+const { className, href, imgSrc, imgLQIPData, title, description, date } =
   Astro.props;
 
 const baseClasses = tw(
-  "group @container h-full rounded-2xl outline-offset-2 has-focus-visible:outline-2 has-focus-visible:outline-dark-beige",
+  "group @container h-full rounded-2xl bg-sand-beige outline-offset-2 outline-dark-beige transition-colors hover:cursor-pointer hover:bg-dark-beige/60 has-focus-visible:bg-dark-beige/60 has-focus-visible:outline-2",
 );
+
+const classList = tw(baseClasses, className);
 ---
 
-<article class:list={tw(baseClasses, className)}>
+<article class:list={classList}>
   <a
     aria-label=`Zobacz wpis: ${title}`
-    class="flex w-full flex-col overflow-hidden rounded-2xl bg-sand-beige transition-colors outline-none group-hover:bg-dark-beige/60 group-has-focus-visible:bg-dark-beige/60 hover:cursor-pointer @xl:h-full @xl:flex-row @xl:group-even:flex-row-reverse"
+    class="flex w-full flex-col overflow-hidden rounded-2xl outline-none @xl:h-full @xl:flex-row @xl:group-even:flex-row-reverse"
     href={href}
   >
     <Image
       alt=""
-      className="noise-15 aspect-5/2 flex-1 rounded-none"
+      className="noise-15 aspect-5/2 flex-1 overflow-hidden rounded-none"
       lqipDataUrl={imgLQIPData}
       sizes="500px"
       src={imgSrc}
@@ -44,10 +48,10 @@ const baseClasses = tw(
     <div
       class="noise-30 flex flex-2 flex-col justify-center p-(--space-s-m) px-(--space-s-m) pb-(--space-m) @xl:p-(--space-m-l)"
     >
-      <span
-        class="text-xs text-charcoal/80 @xl:text-left @xl:group-even:text-right"
-        >⏱️ {timeToRead} min.</span
-      >
+      <PublishDate
+        className="@xl:text-left @xl:group-even:text-right"
+        date={date}
+      />
       <Heading
         className="text-base font-normal tracking-normal text-balance text-dark-teal transition-colors group-hover:text-deep-green group-has-focus-visible:text-deep-green @xl:text-left @xl:group-even:text-right"
         level={3}
@@ -55,7 +59,7 @@ const baseClasses = tw(
         {title}
       </Heading>
       <Paragraph
-        className="mt-(--space-2xs) block text-justify text-sm text-pretty @xl:group-even:ml-auto @xl:group-even:text-right"
+        className="mt-(--space-2xs) text-justify text-sm text-pretty @xl:group-even:ml-auto @xl:group-even:text-right"
       >
         {description}
       </Paragraph>
