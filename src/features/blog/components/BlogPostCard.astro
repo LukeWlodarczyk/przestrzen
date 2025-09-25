@@ -1,10 +1,12 @@
 ---
+import { tw } from "@utils/index.ts";
+
 import Heading from "@components/typography/Heading.astro";
 import Paragraph from "@components/typography/Paragraph.astro";
 
 import Image from "@components/media/Image/Image.astro";
 
-import { tw } from "@utils/index.ts";
+import PublishDate from "./PublishDate.astro";
 
 interface PostCard {
   href: string;
@@ -12,14 +14,14 @@ interface PostCard {
   imgLQIPData?: string;
   title: string;
   description: string;
-  timeToRead: number;
+  date: Date;
 }
 
 interface Props extends PostCard {
   className?: string;
 }
 
-const { className, href, imgSrc, imgLQIPData, title, description, timeToRead } =
+const { className, href, imgSrc, imgLQIPData, title, description, date } =
   Astro.props;
 
 const baseClasses = tw(
@@ -44,10 +46,10 @@ const baseClasses = tw(
     <div
       class="noise-30 flex flex-2 flex-col justify-center p-(--space-s-m) px-(--space-s-m) pb-(--space-m) @xl:p-(--space-m-l)"
     >
-      <span
-        class="text-xs text-charcoal/80 @xl:text-left @xl:group-even:text-right"
-        >⏱️ {timeToRead} min.</span
-      >
+      <PublishDate
+        className="@xl:text-left @xl:group-even:text-right"
+        date={date}
+      />
       <Heading
         className="text-base font-normal tracking-normal text-balance text-dark-teal transition-colors group-hover:text-deep-green group-has-focus-visible:text-deep-green @xl:text-left @xl:group-even:text-right"
         level={3}
