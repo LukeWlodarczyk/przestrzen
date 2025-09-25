@@ -82,6 +82,16 @@ const options: Options = {
         },
         slots: { default: await next(node.content) },
       }),
+    [BLOCKS.HEADING_4]: async (node, next) =>
+      container.renderToString(Heading, {
+        props: {
+          className: tw(
+            "mt-(--space-l-xl) text-base font-light tracking-wider text-deep-green",
+          ),
+          level: 4,
+        },
+        slots: { default: await next(node.content) },
+      }),
     [BLOCKS.PARAGRAPH]: async (node, next) =>
       container.renderToString(Paragraph, {
         props: {
