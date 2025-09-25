@@ -1,0 +1,25 @@
+---
+import BlogPostLayout from "@features/blog/layouts/BlogPostLayout.astro";
+
+import BlogPostSection from "@features/blog/sections/BlogPost.astro";
+
+import AboutMePreviewSection from "@features/aboutMe/sections/AboutMePreview/AboutMePreview.astro";
+import ContactPreviewSection from "@features/contact/sections/ContactPreview.astro";
+
+import loadBlogPostsData from "@features/blog/loaders/blogPosts";
+
+export const getStaticPaths = async () => {
+  const list = await loadBlogPostsData();
+
+  return list.map((blog) => ({ params: { slug: blog.slug } }));
+};
+
+const { slug } = Astro.params;
+---
+
+<BlogPostLayout slug={slug}>
+  <BlogPostSection slug={slug} />
+
+  <AboutMePreviewSection />
+  <ContactPreviewSection />
+</BlogPostLayout>

@@ -1,15 +1,18 @@
 import type { EntryFieldTypes } from "contentful";
 
-import loadPreviewData from "@features/blog/loaders/previewLoader";
+import loadBlogPostsData from "@features/blog/loaders/blogPosts";
 
 export interface BlogPost {
   contentTypeId: "blogPost";
   fields: {
+    metaTitle: EntryFieldTypes.Text;
+    metaDescription: EntryFieldTypes.Text;
     title: EntryFieldTypes.Text;
     slug: EntryFieldTypes.Text;
     description: EntryFieldTypes.Text;
     image: EntryFieldTypes.AssetLink;
     body: EntryFieldTypes.RichText;
+    date: EntryFieldTypes.Date;
   };
 }
 
@@ -28,8 +31,8 @@ export interface BlogPreview {
 }
 
 export type BlogPostFields = Awaited<
-  ReturnType<typeof loadPreviewData>
->["recomendedBlogPosts"][number];
+  ReturnType<typeof loadBlogPostsData>
+>[number];
 
 export interface BlogMain {
   contentTypeId: "blogMainPage";
