@@ -25,14 +25,16 @@ const { className, href, imgSrc, imgLQIPData, title, description, date } =
   Astro.props;
 
 const baseClasses = tw(
-  "group @container h-full rounded-2xl outline-offset-2 has-focus-visible:outline-2 has-focus-visible:outline-dark-beige",
+  "group @container h-full rounded-2xl bg-sand-beige outline-offset-2 outline-dark-beige transition-colors hover:cursor-pointer hover:bg-dark-beige/60 has-focus-visible:bg-dark-beige/60 has-focus-visible:outline-2",
 );
+
+const classList = tw(baseClasses, className);
 ---
 
-<article class:list={tw(baseClasses, className)}>
+<article class:list={classList}>
   <a
     aria-label=`Zobacz wpis: ${title}`
-    class="flex w-full flex-col overflow-hidden rounded-2xl bg-sand-beige transition-colors outline-none group-hover:bg-dark-beige/60 group-has-focus-visible:bg-dark-beige/60 hover:cursor-pointer @xl:h-full @xl:flex-row @xl:group-even:flex-row-reverse"
+    class="flex w-full flex-col overflow-hidden rounded-2xl outline-none @xl:h-full @xl:flex-row @xl:group-even:flex-row-reverse"
     href={href}
   >
     <Image
@@ -57,7 +59,7 @@ const baseClasses = tw(
         {title}
       </Heading>
       <Paragraph
-        className="mt-(--space-2xs) block text-justify text-sm text-pretty @xl:group-even:ml-auto @xl:group-even:text-right"
+        className="mt-(--space-2xs) text-justify text-sm text-pretty @xl:group-even:ml-auto @xl:group-even:text-right"
       >
         {description}
       </Paragraph>
