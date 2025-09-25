@@ -3,7 +3,7 @@
 }
 
 @utility noise-* {
-  @apply relative overflow-hidden before:pointer-events-none before:absolute before:inset-0 before:z-1 before:block before:h-full before:w-full before:mix-blend-overlay;
+  @apply relative before:pointer-events-none before:absolute before:inset-0 before:z-1 before:block before:h-full before:w-full before:mix-blend-overlay;
 
   &::before {
     background-image: var(--noise);
