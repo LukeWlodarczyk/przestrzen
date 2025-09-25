@@ -1,0 +1,15 @@
+---
+interface Props {
+  hasImage: boolean;
+}
+
+const { hasImage } = Astro.props;
+---
+
+{
+  hasImage && (
+    <script>
+      import initImage from "@components/media/Image/script/image"; initImage();
+    </script>
+  )
+}
