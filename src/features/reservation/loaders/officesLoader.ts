@@ -3,11 +3,10 @@ import contentfulClient, { withCache } from "@lib/contentful";
 import type { OfficesList } from "@features/reservation/types";
 
 const loadDataOrdered = async () => {
-  const entries =
-    await contentfulClient.withoutUnresolvableLinks.getEntries<OfficesList>({
-      content_type: "officesList",
-      limit: 1,
-    });
+  const entries = await contentfulClient.getEntries<OfficesList>({
+    content_type: "officesList",
+    limit: 1,
+  });
 
   const [data] = entries.items;
 

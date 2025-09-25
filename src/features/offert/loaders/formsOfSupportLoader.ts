@@ -3,13 +3,10 @@ import contentfulClient, { withCache } from "@lib/contentful";
 import type { FormsOfSupportList } from "@features/offert/types";
 
 const loadDataOrdered = async () => {
-  const entries =
-    await contentfulClient.withoutUnresolvableLinks.getEntries<FormsOfSupportList>(
-      {
-        content_type: "formsOfSupportList",
-        limit: 1,
-      },
-    );
+  const entries = await contentfulClient.getEntries<FormsOfSupportList>({
+    content_type: "formsOfSupportList",
+    limit: 1,
+  });
 
   const [data] = entries.items;
 

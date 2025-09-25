@@ -3,11 +3,10 @@ import contentfulClient, { withCache } from "@lib/contentful";
 import type { CompanyDetails } from "@features/contact/types";
 
 const loadCompanyDetailsData = async () => {
-  const entries =
-    await contentfulClient.withoutUnresolvableLinks.getEntries<CompanyDetails>({
-      content_type: "companyDetails",
-      limit: 1,
-    });
+  const entries = await contentfulClient.getEntries<CompanyDetails>({
+    content_type: "companyDetails",
+    limit: 1,
+  });
 
   const [data] = entries.items;
 

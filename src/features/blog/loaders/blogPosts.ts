@@ -13,11 +13,10 @@ export const enhanceBlogPost = (blogPost: ExtractEntryFields<BlogPost>) => ({
 });
 
 const loadData = async () => {
-  const entries =
-    await contentfulClient.withoutUnresolvableLinks.getEntries<BlogPost>({
-      content_type: "blogPost",
-      order: ["-fields.date"],
-    });
+  const entries = await contentfulClient.getEntries<BlogPost>({
+    content_type: "blogPost",
+    order: ["-fields.date"],
+  });
 
   return entries.items.map((entry) => entry.fields).map(enhanceBlogPost);
 };

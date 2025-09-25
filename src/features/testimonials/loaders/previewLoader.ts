@@ -3,13 +3,10 @@ import contentfulClient, { withCache } from "@lib/contentful";
 import type { TestimonialsPreview } from "@features/testimonials/types";
 
 const loadPreviewData = async () => {
-  const entries =
-    await contentfulClient.withoutUnresolvableLinks.getEntries<TestimonialsPreview>(
-      {
-        content_type: "testimonialsPreview",
-        limit: 1,
-      },
-    );
+  const entries = await contentfulClient.getEntries<TestimonialsPreview>({
+    content_type: "testimonialsPreview",
+    limit: 1,
+  });
 
   const [data] = entries.items;
 
