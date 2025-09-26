@@ -3,6 +3,8 @@
 import Section from "@components/layout/Section.astro";
 
 import Heading from "@components/typography/Heading.astro";
+import InlineLink from "@components/typography/InlineLink.astro";
+
 import RichTextBlock from "@components/richText/RichTextBlock.astro";
 
 import Map from "@components/interactive/Map";
@@ -10,7 +12,7 @@ import Map from "@components/interactive/Map";
 import Widget from "@features/reservation/components/Widget";
 import OfficeCard from "@features/reservation/components/OfficeCard.astro";
 
-import { DYNAMIC_ROUTES } from "@routes";
+import { DYNAMIC_ROUTES, STATIC_ROUTES } from "@routes";
 
 import loadOfficesData from "@features/reservation/loaders/officesLoader";
 
@@ -38,9 +40,17 @@ const office = officesData.list.find(
   containerClassName="flex flex-col lg:grid lg:grid-cols-(--two-col-grid) lg:gap-(--space-m-l)"
 >
   <div class="flex w-full flex-col">
-    <Heading className="text-center lg:text-left" level={1}>
-      {office.heading}
+    <Heading className="text-center text-deep-green lg:text-left" level={1}>
+      {office.name}
     </Heading>
+
+    <InlineLink
+      className="arrow-left-3xs order-first mx-auto mb-(--space-2xs-xs) block w-fit text-center text-sm text-warm-yellow hover:arrow-left-animate hover:no-underline focus:arrow-left-animate focus-visible:no-underline md:ml-[unset]"
+      href={STATIC_ROUTES.reservation}
+    >
+      Rezerwacja
+    </InlineLink>
+
     <RichTextBlock
       className="text-center lg:text-left"
       containerClassName="mx-auto mt-(--space-xs-s) lg:ml-0 "
