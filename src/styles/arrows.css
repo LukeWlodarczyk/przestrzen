@@ -1,0 +1,39 @@
+@theme {
+  --animate-arrow-slide-left: arrow-slide-left ease-out 0.6s infinite alternate;
+  --animate-arrow-slide-right: arrow-slide-right ease-out 0.6s infinite
+    alternate;
+
+  @keyframes arrow-slide-left {
+    from {
+      transform: translateX(0px);
+    }
+    to {
+      transform: translateX(-5px);
+    }
+  }
+
+  @keyframes arrow-slide-right {
+    from {
+      transform: translateX(0px);
+    }
+    to {
+      transform: translateX(5px);
+    }
+  }
+}
+
+@utility arrow-left-* {
+  @apply relative block before:inline-block before:pr-[--value(--space-*)] before:content-['←'];
+}
+
+@utility arrow-left-animate {
+  @apply before:animate-arrow-slide-left;
+}
+
+@utility arrow-right-* {
+  @apply relative block after:inline-block after:pl-[--value(--space-*)] after:content-['→'];
+}
+
+@utility arrow-right-animate {
+  @apply after:animate-arrow-slide-right;
+}
