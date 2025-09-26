@@ -45,16 +45,17 @@ const hasWebsite = Boolean(website);
       )
     }
     <header
-      class="flex flex-col gap-(--space-3xs) @lg:justify-center @lg:gap-(--space-2xs)"
+      class="group flex flex-col gap-(--space-3xs) @lg:justify-center @lg:gap-(--space-2xs)"
     >
       <h3
         class:list={tw(
-          "w-fit overflow-hidden text-lg tracking-wide text-ellipsis whitespace-nowrap text-warm-yellow",
-          isLink && "group-hover:shine peer-focus:shine",
+          "overflow-hidden text-lg tracking-wide text-ellipsis whitespace-nowrap text-warm-yellow",
+          isLink && "group-peer-focus:shine group-hover:shine",
+          isLink &&
+            "arrow-right-3xs group-peer-focus:arrow-right-animate group-hover:arrow-right-animate",
         )}
       >
         {name}
-        {isLink && "→"}
       </h3>
       <p
         class="overflow-hidden font-extralight text-ellipsis whitespace-nowrap text-sand-beige"

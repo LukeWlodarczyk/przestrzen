@@ -8,6 +8,7 @@
 @import "./container.css";
 @import "./noise";
 @import "./shine";
+@import "./arrows";
 
 @layer base {
   body {
