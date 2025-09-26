@@ -5,10 +5,8 @@ export interface OffertPreview {
   fields: {
     heading: EntryFieldTypes.Text;
     headline: EntryFieldTypes.RichText;
-    areasOfSupportHeading: EntryFieldTypes.Text;
     areasOfSupportDescription: EntryFieldTypes.RichText;
     cldVideoPublicId: EntryFieldTypes.Text;
-    formsOfSupportHeading: EntryFieldTypes.Text;
     formsOfSupportDescription: EntryFieldTypes.RichText;
   };
 }
