@@ -12,7 +12,7 @@ import Button from "@components/interactive/Button.astro";
 
 import { resolveAssetUrl } from "@lib/contentful";
 
-import { DYNAMIC_ROUTES } from "@routes";
+import { DYNAMIC_ROUTES, STATIC_ROUTES } from "@routes";
 
 import loadAreasOfSupportData from "@features/offert/loaders/areasOfSupportLoader";
 import loadFormsOfSupportData from "@features/offert/loaders/formsOfSupportLoader";
@@ -58,7 +58,7 @@ const areasOfSupport = await loadAreasOfSupportData();
 
   <Button
     className="my-(--space-2xl-3xl) w-full"
-    href="/rezerwacja"
+    href={STATIC_ROUTES.reservation}
     size="large"
   >
     {data.ctaLabel}
@@ -86,6 +86,14 @@ const areasOfSupport = await loadAreasOfSupportData();
       ))
     }
   </ul>
+
+  <Button
+    className="mt-(--space-2xl-3xl) w-full"
+    href={STATIC_ROUTES.reservation}
+    size="large"
+  >
+    {data.ctaLabel}
+  </Button>
 </Section>
 
 <style>
