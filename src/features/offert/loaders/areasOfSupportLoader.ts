@@ -12,6 +12,7 @@ const loadDataOrdered = async () => {
 
   return {
     label: data.fields.label,
+    image: data.fields.image,
     list: data.fields.listInOrder
       .map((item) => item?.fields)
       .filter((item) => !!item),
