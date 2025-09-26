@@ -24,7 +24,9 @@ const compoanyDetails = await loadCompanyDetails();
   className="bg-warm-white pt-(--space-5xl-6xl)"
   containerClassName="flex flex-col items-center"
 >
-  <Heading className="text-center" level={1}>{data.heading}</Heading>
+  <Heading className="text-center text-lg font-normal" level={1}>
+    {data.heading}
+  </Heading>
   <RichTextBlock
     className="text-center"
     containerClassName="mt-(--space-xs-s)"

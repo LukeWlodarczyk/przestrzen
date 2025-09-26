@@ -34,7 +34,7 @@ const blogPost = blogPosts.find((blog) => blog.slug === slug) as BlogPostFields;
     <Fragment slot="header">
       <div class="flex flex-col lg:hidden">
         <Heading
-          className="mb-(--space-s-m) text-center text-lg font-light text-balance text-warm-yellow/80"
+          className="mb-(--space-s-m) text-center text-lg font-normal text-balance"
           level={1}
         >
           {blogPost.title}
@@ -59,7 +59,7 @@ const blogPost = blogPosts.find((blog) => blog.slug === slug) as BlogPostFields;
 
         <div class="flex flex-col lg:order-first">
           <Heading
-            className="mb-(--space-s-m) hidden text-lg font-light text-balance text-warm-yellow/80 lg:block"
+            className="mb-(--space-s-m) hidden text-lg font-normal text-balance lg:block"
             level={1}>{blogPost.title}</Heading
           >
 
