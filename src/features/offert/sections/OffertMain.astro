@@ -1,14 +1,17 @@
 ---
 /* eslint-disable astro/no-unused-css-selector */
-import FormOfSupportCard from "@features/offert/components/FormOfSupportCard.astro";
-
 import Section from "@components/layout/Section.astro";
 
 import Heading from "@components/typography/Heading.astro";
+
 import RichTextBlock from "@components/richText/RichTextBlock.astro";
 
 import Badge from "@components/interactive/Badge.astro";
 import Button from "@components/interactive/Button.astro";
+
+import Image from "@components/media/Image/Image.astro";
+
+import FormOfSupportCard from "@features/offert/components/FormOfSupportCard.astro";
 
 import { resolveAssetUrl } from "@lib/contentful";
 
@@ -28,14 +31,31 @@ const areasOfSupport = await loadAreasOfSupportData();
 <Section
   className="offert-main-wrapper noise-30 bg-muted-green pt-(--space-5xl-6xl)"
 >
-  <Heading className="text-center" level={1}>{data.heading}</Heading>
+  <div class="flex items-center justify-around gap-(--space-s-m)">
+    <Image
+      alt=""
+      className="hidden w-[250px] md:block"
+      sizes="250"
+      src={resolveAssetUrl(formsOfSupport.image)}
+      widths={[250]}
+    />
 
-  <Heading className="sr-only" level={2}>{formsOfSupport.label}</Heading>
-  <RichTextBlock
-    className="text-justify text-balance text-muted-teal"
-    containerClassName="mx-auto mt-(--space-xs-s)"
-    document={data.formsOfSupportDescription}
-  />
+    <div>
+      <Heading
+        className="text-center text-lg font-normal md:text-left"
+        level={1}
+      >
+        {data.heading}
+      </Heading>
+
+      <Heading className="sr-only" level={2}>{formsOfSupport.label}</Heading>
+      <RichTextBlock
+        className="text-justify text-balance text-muted-teal"
+        containerClassName="mx-auto mt-(--space-xs-s)"
+        document={data.formsOfSupportDescription}
+      />
+    </div>
+  </div>
 
   <ul
     aria-label={formsOfSupport.label}
@@ -64,12 +84,24 @@ const areasOfSupport = await loadAreasOfSupportData();
     {data.ctaLabel}
   </Button>
 
-  <Heading className="sr-only" level={2}>{areasOfSupport.label}</Heading>
-  <RichTextBlock
-    className="text-justify text-balance text-muted-teal"
-    containerClassName="mx-auto mt-(--space-xs-s)"
-    document={data.areasOfSupportDescription}
-  />
+  <div class="flex items-center justify-around gap-(--space-s-m)">
+    <div>
+      <Heading className="sr-only" level={2}>{areasOfSupport.label}</Heading>
+
+      <RichTextBlock
+        className="text-justify text-balance text-muted-teal"
+        containerClassName="mx-auto mt-(--space-xs-s)"
+        document={data.areasOfSupportDescription}
+      />
+    </div>
+    <Image
+      alt=""
+      className="hidden w-[250px] lg:block"
+      sizes="250"
+      src={resolveAssetUrl(areasOfSupport.image)}
+      widths={[250]}
+    />
+  </div>
 
   <ul
     aria-label={areasOfSupport.label}

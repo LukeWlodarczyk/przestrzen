@@ -27,6 +27,7 @@ export interface FormsOfSupportList {
   contentTypeId: "formsOfSupportList";
   fields: {
     label: EntryFieldTypes.Text;
+    image: EntryFieldTypes.AssetLink;
     listInOrder: EntryFieldTypes.Array<
       EntryFieldTypes.EntryLink<FormOfSupport>
     >;
@@ -47,6 +48,7 @@ export interface AreasOfSupportList {
   contentTypeId: "areasOfSupportList";
   fields: {
     label: EntryFieldTypes.Text;
+    image: EntryFieldTypes.AssetLink;
     listInOrder: EntryFieldTypes.Array<
       EntryFieldTypes.EntryLink<AreaOfSupport>
     >;
