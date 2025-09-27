@@ -8,6 +8,7 @@ import { DYNAMIC_ROUTES, STATIC_ROUTES } from "@routes";
 import type { BlogPostFields as BlogPost } from "@features/blog/types";
 
 import BlogPostCardPreview from "./BlogPostCardPreview.astro";
+import BlogSubscribeCard from "./BlogSubscribeCard.astro";
 
 interface Props {
   heading: string;
@@ -30,7 +31,7 @@ const { heading, posts } = Astro.props;
   {
     posts.map((post) => (
       <BlogPostCardPreview
-        className="min-w-[300px] "
+        className="min-w-[300px]"
         date={post.date}
         description={post.description}
         href={DYNAMIC_ROUTES.blogPost(post.slug)}
@@ -48,3 +49,5 @@ const { heading, posts } = Astro.props;
 >
   Czytaj więcej
 </Button>
+
+<BlogSubscribeCard className="mt-(--space-s-m)" />
