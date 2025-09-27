@@ -1,0 +1,31 @@
+---
+import Heading from "@components/typography/Heading.astro";
+import Paragraph from "@components/typography/Paragraph.astro";
+
+import { tw } from "@utils/index.ts";
+
+interface Props {
+  className?: string;
+}
+
+const { className } = Astro.props;
+
+const baseClasses = tw(
+  "@container noise-20 flex h-fit w-full flex-col rounded-2xl border border-sand-beige bg-sand-beige/20 p-(--space-s-m) @xl:p-(--space-m-l)",
+);
+
+const classList = tw(baseClasses, className);
+---
+
+<article class:list={classList}>
+  <Heading
+    className="text-base font-normal tracking-normal text-pretty text-dark-teal"
+    level={3}
+  >
+    Nowe artykuły – od razu w Twojej skrzynce ✉️
+  </Heading>
+  <Paragraph className="mt-(--space-2xs) block text-sm text-pretty">
+    Zapisz się i otrzymuj e-mail za każdym razem, gdy publikuję nowy artykuł.
+    Prosto, wygodnie i zawsze na czas.
+  </Paragraph>
+</article>
