@@ -4,6 +4,8 @@ import Paragraph from "@components/typography/Paragraph.astro";
 
 import { tw } from "@utils/index.ts";
 
+import BlogSubscribeForm from "./BlogSubscribeForm/BlogSubscribeForm";
+
 interface Props {
   className?: string;
 }
@@ -28,4 +30,6 @@ const classList = tw(baseClasses, className);
     Zapisz się i otrzymuj e-mail za każdym razem, gdy publikuję nowy artykuł.
     Prosto, wygodnie i zawsze na czas.
   </Paragraph>
+
+  <BlogSubscribeForm className="mt-(--space-s)" client:visible />
 </article>
