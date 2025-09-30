@@ -1,4 +1,9 @@
-import contentfulClient, { withCache } from "@lib/contentful";
+import contentfulClient, {
+  extractEntryFields,
+  withCache,
+} from "@lib/contentful";
+
+import { isDefined } from "@utils/index";
 
 import { enhanceBlogPost } from "@features/blog/loaders/blogPosts";
 
@@ -15,8 +20,8 @@ const loadPreviewData = async () => {
   return {
     ...data.fields,
     recomendedBlogPosts: data.fields.recomendedBlogPosts
-      .map((post) => post?.fields)
-      .filter((post) => !!post)
+      .filter(isDefined)
+      .map(extractEntryFields)
       .map(enhanceBlogPost),
   };
 };

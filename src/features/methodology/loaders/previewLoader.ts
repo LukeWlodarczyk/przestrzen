@@ -1,4 +1,9 @@
-import contentfulClient, { withCache } from "@lib/contentful";
+import contentfulClient, {
+  extractEntryFields,
+  withCache,
+} from "@lib/contentful";
+
+import { isDefined } from "@utils/index";
 
 import type { MethodologyPreview } from "@features/methodology/types";
 
@@ -12,9 +17,7 @@ const loadPreviewData = async () => {
 
   return {
     ...data.fields,
-    items: data.fields.items
-      .map((item) => item?.fields)
-      .filter((item) => !!item),
+    items: data.fields.items.filter(isDefined).map(extractEntryFields),
   };
 };
 

@@ -1,8 +1,13 @@
-import contentfulClient, { withCache } from "@lib/contentful";
+import contentfulClient, {
+  extractEntryFields,
+  withCache,
+} from "@lib/contentful";
+
+import { isDefined } from "@utils/index";
 
 import type { OfficesList } from "@features/reservation/types";
 
-const loadDataOrdered = async () => {
+const loadOfficesDataOrdered = async () => {
   const entries = await contentfulClient.getEntries<OfficesList>({
     content_type: "officesList",
     limit: 1,
@@ -12,10 +17,8 @@ const loadDataOrdered = async () => {
 
   return {
     label: data.fields.label,
-    list: data.fields.listInOrder
-      .map((item) => item?.fields)
-      .filter((item) => !!item),
+    list: data.fields.listInOrder.filter(isDefined).map(extractEntryFields),
   };
 };
 
-export default withCache(loadDataOrdered);
+export default withCache(loadOfficesDataOrdered);
