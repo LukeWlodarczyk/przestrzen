@@ -24,6 +24,12 @@ import loadBlogPosts from "@features/blog/loaders/blogPosts";
 
 const blogPosts = await loadBlogPosts();
 
+const RECENT_BLOG_POSTS_COUNT = 4;
+
+interface Props {
+  slug: string;
+}
+
 const { slug } = Astro.props;
 
 const blogPost = blogPosts.find((blog) => blog.slug === slug) as BlogPostFields;
@@ -94,7 +100,7 @@ const blogPost = blogPosts.find((blog) => blog.slug === slug) as BlogPostFields;
 
     <BlogAside
       heading="Moje ostatnie publikacje ✍🏻"
-      posts={blogPosts}
+      posts={blogPosts.slice(0, RECENT_BLOG_POSTS_COUNT)}
       slot="aside"
     />
   </Article>
