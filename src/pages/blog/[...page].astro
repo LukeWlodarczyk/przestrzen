@@ -1,0 +1,35 @@
+---
+import type { GetStaticPaths, Page } from "astro";
+
+import BlogMainLayout from "@features/blog/layouts/BlogMainLayout.astro";
+
+import BlogMainSection from "@features/blog/sections/BlogMain.astro";
+
+import AboutMePreviewSection from "@features/aboutMe/sections/AboutMePreview/AboutMePreview.astro";
+import ContactPreviewSection from "@features/contact/sections/ContactPreview.astro";
+
+import type { BlogPostFields as BlogPost } from "@features/blog/types";
+
+import { BLOG_MAIN_PAGE_SIZE } from "@features/blog/config";
+
+import loadBlogPostsData from "@features/blog/loaders/blogPosts";
+
+interface Props {
+  page: Page<BlogPost>;
+}
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const list = await loadBlogPostsData();
+
+  return paginate(list, { pageSize: BLOG_MAIN_PAGE_SIZE });
+};
+
+const { page } = Astro.props;
+---
+
+<BlogMainLayout>
+  <BlogMainSection page={page} />
+
+  <AboutMePreviewSection />
+  <ContactPreviewSection />
+</BlogMainLayout>
