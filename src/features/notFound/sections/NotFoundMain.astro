@@ -8,6 +8,8 @@ import Weight from "@components/typography/Weight.astro";
 import Button from "@components/interactive/Button.astro";
 import GoBack from "@components/interactive/GoBack.astro";
 
+import { STATIC_ROUTES } from "@routes";
+
 // 🚧 Contentful loader (currently unused).
 // Page content is hardcoded directly in the view for now.
 // This loader is intentionally kept for potential future use
@@ -23,14 +25,16 @@ import GoBack from "@components/interactive/GoBack.astro";
     404 - Strona nie istnieje
   </Heading>
 
-  <Headline className="mt-(--space-s-m) text-center"
-    >Błądząc w <Weight>ogrodzie myśli</Weight>, pusta ścieżka może okazać się
+  <Headline className="mt-(--space-s-m) text-center">
+    Błądząc w <Weight>ogrodzie myśli</Weight>, pusta ścieżka może okazać się
     wskazówką, że <Weight>czas zawrócić</Weight>
-
-    <div class="mt-(--space-l-xl) flex flex-wrap justify-center">
-      <GoBack>Krok wstecz</GoBack>
-      <Button href="/" variant="tertiary">Strona główna</Button>
-      <Button href="/blog" variant="tertiary">Odwiedź blog</Button>
-    </div>
   </Headline>
+
+  <div class="mt-(--space-l-xl) flex flex-wrap justify-center">
+    <GoBack>Krok wstecz</GoBack>
+    <Button href={STATIC_ROUTES.home} variant="tertiary">
+      Strona główna
+    </Button>
+    <Button href={STATIC_ROUTES.blog} variant="tertiary">Odwiedź blog</Button>
+  </div>
 </Section>
