@@ -20,11 +20,11 @@ import BREAKPOINTS from "@styles/breakpoints/breakpoints";
 
 import loadData from "@features/aboutMe/loaders/mainLoader";
 
-import loadBlogPosts from "@features/blog/loaders/blogPosts";
+import loadBlogPreview from "@features/blog/loaders/previewLoader";
 
 import BlogAside from "@features/blog/components/BlogAside.astro";
 
-const blogPosts = await loadBlogPosts();
+const { recomendedBlogPosts } = await loadBlogPreview();
 
 const data = await loadData();
 
@@ -116,8 +116,8 @@ const aboutMeVideoSources = [
     </Fragment>
 
     <BlogAside
-      heading="Moje ostatnie publikacje ✍🏻"
-      posts={blogPosts}
+      heading="Polecane publikacje 📜"
+      posts={recomendedBlogPosts}
       slot="aside"
     />
   </Article>
