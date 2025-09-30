@@ -6,4 +6,5 @@ export { default as hideAndRemove } from "./hideAndRemove.ts";
 export { default as getRequiredCssVariable } from "./getRequiredCssVariable.ts";
 export { default as initSwipe } from "./swipe.ts";
 export { default as initKeyboardArrows } from "./keyboardArrows.ts";
+export { default as isDefined } from "./isDefined.ts";
 export { type PropsWithChildren } from "./types.ts";
