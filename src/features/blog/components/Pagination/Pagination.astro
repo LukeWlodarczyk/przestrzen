@@ -1,0 +1,79 @@
+---
+import { tw } from "@utils/index";
+
+import PageItem from "./PageItem.astro";
+
+import {
+  generatePaginationItems,
+  generateBlogPaginationHref,
+} from "./pagination";
+
+const ELIPSIS = "…";
+const ARROW = "➛";
+
+interface Props {
+  className?: string;
+  prevUrl?: string;
+  nextUrl?: string;
+  totalPages: number;
+  currentPage: number;
+}
+
+const { className, prevUrl, nextUrl, totalPages, currentPage } = Astro.props;
+
+const paginationItems = generatePaginationItems(currentPage, totalPages);
+
+const baseClasses = tw("w-full");
+
+const classList = tw(baseClasses, className);
+
+const visibilityClasses = tw("hidden lg:block");
+---
+
+<nav class:list={classList}>
+  <ul class="flex gap-(--space-2xs-xs)">
+    {
+      paginationItems.map((item) => {
+        switch (item.type) {
+          case "page":
+            return (
+              <PageItem
+                className={tw(visibilityClasses, item.isCurrent && "block")}
+                href={generateBlogPaginationHref(item.value)}
+                isCurrent={item.isCurrent}
+                value={item.value}
+              />
+            );
+          case "ellipsis":
+            return (
+              <PageItem
+                className={tw(visibilityClasses)}
+                disabled
+                isCurrent={false}
+                value={ELIPSIS}
+              />
+            );
+          case "prev":
+            return (
+              <PageItem
+                className="scale-x-[-1]"
+                disabled={item.disabled}
+                href={prevUrl}
+                isCurrent={false}
+                value={ARROW}
+              />
+            );
+          case "next":
+            return (
+              <PageItem
+                disabled={item.disabled}
+                href={nextUrl}
+                isCurrent={false}
+                value={ARROW}
+              />
+            );
+        }
+      })
+    }
+  </ul>
+</nav>

@@ -1,0 +1,39 @@
+---
+import { tw } from "@utils/index";
+
+interface Props {
+  className?: string;
+  isCurrent: boolean;
+  value: number | string;
+  href?: string;
+  disabled?: boolean;
+}
+
+const { className, isCurrent, value, href, disabled = false } = Astro.props;
+
+const baseStyles = tw(
+  "noise-10 block w-fit cursor-pointer rounded-2xl bg-dark-beige/60 px-(--space-m) py-(--space-2xs) text-center font-light tracking-wide text-charcoal/80 outline-offset-2 outline-dark-beige/80 select-none hover:bg-dark-beige/80 focus:bg-dark-beige/80",
+);
+
+const currentStyles = tw(
+  "bg-deep-green px-(--space-xl) text-warm-yellow outline-deep-green hover:bg-deep-green/90 hover:text-warm-yellow focus:bg-deep-green/90",
+);
+
+const disabledLink = tw(
+  "cursor-not-allowed bg-dark-beige/40 text-charcoal/60 hover:bg-dark-beige/40 hover:text-charcoal/60",
+);
+
+const isLink = !disabled && Boolean(href);
+---
+
+<li class:list={className}>
+  {
+    isLink ? (
+      <a class:list={tw(baseStyles, isCurrent && currentStyles)} href={href}>
+        {value}
+      </a>
+    ) : (
+      <span class:list={tw(baseStyles, disabledLink)}>{value}</span>
+    )
+  }
+</li>
