@@ -1,6 +1,6 @@
 ---
 import Section from "@components/layout/Section.astro";
-import Article from "@components/layout/Article.astro";
+import Article from "@components/layout/Article/Article.astro";
 
 import Heading from "@components/typography/Heading.astro";
 import Paragraph from "@components/typography/Paragraph.astro";
@@ -30,7 +30,7 @@ const blogPost = blogPosts.find((blog) => blog.slug === slug) as BlogPostFields;
 ---
 
 <Section className="noise-30 bg-warm-white pt-(--space-5xl-6xl)">
-  <Article>
+  <Article asideClientDirective="client:idle">
     <Fragment slot="header">
       <div class="flex flex-col lg:hidden">
         <Heading
@@ -60,8 +60,10 @@ const blogPost = blogPosts.find((blog) => blog.slug === slug) as BlogPostFields;
         <div class="flex flex-col lg:order-first">
           <Heading
             className="mb-(--space-s-m) hidden text-lg font-normal text-balance lg:block"
-            level={1}>{blogPost.title}</Heading
+            level={1}
           >
+            {blogPost.title}
+          </Heading>
 
           <PublishDate
             className="order-first mb-(--space-xs-s) hidden text-sm font-light lg:block"

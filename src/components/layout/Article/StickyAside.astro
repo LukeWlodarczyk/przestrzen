@@ -1,0 +1,41 @@
+---
+import StickyBox from "@components/layout/StickyBox";
+
+import BREAKPOINTS from "@styles/breakpoints/breakpoints";
+
+import type { PropsWithChildren } from "@utils/types";
+
+import type { AsideDirectives } from "./stickyAside";
+
+type Props = PropsWithChildren<{
+  className?: string;
+  clientDirective: AsideDirectives;
+  mediaQueryBreakpoint: (typeof BREAKPOINTS)[keyof typeof BREAKPOINTS];
+}>;
+
+const { className, clientDirective, mediaQueryBreakpoint } = Astro.props;
+
+const stickyBoxProps = {
+  offsetBottom: 24,
+  offsetTop: 24,
+};
+
+const mediaQuery = `(min-width: ${mediaQueryBreakpoint})`;
+---
+
+<aside class:list={className}>
+  {
+    clientDirective === "client:media" && (
+      <StickyBox client:media={mediaQuery} {...stickyBoxProps}>
+        <slot />
+      </StickyBox>
+    )
+  }
+  {
+    clientDirective === "client:idle" && (
+      <StickyBox client:idle {...stickyBoxProps}>
+        <slot />
+      </StickyBox>
+    )
+  }
+</aside>

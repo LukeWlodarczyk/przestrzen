@@ -2,7 +2,7 @@
 import { STATIC_ROUTES } from "@routes";
 
 import Section from "@components/layout/Section.astro";
-import Article from "@components/layout/Article.astro";
+import Article from "@components/layout/Article/Article.astro";
 
 import Heading from "@components/typography/Heading.astro";
 
@@ -58,7 +58,7 @@ const aboutMeVideoSources = [
 <Section
   className="noise-30 bg-warm-white pt-(--space-5xl-6xl) lg:pt-(--space-4xl-5xl)"
 >
-  <Article>
+  <Article asideClientDirective="client:idle">
     <Fragment slot="header">
       <Heading
         className="mb-(--space-s-m) text-center text-lg font-normal lg:hidden"
