@@ -1,11 +1,11 @@
 ---
-import CompanyDetails from "@features/contact/components/CompanyDetails.astro";
-
 import Section from "@components/layout/Section.astro";
 
 import RichHeadline from "@components/richText/RichHeadline.astro";
 
 import Map from "@components/interactive/Map";
+
+import CompanyDetails from "@features/contact/components/CompanyDetails.astro";
 
 import loadCompanyDetails from "@features/contact/loaders/companyDetailsLoader";
 
@@ -44,7 +44,7 @@ const currentYear = new Date().getFullYear();
     />
 
     <CompanyDetails
-      className="text-warm-white"
+      className="text-warm-white lg:w-1/2 lg:items-start lg:text-left"
       details={companyDetails.office}
       withScope
     />

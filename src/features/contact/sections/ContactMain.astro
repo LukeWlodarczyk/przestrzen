@@ -37,7 +37,10 @@ const compoanyDetails = await loadCompanyDetails();
     aria-label={compoanyDetails.label}
     class="mt-(--space-xl-2xl) flex w-full max-w-prose flex-col items-center gap-(--space-l-xl) lg:flex-row-reverse"
   >
-    <CompanyDetails details={compoanyDetails.office} />
+    <CompanyDetails
+      className="lg:w-1/2 lg:items-start lg:text-left"
+      details={compoanyDetails.office}
+    />
     <Map
       className="h-[300px] w-full max-w-full lg:aspect-square lg:w-1/2 lg:max-w-[500px]"
       client:load
