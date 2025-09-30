@@ -1,17 +1,25 @@
 ---
+import type { Page } from "astro";
+
 import Section from "@components/layout/Section.astro";
 
 import Heading from "@components/typography/Heading.astro";
 import RichTextBlock from "@components/richText/RichTextBlock.astro";
 
 import BlogPostList from "@features/blog/components/BlogPostList.astro";
+import Pagination from "@features/blog/components/Pagination/Pagination.astro";
 
 import loadData from "@features/blog/loaders/mainLoader";
-import loadBlogPosts from "@features/blog/loaders/blogPosts";
 
-const blogPosts = await loadBlogPosts();
+import type { BlogPostFields as BlogPost } from "@features/blog/types";
 
 const data = await loadData();
+
+interface Props {
+  page: Page<BlogPost>;
+}
+
+const { page } = Astro.props;
 ---
 
 <Section className="bg-warm-white pt-(--space-5xl-6xl)">
@@ -28,6 +36,14 @@ const data = await loadData();
   <BlogPostList
     aria-label={data.listLabel}
     className="mt-(--space-l-xl)"
-    posts={blogPosts}
+    posts={page.data}
+  />
+
+  <Pagination
+    className="mx-auto mt-(--space-m-l) w-fit"
+    currentPage={page.currentPage}
+    nextUrl={page.url.next}
+    prevUrl={page.url.prev}
+    totalPages={page.lastPage}
   />
 </Section>
