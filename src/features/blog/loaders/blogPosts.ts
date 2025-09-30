@@ -1,4 +1,5 @@
 import contentfulClient, {
+  extractEntryFields,
   timeToRead,
   withCache,
   type ExtractEntryFields,
@@ -12,13 +13,13 @@ export const enhanceBlogPost = (blogPost: ExtractEntryFields<BlogPost>) => ({
   timeToRead: timeToRead(blogPost.body),
 });
 
-const loadData = async () => {
+const loadBlogPostsData = async () => {
   const entries = await contentfulClient.getEntries<BlogPost>({
     content_type: "blogPost",
     order: ["-fields.date"],
   });
 
-  return entries.items.map((entry) => entry.fields).map(enhanceBlogPost);
+  return entries.items.map(extractEntryFields).map(enhanceBlogPost);
 };
 
-export default withCache(loadData);
+export default withCache(loadBlogPostsData);

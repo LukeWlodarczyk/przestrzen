@@ -2,6 +2,8 @@ import contentfulClient, { withCache } from "@lib/contentful";
 
 import type { TestimonialsPreview } from "@features/testimonials/types";
 
+import isDefined from "@utils/isDefined";
+
 const loadPreviewData = async () => {
   const entries = await contentfulClient.getEntries<TestimonialsPreview>({
     content_type: "testimonialsPreview",
@@ -13,7 +15,7 @@ const loadPreviewData = async () => {
   return {
     ...data.fields,
     testimonials: data.fields.testimonials
-      .filter((testimonial) => !!testimonial)
+      .filter(isDefined)
       .map((testimonial) => ({
         ...testimonial.fields,
         id: testimonial.sys.id,
