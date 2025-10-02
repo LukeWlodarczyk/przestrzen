@@ -1,0 +1,98 @@
+---
+import { STATIC_ROUTES } from "@routes";
+
+import { resolveAssetUrl } from "@lib/contentful";
+
+import Section from "@components/layout/Section.astro";
+import Article from "@components/layout/Article/Article.astro";
+
+import Heading from "@components/typography/Heading.astro";
+import Paragraph from "@components/typography/Paragraph.astro";
+import InlineLink from "@components/typography/InlineLink.astro";
+
+import RichArticleBody from "@components/richText/RichArticleBody.astro";
+
+import Image from "@components/media/Image/Image.astro";
+
+import Button from "@components/interactive/Button.astro";
+
+import FormOfSupportAside from "@features/offert/components/FormOfSupportAside.astro";
+
+import loadFormsOfSuport from "@features/offert/loaders/formsOfSupportLoader";
+
+import type { FormOfSupportFields as FormOfSupport } from "@features/offert/types";
+
+interface Props {
+  formOfSupport: FormOfSupport;
+}
+
+const formsOfSupport = await loadFormsOfSuport();
+
+const { formOfSupport } = Astro.props;
+---
+
+<Section
+  className="noise-45 bg-muted-green pt-(--space-5xl-6xl) lg:pt-(--space-4xl-5xl)"
+>
+  <Article>
+    <Fragment slot="header">
+      <div
+        class="flex flex-col items-center gap-(--space-s-m) md:flex-row md:gap-(--space-xl-2xl)"
+      >
+        <div class="flex flex-col md:w-2/3">
+          <Heading
+            className="mb-(--space-s-m) text-center text-lg font-normal text-balance text-deep-green md:text-left"
+            level={1}
+          >
+            {formOfSupport.name}
+          </Heading>
+
+          <InlineLink
+            className="arrow-left-3xs order-first mx-auto mb-(--space-2xs-xs) block w-fit text-center text-sm text-warm-yellow capitalize hover:arrow-left-animate hover:no-underline focus:arrow-left-animate md:ml-[unset]"
+            href={STATIC_ROUTES.formOfSupport}
+          >
+            {formsOfSupport.label}
+          </InlineLink>
+
+          <Paragraph className="text-justify">
+            {formOfSupport.description}
+          </Paragraph>
+        </div>
+
+        <div class="order-first mx-auto md:order-2 md:w-1/3">
+          <Image
+            alt=""
+            className="mx-auto w-full max-w-[150px] overflow-hidden md:max-w-[250px]"
+            sizes="250px"
+            src={resolveAssetUrl(formOfSupport.image)}
+            widths={[250]}
+          />
+        </div>
+      </div>
+    </Fragment>
+
+    <Fragment slot="body">
+      <RichArticleBody
+        containerClassName="mb-(--space-xl-2xl)"
+        document={formOfSupport.body}
+      />
+
+      <div
+        class="mt-auto flex max-w-prose flex-col items-center justify-center gap-(--space-s-m) sm:flex-row"
+      >
+        <Button href={STATIC_ROUTES.offert} variant="tertiary">
+          Zobacz pełną ofertę
+        </Button>
+        <Button href={STATIC_ROUTES.reservation} variant="primary">
+          Zarezerwuj wizytę
+        </Button>
+      </div>
+    </Fragment>
+
+    <FormOfSupportAside
+      areasOfSupport={formOfSupport.relatedAreasOfSupport}
+      heading="Powiązane obszary wsparcia 🧩"
+      slot="aside"
+    />
+  </Article>
+</Section>

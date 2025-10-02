@@ -1,5 +1,7 @@
 import type { EntryFieldTypes } from "contentful";
 
+import loadFormsOfSupport from "./loaders/formsOfSupportLoader";
+
 export interface OffertPreview {
   contentTypeId: "offertPreview";
   fields: {
@@ -14,10 +16,16 @@ export interface OffertPreview {
 export interface FormOfSupport {
   contentTypeId: "formOfSupport";
   fields: {
+    metaTitle: EntryFieldTypes.Text;
+    metaDescription: EntryFieldTypes.Text;
     name: EntryFieldTypes.Text;
     slug: EntryFieldTypes.Text;
-    description: EntryFieldTypes.Text;
     image: EntryFieldTypes.AssetLink;
+    description: EntryFieldTypes.Text;
+    body: EntryFieldTypes.RichText;
+    recommendedAreasOfSupport: EntryFieldTypes.Array<
+      EntryFieldTypes.EntryLink<AreaOfSupport>
+    >;
   };
 }
 
@@ -32,13 +40,20 @@ export interface FormsOfSupportList {
   };
 }
 
+export type FormOfSupportFields = Awaited<
+  ReturnType<typeof loadFormsOfSupport>
+>["list"][number];
+
 export interface AreaOfSupport {
   contentTypeId: "areaOfSupport";
   fields: {
+    metaTitle: EntryFieldTypes.Text;
+    metaDescription: EntryFieldTypes.Text;
     name: EntryFieldTypes.Text;
     slug: EntryFieldTypes.Text;
-    description: EntryFieldTypes.Text;
     image: EntryFieldTypes.AssetLink;
+    description: EntryFieldTypes.Text;
+    body: EntryFieldTypes.RichText;
   };
 }
 
