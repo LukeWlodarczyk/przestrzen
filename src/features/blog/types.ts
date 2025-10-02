@@ -22,8 +22,8 @@ export interface BlogPreviewSkeleton {
     heading: EntryFieldTypes.Text;
     headline: EntryFieldTypes.RichText;
     description: EntryFieldTypes.RichText;
-    recomendedBlogPostsLabel: EntryFieldTypes.Text;
-    recomendedBlogPosts: EntryFieldTypes.Array<
+    recommendedBlogPostsLabel: EntryFieldTypes.Text;
+    recommendedBlogPosts: EntryFieldTypes.Array<
       EntryFieldTypes.EntryLink<BlogPostSkeleton>
     >;
     ctaLabel: EntryFieldTypes.Text;
