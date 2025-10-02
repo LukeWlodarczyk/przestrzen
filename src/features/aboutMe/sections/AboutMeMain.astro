@@ -101,10 +101,13 @@ const aboutMeVideoSources = [
     </Fragment>
 
     <Fragment slot="body">
-      <RichArticleBody document={data.body} />
+      <RichArticleBody
+        containerClassName="mb-(--space-xl-2xl)"
+        document={data.body}
+      />
 
       <div
-        class="mt-(--space-xl-2xl) mb-(--space-s-m) flex flex-col items-center justify-center gap-(--space-s-m) sm:flex-row"
+        class="mt-auto mb-(--space-s-m) flex flex-col items-center justify-center gap-(--space-s-m) sm:flex-row"
       >
         <Button href={STATIC_ROUTES.offert} variant="tertiary">
           Poznaj ofertę
