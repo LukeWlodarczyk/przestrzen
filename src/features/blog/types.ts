@@ -2,7 +2,7 @@ import type { EntryFieldTypes } from "contentful";
 
 import loadBlogPostsData from "@features/blog/loaders/blogPosts";
 
-export interface BlogPost {
+export interface BlogPostSkeleton {
   contentTypeId: "blogPost";
   fields: {
     metaTitle: EntryFieldTypes.Text;
@@ -16,7 +16,7 @@ export interface BlogPost {
   };
 }
 
-export interface BlogPreview {
+export interface BlogPreviewSkeleton {
   contentTypeId: "blogPreview";
   fields: {
     heading: EntryFieldTypes.Text;
@@ -24,17 +24,15 @@ export interface BlogPreview {
     description: EntryFieldTypes.RichText;
     recomendedBlogPostsLabel: EntryFieldTypes.Text;
     recomendedBlogPosts: EntryFieldTypes.Array<
-      EntryFieldTypes.EntryLink<BlogPost>
+      EntryFieldTypes.EntryLink<BlogPostSkeleton>
     >;
     ctaLabel: EntryFieldTypes.Text;
   };
 }
 
-export type BlogPostFields = Awaited<
-  ReturnType<typeof loadBlogPostsData>
->[number];
+export type BlogPost = Awaited<ReturnType<typeof loadBlogPostsData>>[number];
 
-export interface BlogMain {
+export interface BlogMainSkeleton {
   contentTypeId: "blogMainPage";
   fields: {
     metaTitle: EntryFieldTypes.Text;

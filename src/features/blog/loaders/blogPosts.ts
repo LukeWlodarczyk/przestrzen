@@ -5,16 +5,18 @@ import contentfulClient, {
   type ExtractEntryFields,
 } from "@lib/contentful";
 
-import type { BlogPost } from "@features/blog/types";
+import type { BlogPostSkeleton } from "@features/blog/types";
 
-export const enhanceBlogPost = (blogPost: ExtractEntryFields<BlogPost>) => ({
-  ...blogPost,
-  date: new Date(blogPost.date),
-  timeToRead: timeToRead(blogPost.body),
+export const enhanceBlogPost = (
+  rawBlogPost: ExtractEntryFields<BlogPostSkeleton>,
+) => ({
+  ...rawBlogPost,
+  date: new Date(rawBlogPost.date),
+  timeToRead: timeToRead(rawBlogPost.body),
 });
 
 const loadBlogPostsData = async () => {
-  const entries = await contentfulClient.getEntries<BlogPost>({
+  const entries = await contentfulClient.getEntries<BlogPostSkeleton>({
     content_type: "blogPost",
     order: ["-fields.date"],
   });
