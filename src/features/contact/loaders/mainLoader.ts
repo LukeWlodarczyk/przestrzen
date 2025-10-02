@@ -1,9 +1,9 @@
 import contentfulClient, { withCache } from "@lib/contentful";
 
-import type { ContactMain } from "@features/contact/types";
+import type { ContactMainSkeleton } from "@features/contact/types";
 
 const loadMainData = async () => {
-  const entries = await contentfulClient.getEntries<ContactMain>({
+  const entries = await contentfulClient.getEntries<ContactMainSkeleton>({
     content_type: "contactMainPage",
     limit: 1,
   });

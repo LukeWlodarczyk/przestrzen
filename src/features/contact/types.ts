@@ -4,7 +4,7 @@ import type { Office } from "@features/reservation/types";
 
 import type loadCompanyDetailsData from "@features/contact/loaders/companyDetailsLoader";
 
-export interface ContactPreview {
+export interface ContactPreviewSkeleton {
   contentTypeId: "contactPreview";
   fields: {
     heading: EntryFieldTypes.Text;
@@ -13,7 +13,7 @@ export interface ContactPreview {
   };
 }
 
-export interface CompanyDetails {
+export interface CompanyDetailsSkeleton {
   contentTypeId: "companyDetails";
   fields: {
     label: EntryFieldTypes.Text;
@@ -23,11 +23,11 @@ export interface CompanyDetails {
   };
 }
 
-export type CompanyDetailsFields = Awaited<
+export type CompanyDetails = Awaited<
   ReturnType<typeof loadCompanyDetailsData>
 >["office"];
 
-export interface ContactSuccess {
+export interface ContactSuccessSkeleton {
   contentTypeId: "contactSuccessPage";
   fields: {
     metaTitle: EntryFieldTypes.Text;
@@ -38,7 +38,7 @@ export interface ContactSuccess {
   };
 }
 
-export interface ContactMain {
+export interface ContactMainSkeleton {
   contentTypeId: "contactMainPage";
   fields: {
     metaTitle: EntryFieldTypes.Text;
