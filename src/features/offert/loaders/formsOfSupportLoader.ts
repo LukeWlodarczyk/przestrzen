@@ -11,6 +11,7 @@ const loadDataOrdered = async () => {
   const entries = await contentfulClient.getEntries<FormsOfSupportList>({
     content_type: "formsOfSupportList",
     limit: 1,
+    include: 2,
   });
 
   const [data] = entries.items;
@@ -18,7 +19,15 @@ const loadDataOrdered = async () => {
   return {
     label: data.fields.label,
     image: data.fields.image,
-    list: data.fields.listInOrder.filter(isDefined).map(extractEntryFields),
+    list: data.fields.listInOrder
+      .filter(isDefined)
+      .map(extractEntryFields)
+      .map((form) => ({
+        ...form,
+        relatedAreasOfSupport: form.relatedAreasOfSupport
+          .filter(isDefined)
+          .map(extractEntryFields),
+      })),
   };
 };
 

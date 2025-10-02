@@ -1,0 +1,28 @@
+---
+import FormOfSupportLayout from "@features/offert/layouts/FormOfSupportLayout.astro";
+
+import FormOfSupportSection from "@features/offert/sections/FormOfSupport.astro";
+
+import TestimonialsPreviewSection from "@features/testimonials/sections/TestimonialsPreview.astro";
+import ContactPreviewSection from "@features/contact/sections/ContactPreview.astro";
+
+import loadFormsOfSupport from "@features/offert/loaders/formsOfSupportLoader";
+
+export const getStaticPaths = async () => {
+  const { list } = await loadFormsOfSupport();
+
+  return list.map((form) => ({
+    params: { slug: form.slug },
+    props: { formOfSupport: form },
+  }));
+};
+
+const { formOfSupport } = Astro.props;
+---
+
+<FormOfSupportLayout formOfSupport={formOfSupport}>
+  <FormOfSupportSection formOfSupport={formOfSupport} />
+
+  <TestimonialsPreviewSection />
+  <ContactPreviewSection />
+</FormOfSupportLayout>

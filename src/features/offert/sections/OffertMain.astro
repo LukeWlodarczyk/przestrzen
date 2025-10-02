@@ -14,7 +14,7 @@ import OffertCard from "@features/offert/components/OffertCard.astro";
 
 import { resolveAssetUrl } from "@lib/contentful";
 
-import { DYNAMIC_ROUTES, STATIC_ROUTES } from "@routes";
+import { DYNAMIC_ROUTES, IDS, STATIC_ROUTES } from "@routes";
 
 import loadAreasOfSupportData from "@features/offert/loaders/areasOfSupportLoader";
 import loadFormsOfSupportData from "@features/offert/loaders/formsOfSupportLoader";
@@ -58,7 +58,8 @@ const areasOfSupport = await loadAreasOfSupportData();
 
   <ul
     aria-label={formsOfSupport.label}
-    class="mt-(--space-xl-2xl) grid auto-rows-auto grid-cols-(--fluid-offer-items-grid) gap-(--space-m-l)"
+    class="mt-(--space-xl-2xl) grid scroll-mt-(--space-5xl) auto-rows-auto grid-cols-(--fluid-offer-items-grid) gap-(--space-m-l)"
+    id={IDS.formOfSupport}
     role="list"
   >
     {
