@@ -16,7 +16,6 @@ export interface OfficeSkeleton {
   fields: {
     metaTitle: EntryFieldTypes.Text;
     metaDescription: EntryFieldTypes.Text;
-    heading: EntryFieldTypes.Text;
     description: EntryFieldTypes.RichText;
     name: EntryFieldTypes.Text;
     fullName: EntryFieldTypes.Text;
@@ -43,13 +42,6 @@ export interface OfficesListSkeleton {
 }
 
 export type Office = Awaited<ReturnType<typeof loadOffices>>["list"][number];
-
-export interface WidgetSkeleton {
-  contentTypeId: "widget";
-  fields: {
-    therapistId: EntryFieldTypes.Text;
-  };
-}
 
 export interface ReservationSuccessSkeleton {
   contentTypeId: "reservationSuccessPage";
