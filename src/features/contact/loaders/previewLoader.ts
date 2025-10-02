@@ -1,9 +1,9 @@
 import contentfulClient, { withCache } from "@lib/contentful";
 
-import type { ContactPreview } from "@features/contact/types";
+import type { ContactPreviewSkeleton } from "@features/contact/types";
 
 const loadPreviewData = async () => {
-  const entries = await contentfulClient.getEntries<ContactPreview>({
+  const entries = await contentfulClient.getEntries<ContactPreviewSkeleton>({
     content_type: "contactPreview",
     limit: 1,
   });

@@ -1,10 +1,10 @@
 import type { EntryFieldTypes } from "contentful";
 
-import type { Office } from "@features/reservation/types";
+import type { OfficeSkeleton } from "@features/reservation/types";
 
 import type loadCompanyDetailsData from "@features/contact/loaders/companyDetailsLoader";
 
-export interface ContactPreview {
+export interface ContactPreviewSkeleton {
   contentTypeId: "contactPreview";
   fields: {
     heading: EntryFieldTypes.Text;
@@ -13,21 +13,21 @@ export interface ContactPreview {
   };
 }
 
-export interface CompanyDetails {
+export interface CompanyDetailsSkeleton {
   contentTypeId: "companyDetails";
   fields: {
     label: EntryFieldTypes.Text;
     headline: EntryFieldTypes.RichText;
     therapistId: EntryFieldTypes.Text;
-    office: EntryFieldTypes.EntryLink<Office>;
+    office: EntryFieldTypes.EntryLink<OfficeSkeleton>;
   };
 }
 
-export type CompanyDetailsFields = Awaited<
+export type CompanyDetails = Awaited<
   ReturnType<typeof loadCompanyDetailsData>
 >["office"];
 
-export interface ContactSuccess {
+export interface ContactSuccessSkeleton {
   contentTypeId: "contactSuccessPage";
   fields: {
     metaTitle: EntryFieldTypes.Text;
@@ -38,7 +38,7 @@ export interface ContactSuccess {
   };
 }
 
-export interface ContactMain {
+export interface ContactMainSkeleton {
   contentTypeId: "contactMainPage";
   fields: {
     metaTitle: EntryFieldTypes.Text;

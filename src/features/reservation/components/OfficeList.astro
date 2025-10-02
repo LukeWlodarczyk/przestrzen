@@ -1,10 +1,11 @@
 ---
+import { DYNAMIC_ROUTES } from "@routes";
+
 import { tw } from "@utils/index.ts";
 
 import OfficeCard from "@features/reservation/components/OfficeCard.astro";
 
-import type { OfficeFields as Office } from "@features/reservation/types";
-import { DYNAMIC_ROUTES } from "@routes";
+import type { Office } from "@features/reservation/types";
 
 interface Props {
   className?: string;

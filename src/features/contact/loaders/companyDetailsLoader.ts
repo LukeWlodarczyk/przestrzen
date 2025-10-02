@@ -1,9 +1,9 @@
 import contentfulClient, { withCache } from "@lib/contentful";
 
-import type { CompanyDetails } from "@features/contact/types";
+import type { CompanyDetailsSkeleton } from "@features/contact/types";
 
 const loadCompanyDetailsData = async () => {
-  const entries = await contentfulClient.getEntries<CompanyDetails>({
+  const entries = await contentfulClient.getEntries<CompanyDetailsSkeleton>({
     content_type: "companyDetails",
     limit: 1,
   });

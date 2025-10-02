@@ -1,9 +1,9 @@
 import contentfulClient, { withCache } from "@lib/contentful";
 
-import type { BlogMain } from "@features/blog/types";
+import type { BlogMainSkeleton } from "@features/blog/types";
 
 const loadMainData = async () => {
-  const entries = await contentfulClient.getEntries<BlogMain>({
+  const entries = await contentfulClient.getEntries<BlogMainSkeleton>({
     content_type: "blogMainPage",
     limit: 1,
   });

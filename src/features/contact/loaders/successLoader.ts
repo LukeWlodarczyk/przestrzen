@@ -1,9 +1,9 @@
 import contentfulClient, { withCache } from "@lib/contentful";
 
-import type { ContactSuccess } from "@features/contact/types";
+import type { ContactSuccessSkeleton } from "@features/contact/types";
 
 const loadSuccessData = async () => {
-  const entries = await contentfulClient.getEntries<ContactSuccess>({
+  const entries = await contentfulClient.getEntries<ContactSuccessSkeleton>({
     content_type: "contactSuccessPage",
     limit: 1,
   });

@@ -1,9 +1,9 @@
 import contentfulClient, { withCache } from "@lib/contentful";
 
-import type { HomePage } from "@features/home/types";
+import type { HomePageSkeleton } from "@features/home/types";
 
 const loadMainData = async () => {
-  const entries = await contentfulClient.getEntries<HomePage>({
+  const entries = await contentfulClient.getEntries<HomePageSkeleton>({
     content_type: "homePage",
     limit: 1,
   });

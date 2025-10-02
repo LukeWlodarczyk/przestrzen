@@ -2,7 +2,7 @@ import type { EntryFieldTypes } from "contentful";
 
 import loadOffices from "@features/reservation/loaders/officesLoader";
 
-export interface ReservationPreview {
+export interface ReservationPreviewSkeleton {
   contentTypeId: "reservationPreview";
   fields: {
     heading: EntryFieldTypes.Text;
@@ -11,7 +11,7 @@ export interface ReservationPreview {
   };
 }
 
-export interface Office {
+export interface OfficeSkeleton {
   contentTypeId: "office";
   fields: {
     metaTitle: EntryFieldTypes.Text;
@@ -32,26 +32,26 @@ export interface Office {
   };
 }
 
-export interface OfficesList {
+export interface OfficesListSkeleton {
   contentTypeId: "officesList";
   fields: {
     label: EntryFieldTypes.Text;
-    listInOrder: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<Office>>;
+    listInOrder: EntryFieldTypes.Array<
+      EntryFieldTypes.EntryLink<OfficeSkeleton>
+    >;
   };
 }
 
-export type OfficeFields = Awaited<
-  ReturnType<typeof loadOffices>
->["list"][number];
+export type Office = Awaited<ReturnType<typeof loadOffices>>["list"][number];
 
-export interface Widget {
+export interface WidgetSkeleton {
   contentTypeId: "widget";
   fields: {
     therapistId: EntryFieldTypes.Text;
   };
 }
 
-export interface ReservationSuccess {
+export interface ReservationSuccessSkeleton {
   contentTypeId: "reservationSuccessPage";
   fields: {
     metaTitle: EntryFieldTypes.Text;
@@ -63,7 +63,7 @@ export interface ReservationSuccess {
   };
 }
 
-export interface ReservationMain {
+export interface ReservationMainSkeleton {
   contentTypeId: "reservationMainPage";
   fields: {
     metaTitle: EntryFieldTypes.Text;

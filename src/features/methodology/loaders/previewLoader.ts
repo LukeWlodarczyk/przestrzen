@@ -5,13 +5,15 @@ import contentfulClient, {
 
 import { isDefined } from "@utils/index";
 
-import type { MethodologyPreview } from "@features/methodology/types";
+import type { MethodologyPreviewSkeleton } from "@features/methodology/types";
 
 const loadPreviewData = async () => {
-  const entries = await contentfulClient.getEntries<MethodologyPreview>({
-    content_type: "methodologyPreview",
-    limit: 1,
-  });
+  const entries = await contentfulClient.getEntries<MethodologyPreviewSkeleton>(
+    {
+      content_type: "methodologyPreview",
+      limit: 1,
+    },
+  );
 
   const [data] = entries.items;
 

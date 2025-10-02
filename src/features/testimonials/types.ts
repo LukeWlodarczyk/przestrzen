@@ -2,7 +2,7 @@ import type { EntryFieldTypes } from "contentful";
 
 import loadPreviewData from "@features/testimonials/loaders/previewLoader";
 
-interface Testimonial {
+interface TestimonialSkeleton {
   contentTypeId: "testimonialsPreview";
   fields: {
     author: EntryFieldTypes.Text;
@@ -15,17 +15,19 @@ interface Testimonial {
   };
 }
 
-export interface TestimonialsPreview {
+export interface TestimonialsPreviewSkeleton {
   contentTypeId: "testimonialsPreview";
   fields: {
     heading: EntryFieldTypes.Text;
     headline: EntryFieldTypes.RichText;
     carouselLabel: EntryFieldTypes.Text;
     cldVideoPublicId: EntryFieldTypes.Text;
-    testimonials: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<Testimonial>>;
+    testimonials: EntryFieldTypes.Array<
+      EntryFieldTypes.EntryLink<TestimonialSkeleton>
+    >;
   };
 }
 
-export type TestimonailFields = Awaited<
+export type Testimonial = Awaited<
   ReturnType<typeof loadPreviewData>
 >["testimonials"][number];

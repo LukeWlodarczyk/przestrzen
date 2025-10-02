@@ -7,10 +7,10 @@ import { isDefined } from "@utils/index";
 
 import { enhanceBlogPost } from "@features/blog/loaders/blogPosts";
 
-import type { BlogPreview } from "@features/blog/types";
+import type { BlogPreviewSkeleton } from "@features/blog/types";
 
 const loadPreviewData = async () => {
-  const entries = await contentfulClient.getEntries<BlogPreview>({
+  const entries = await contentfulClient.getEntries<BlogPreviewSkeleton>({
     content_type: "blogPreview",
     limit: 1,
   });

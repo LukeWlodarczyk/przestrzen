@@ -1,6 +1,6 @@
 import type { EntryFieldTypes } from "contentful";
 
-export interface HomePage {
+export interface HomePageSkeleton {
   contentTypeId: "homePage";
   fields: {
     metaTitle: EntryFieldTypes.Text;

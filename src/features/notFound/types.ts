@@ -1,6 +1,6 @@
 import type { EntryFieldTypes } from "contentful";
 
-export interface NotFoundPage {
+export interface NotFoundPageSkeleton {
   contentTypeId: "notFoundPage";
   fields: {
     metaTitle: EntryFieldTypes.Text;

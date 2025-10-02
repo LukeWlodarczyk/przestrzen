@@ -1,9 +1,9 @@
 import contentfulClient, { withCache } from "@lib/contentful";
 
-import type { OffertPreview } from "@features/offert/types";
+import type { OffertPreviewSkeleton } from "@features/offert/types";
 
 const loadPreviewData = async () => {
-  const entries = await contentfulClient.getEntries<OffertPreview>({
+  const entries = await contentfulClient.getEntries<OffertPreviewSkeleton>({
     content_type: "offertPreview",
     limit: 1,
   });

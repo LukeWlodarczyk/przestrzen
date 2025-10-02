@@ -1,9 +1,9 @@
 import contentfulClient, { withCache } from "@lib/contentful";
 
-import type { ReservationMain } from "@features/reservation/types";
+import type { ReservationMainSkeleton } from "@features/reservation/types";
 
 const loadMainData = async () => {
-  const entries = await contentfulClient.getEntries<ReservationMain>({
+  const entries = await contentfulClient.getEntries<ReservationMainSkeleton>({
     content_type: "reservationMainPage",
     limit: 1,
   });

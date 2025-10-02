@@ -5,10 +5,10 @@ import contentfulClient, {
 
 import { isDefined } from "@utils/index";
 
-import type { OfficesList } from "@features/reservation/types";
+import type { OfficesListSkeleton } from "@features/reservation/types";
 
 const loadOfficesDataOrdered = async () => {
-  const entries = await contentfulClient.getEntries<OfficesList>({
+  const entries = await contentfulClient.getEntries<OfficesListSkeleton>({
     content_type: "officesList",
     limit: 1,
   });
