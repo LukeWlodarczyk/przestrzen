@@ -1,6 +1,6 @@
 import type { EntryFieldTypes } from "contentful";
 
-import type { Office } from "@features/reservation/types";
+import type { OfficeSkeleton } from "@features/reservation/types";
 
 import type loadCompanyDetailsData from "@features/contact/loaders/companyDetailsLoader";
 
@@ -19,7 +19,7 @@ export interface CompanyDetailsSkeleton {
     label: EntryFieldTypes.Text;
     headline: EntryFieldTypes.RichText;
     therapistId: EntryFieldTypes.Text;
-    office: EntryFieldTypes.EntryLink<Office>;
+    office: EntryFieldTypes.EntryLink<OfficeSkeleton>;
   };
 }
 
