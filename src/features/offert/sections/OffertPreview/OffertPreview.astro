@@ -11,7 +11,7 @@ import Badge from "@components/interactive/Badge.astro";
 
 import Video from "@components/media/Video/Video.astro";
 
-import FormOfSupportCard from "@features/offert/components/FormOfSupportCard.astro";
+import OffertCard from "@features/offert/components/OffertCard.astro";
 
 import { DYNAMIC_ROUTES } from "@routes";
 
@@ -107,7 +107,7 @@ const offertVideoSources = [
     {
       formsOfSupport.list.map((item) => (
         <li>
-          <FormOfSupportCard
+          <OffertCard
             description={item.description}
             href={DYNAMIC_ROUTES.formOfSupport(item.slug)}
             imgSrc={resolveAssetUrl(item.image)}

@@ -24,7 +24,7 @@ const baseClasses = tw("group @container h-full w-full");
 <article class:list={tw(baseClasses, className)}>
   <a
     aria-label=`Dowiedz się więcej o: ${label}`
-    class="flex h-full flex-col rounded-2xl outline-warm-yellow transition-colors group-focus-within:border-deep-green group-hover:border-deep-green hover:cursor-pointer @md:flex-row @md:items-center @md:gap-(--space-m-l)"
+    class="flex h-full flex-col rounded-2xl outline-warm-yellow hover:cursor-pointer @md:flex-row @md:items-center @md:gap-(--space-m-l)"
     href={href}
   >
     <Image
@@ -47,7 +47,7 @@ const baseClasses = tw("group @container h-full w-full");
         {label}
       </Heading>
       <Paragraph
-        className="mt-(--space-2xs) block text-justify text-sm text-pretty text-forest-green"
+        className="mt-(--space-2xs) line-clamp-4 text-justify text-sm text-pretty text-forest-green"
       >
         {description}
       </Paragraph>

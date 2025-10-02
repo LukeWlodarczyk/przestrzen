@@ -6,12 +6,11 @@ import Heading from "@components/typography/Heading.astro";
 
 import RichTextBlock from "@components/richText/RichTextBlock.astro";
 
-import Badge from "@components/interactive/Badge.astro";
 import Button from "@components/interactive/Button.astro";
 
 import Image from "@components/media/Image/Image.astro";
 
-import FormOfSupportCard from "@features/offert/components/FormOfSupportCard.astro";
+import OffertCard from "@features/offert/components/OffertCard.astro";
 
 import { resolveAssetUrl } from "@lib/contentful";
 
@@ -59,13 +58,13 @@ const areasOfSupport = await loadAreasOfSupportData();
 
   <ul
     aria-label={formsOfSupport.label}
-    class="mt-(--space-xl-2xl) grid auto-rows-auto grid-cols-(--fluid-form-of-support-grid) gap-(--space-m-l)"
+    class="mt-(--space-xl-2xl) grid auto-rows-auto grid-cols-(--fluid-offer-items-grid) gap-(--space-m-l)"
     role="list"
   >
     {
       formsOfSupport.list.map((item) => (
         <li>
-          <FormOfSupportCard
+          <OffertCard
             description={item.description}
             href={DYNAMIC_ROUTES.formOfSupport(item.slug)}
             imgSrc={resolveAssetUrl(item.image)}
@@ -105,15 +104,18 @@ const areasOfSupport = await loadAreasOfSupportData();
 
   <ul
     aria-label={areasOfSupport.label}
-    class="mt-(--space-l-xl) flex flex-wrap justify-center gap-x-(--space-s) gap-y-(--space-xs)"
+    class="mt-(--space-2xl-3xl) grid auto-rows-auto grid-cols-(--fluid-offer-items-grid) gap-(--space-m-l)"
     role="list"
   >
     {
       areasOfSupport.list.map((item) => (
         <li>
-          <Badge as="a" href={DYNAMIC_ROUTES.areaOfSupport(item.slug)}>
-            {item.name}
-          </Badge>
+          <OffertCard
+            description={item.description}
+            href={DYNAMIC_ROUTES.areaOfSupport(item.slug)}
+            imgSrc={resolveAssetUrl(item.image)}
+            label={item.name}
+          />
         </li>
       ))
     }
@@ -130,11 +132,11 @@ const areasOfSupport = await loadAreasOfSupportData();
 
 <style>
   .offert-main-wrapper {
-    --min-form-of-support-col-width: 300px;
+    --min-offer-item-col-width: 300px;
 
-    --fluid-form-of-support-grid: repeat(
+    --fluid-offer-items-grid: repeat(
       auto-fill,
-      minmax(min(var(--min-form-of-support-col-width), 100%), 1fr)
+      minmax(min(var(--min-offer-item-col-width), 100%), 1fr)
     );
   }
 </style>
