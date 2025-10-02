@@ -9,6 +9,7 @@
 @import "./noise";
 @import "./shine";
 @import "./arrows";
+@import "./icons";
 
 @layer base {
   body {

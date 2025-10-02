@@ -1,0 +1,7 @@
+@utility icon-left-* {
+  @apply relative block before:inline-block before:pr-(--space-2xs-xs) before:content-[--value([*])];
+}
+
+@utility icon-right-* {
+  @apply relative block after:inline-block after:pl-(--space-2xs-xs) after:content-[--value([*])];
+}
