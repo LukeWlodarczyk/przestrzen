@@ -3,21 +3,13 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 
 import { STATIC_ROUTES } from "@routes";
 
-import loadOfficesData from "@features/reservation/loaders/officesLoader";
-
-import type { OfficeFields } from "@features/reservation/types";
+import type { OfficeFields as Office } from "@features/reservation/types";
 
 interface Props {
-  slug: string;
+  office: Office;
 }
 
-const officesData = await loadOfficesData();
-
-const { slug } = Astro.props;
-
-const office = officesData.list.find(
-  (office) => office.slug === slug,
-) as OfficeFields;
+const { office } = Astro.props;
 ---
 
 <BaseLayout
