@@ -1,6 +1,6 @@
 import type { EntryFieldTypes } from "contentful";
 
-interface MethodologyItem {
+interface MethodologyItemSkeleton {
   contentTypeId: "methodologyItem";
   fields: {
     heading: EntryFieldTypes.Text;
@@ -9,14 +9,16 @@ interface MethodologyItem {
   };
 }
 
-export interface MethodologyPreview {
+export interface MethodologyPreviewSkeleton {
   contentTypeId: "methodologyPreview";
   fields: {
     headerImage: EntryFieldTypes.AssetLink;
     heading: EntryFieldTypes.Text;
     headline: EntryFieldTypes.RichText;
     headingDescription: EntryFieldTypes.RichText;
-    items: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<MethodologyItem>>;
+    items: EntryFieldTypes.Array<
+      EntryFieldTypes.EntryLink<MethodologyItemSkeleton>
+    >;
     footerDescription: EntryFieldTypes.RichText;
     footerImage: EntryFieldTypes.AssetLink;
   };
