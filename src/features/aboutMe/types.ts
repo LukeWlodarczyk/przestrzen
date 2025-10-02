@@ -1,6 +1,6 @@
 import type { EntryFieldTypes } from "contentful";
 
-export interface AboutMePreview {
+export interface AboutMePreviewSkeleton {
   contentTypeId: "aboutMePreview";
   fields: {
     heading: EntryFieldTypes.Text;
@@ -11,7 +11,7 @@ export interface AboutMePreview {
   };
 }
 
-export interface AboutMeMain {
+export interface AboutMeMainSkeleton {
   contentTypeId: "aboutMeMainPage";
   fields: {
     metaTitle: EntryFieldTypes.Text;
