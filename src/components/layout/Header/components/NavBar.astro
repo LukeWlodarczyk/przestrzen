@@ -1,21 +1,21 @@
 ---
-import Section from "@components/layout/Section.astro";
-
-import Button from "@components/interactive/Button.astro";
-
-import Hamburger from "@components/layout/header/components/Hamburger.astro";
-
-import { ids } from "@components/layout/header/script/config";
-
-import Logo from "@assets/logo.svg";
-
 import {
   STATIC_ROUTES,
   type StaticRouteValue,
   type StaticRouteLink,
 } from "@routes";
 
+import Section from "@components/layout/Section.astro";
+
+import Button from "@components/interactive/Button.astro";
+
+import Logo from "@assets/logo.svg";
+
 import loadHomeMainData from "@features/home/loaders/mainLoader";
+
+import Hamburger from "./Hamburger.astro";
+
+import { ids } from "../script/config";
 
 const data = await loadHomeMainData();
 

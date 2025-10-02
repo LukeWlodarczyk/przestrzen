@@ -1,6 +1,6 @@
 import { getRequiredCssVariable, getRequiredElement } from "@utils/index";
 
-import { selectors } from "@components/layout/header/script/config";
+import { selectors } from "@components/layout/Header/script/config";
 
 import {
   combineTraps,

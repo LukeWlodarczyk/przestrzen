@@ -1,7 +1,7 @@
 import { useEffect, useState, type FC } from "react";
 import Sticky, { type StickyBoxCompProps } from "react-sticky-box";
 
-import { selectors } from "@components/layout/header/script/config";
+import { selectors } from "@components/layout/Header/script/config";
 
 import { tw, getRequiredElement } from "@utils/index";
 
