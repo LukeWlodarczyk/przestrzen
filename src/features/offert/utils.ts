@@ -1,7 +1,4 @@
-import type {
-  AreaOfSupportFields as AreaOfSupport,
-  FormOfSupportFields as FormOfSupport,
-} from "@features/offert/types";
+import type { AreaOfSupport, FormOfSupport } from "@features/offert/types";
 
 export const getRecommendedFormsOfSupport = (
   area: AreaOfSupport,

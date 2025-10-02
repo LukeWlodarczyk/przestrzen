@@ -3,7 +3,7 @@ import type { EntryFieldTypes } from "contentful";
 import loadFormsOfSupport from "./loaders/formsOfSupportLoader";
 import loadAreasOfSupport from "./loaders/areasOfSupportLoader";
 
-export interface OffertPreview {
+export interface OffertPreviewSkeleton {
   contentTypeId: "offertPreview";
   fields: {
     heading: EntryFieldTypes.Text;
@@ -14,7 +14,7 @@ export interface OffertPreview {
   };
 }
 
-export interface FormOfSupport {
+export interface FormOfSupportSkeleton {
   contentTypeId: "formOfSupport";
   fields: {
     metaTitle: EntryFieldTypes.Text;
@@ -25,27 +25,27 @@ export interface FormOfSupport {
     description: EntryFieldTypes.Text;
     body: EntryFieldTypes.RichText;
     relatedAreasOfSupport: EntryFieldTypes.Array<
-      EntryFieldTypes.EntryLink<AreaOfSupport>
+      EntryFieldTypes.EntryLink<AreaOfSupportSkeleton>
     >;
   };
 }
 
-export interface FormsOfSupportList {
+export interface FormsOfSupportListSkeleton {
   contentTypeId: "formsOfSupportList";
   fields: {
     label: EntryFieldTypes.Text;
     image: EntryFieldTypes.AssetLink;
     listInOrder: EntryFieldTypes.Array<
-      EntryFieldTypes.EntryLink<FormOfSupport>
+      EntryFieldTypes.EntryLink<FormOfSupportSkeleton>
     >;
   };
 }
 
-export type FormOfSupportFields = Awaited<
+export type FormOfSupport = Awaited<
   ReturnType<typeof loadFormsOfSupport>
 >["list"][number];
 
-export interface AreaOfSupport {
+export interface AreaOfSupportSkeleton {
   contentTypeId: "areaOfSupport";
   fields: {
     metaTitle: EntryFieldTypes.Text;
@@ -58,22 +58,22 @@ export interface AreaOfSupport {
   };
 }
 
-export interface AreasOfSupportList {
+export interface AreasOfSupportListSkeleton {
   contentTypeId: "areasOfSupportList";
   fields: {
     label: EntryFieldTypes.Text;
     image: EntryFieldTypes.AssetLink;
     listInOrder: EntryFieldTypes.Array<
-      EntryFieldTypes.EntryLink<AreaOfSupport>
+      EntryFieldTypes.EntryLink<AreaOfSupportSkeleton>
     >;
   };
 }
 
-export type AreaOfSupportFields = Awaited<
+export type AreaOfSupport = Awaited<
   ReturnType<typeof loadAreasOfSupport>
 >["list"][number];
 
-export interface OffertMain {
+export interface OffertMainSkeleton {
   contentTypeId: "offertMainPage";
   fields: {
     metaTitle: EntryFieldTypes.Text;

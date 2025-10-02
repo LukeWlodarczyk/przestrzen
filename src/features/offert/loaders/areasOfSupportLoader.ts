@@ -5,13 +5,15 @@ import contentfulClient, {
 
 import { isDefined } from "@utils/index";
 
-import type { AreasOfSupportList } from "@features/offert/types";
+import type { AreasOfSupportListSkeleton } from "@features/offert/types";
 
 const loadDataOrdered = async () => {
-  const entries = await contentfulClient.getEntries<AreasOfSupportList>({
-    content_type: "areasOfSupportList",
-    limit: 1,
-  });
+  const entries = await contentfulClient.getEntries<AreasOfSupportListSkeleton>(
+    {
+      content_type: "areasOfSupportList",
+      limit: 1,
+    },
+  );
 
   const [data] = entries.items;
 
