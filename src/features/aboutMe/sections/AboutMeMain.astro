@@ -24,13 +24,13 @@ import loadBlogPreview from "@features/blog/loaders/previewLoader";
 
 import BlogAside from "@features/blog/components/BlogAside.astro";
 
-const { recomendedBlogPosts } = await loadBlogPreview();
+const { recommendedBlogPosts } = await loadBlogPreview();
 
 const data = await loadData();
 
 const aboutMePosterImageUrl = cldVideoHelper.buildPosterImageUrl(
   data.cldVideoPublicId,
-  6.6,
+  0,
 );
 
 const aboutMeLqipDataUrl = await generateLQIP(aboutMePosterImageUrl);
@@ -120,7 +120,7 @@ const aboutMeVideoSources = [
 
     <BlogAside
       heading="Polecane publikacje 📜"
-      posts={recomendedBlogPosts}
+      posts={recommendedBlogPosts}
       slot="aside"
     />
   </Article>

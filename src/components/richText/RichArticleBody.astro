@@ -51,7 +51,7 @@ const options: Options = {
   renderMark: {
     [MARKS.BOLD]: (text) =>
       container.renderToString(Weight, {
-        props: { type: "normal", className: "text-dark-teal" },
+        props: { type: "normal", className: tw("text-dark-teal") },
         slots: { default: text },
       }),
     [MARKS.ITALIC]: (text) =>
@@ -150,7 +150,7 @@ const options: Options = {
       }),
     [BLOCKS.LIST_ITEM]: async (node, next) =>
       container.renderToString(ListItem, {
-        props: { className: "block [&>*]:list-item" },
+        props: { className: tw("block [&>*]:list-item") },
         slots: { default: await next(node.content) },
       }),
     [INLINES.HYPERLINK]: async (node, next) =>
@@ -160,6 +160,7 @@ const options: Options = {
       }),
   },
 };
+
 const hasMultipleNodes = document.content.length > 1;
 
 const Tag = hasMultipleNodes ? "div" : Fragment;

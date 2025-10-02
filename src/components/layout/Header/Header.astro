@@ -1,10 +1,10 @@
 ---
-import TopBar from "@components/layout/header/components/TopBar.astro";
-import NavBar from "@components/layout/header/components/NavBar.astro";
-
-import { ids } from "@components/layout/header/script/config";
-
 import type { StaticRouteValue } from "@routes";
+
+import TopBar from "./components/TopBar.astro";
+import NavBar from "./components/NavBar.astro";
+
+import { ids } from "./script/config";
 
 interface Props {
   currentPage: StaticRouteValue;

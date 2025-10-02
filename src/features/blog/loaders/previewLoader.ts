@@ -19,7 +19,7 @@ const loadPreviewData = async () => {
 
   return {
     ...data.fields,
-    recomendedBlogPosts: data.fields.recomendedBlogPosts
+    recommendedBlogPosts: data.fields.recommendedBlogPosts
       .filter(isDefined)
       .map(extractEntryFields)
       .map(enhanceBlogPost),
