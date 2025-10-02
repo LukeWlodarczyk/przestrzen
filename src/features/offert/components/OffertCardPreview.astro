@@ -1,0 +1,42 @@
+---
+import Heading from "@components/typography/Heading.astro";
+import Paragraph from "@components/typography/Paragraph.astro";
+
+import { tw } from "@utils/index.ts";
+
+interface Props {
+  className?: string;
+  href: string;
+  label: string;
+  description: string;
+}
+
+const { className, href, label, description } = Astro.props;
+
+const baseClasses = tw(
+  "group w-full rounded-2xl border border-forest-green/10 bg-forest-green/1",
+);
+
+const classList = tw(baseClasses, className);
+---
+
+<article class:list={classList}>
+  <a
+    aria-label=`Dowiedz się więcej o: ${label}`
+    class="flex h-full flex-col rounded-2xl p-(--space-s-m) outline-warm-yellow hover:cursor-pointer"
+    href={href}
+  >
+    <Heading
+      className="arrow-right-xs text-base font-normal tracking-normal text-balance text-forest-green transition-colors group-focus-within:arrow-right-animate group-focus-within:text-warm-yellow group-hover:arrow-right-animate group-hover:text-warm-yellow"
+      level={3}
+    >
+      {label}
+    </Heading>
+
+    <Paragraph
+      className="mt-(--space-2xs) line-clamp-3 text-justify text-sm text-pretty text-forest-green"
+    >
+      {description}
+    </Paragraph>
+  </a>
+</article>
