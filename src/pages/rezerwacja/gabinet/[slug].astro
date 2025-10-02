@@ -8,12 +8,16 @@ import loadOfficesData from "@features/reservation/loaders/officesLoader";
 export const getStaticPaths = async () => {
   const { list } = await loadOfficesData();
 
-  return list.map((office) => ({ params: { slug: office.slug } }));
+  return list.map((office) => ({
+    params: { slug: office.slug },
+    props: { office },
+  }));
 };
 
-const { slug } = Astro.params;
+const { office } = Astro.props;
 ---
 
-<ReservationLocationLayout slug={slug}>
-  <ReservationLocationSection slug={slug} />
+<ReservationLocationLayout office={office}>
+  <ReservationLocationSection office={office} />
+
 </ReservationLocationLayout>

@@ -1,5 +1,7 @@
 ---
 /* eslint-disable astro/no-unused-css-selector */
+import { DYNAMIC_ROUTES, STATIC_ROUTES } from "@routes";
+
 import Section from "@components/layout/Section.astro";
 
 import Heading from "@components/typography/Heading.astro";
@@ -9,30 +11,20 @@ import RichTextBlock from "@components/richText/RichTextBlock.astro";
 
 import Map from "@components/interactive/Map";
 
+import loadCompanyDetails from "@features/contact/loaders/companyDetailsLoader";
+
 import Widget from "@features/reservation/components/Widget";
 import OfficeCard from "@features/reservation/components/OfficeCard.astro";
 
-import { DYNAMIC_ROUTES, STATIC_ROUTES } from "@routes";
-
-import loadOfficesData from "@features/reservation/loaders/officesLoader";
-
-import loadCompanyDetails from "@features/contact/loaders/companyDetailsLoader";
-
-import type { OfficeFields } from "@features/reservation/types";
+import type { OfficeFields as Office } from "@features/reservation/types";
 
 interface Props {
-  slug: string;
+  office: Office;
 }
-
-const officesData = await loadOfficesData();
 
 const companyDetailsData = await loadCompanyDetails();
 
-const { slug } = Astro.props;
-
-const office = officesData.list.find(
-  (office) => office.slug === slug,
-) as OfficeFields;
+const { office } = Astro.props;
 ---
 
 <Section

@@ -11,14 +11,17 @@ import loadBlogPostsData from "@features/blog/loaders/blogPosts";
 export const getStaticPaths = async () => {
   const list = await loadBlogPostsData();
 
-  return list.map((blog) => ({ params: { slug: blog.slug } }));
+  return list.map((blogPost) => ({
+    params: { slug: blogPost.slug },
+    props: { blogPost },
+  }));
 };
 
-const { slug } = Astro.params;
+const { blogPost } = Astro.props;
 ---
 
-<BlogPostLayout slug={slug}>
-  <BlogPostSection slug={slug} />
+<BlogPostLayout blogPost={blogPost}>
+  <BlogPostSection blogPost={blogPost} />
 
   <AboutMePreviewSection />
   <ContactPreviewSection />
