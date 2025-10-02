@@ -1,0 +1,22 @@
+---
+import { STATIC_ROUTES } from "@routes";
+
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+import type { AreaOfSupportFields as AreaOfSupport } from "@features/offert/types";
+
+interface Props {
+  areaOfSupport: AreaOfSupport;
+}
+
+const { areaOfSupport } = Astro.props;
+---
+
+<BaseLayout
+  currentPage={STATIC_ROUTES.offert}
+  fontsToPreload={["poppins-300", "poppins-500", "poppins-regular"]}
+  metaDescription={areaOfSupport.metaDescription}
+  metaTitle={areaOfSupport.metaTitle}
+>
+  <slot />
+</BaseLayout>

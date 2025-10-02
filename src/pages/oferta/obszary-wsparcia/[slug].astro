@@ -1,0 +1,28 @@
+---
+import AreaOfSupportLayout from "@features/offert/layouts/AreaOfSupportLayout.astro";
+
+import AreaOfSupportSection from "@features/offert/sections/AreaOfSupport.astro";
+
+import TestimonialsPreviewSection from "@features/testimonials/sections/TestimonialsPreview.astro";
+import ContactPreviewSection from "@features/contact/sections/ContactPreview.astro";
+
+import loadAreasOfSupport from "@features/offert/loaders/areasOfSupportLoader";
+
+export const getStaticPaths = async () => {
+  const { list } = await loadAreasOfSupport();
+
+  return list.map((area) => ({
+    params: { slug: area.slug },
+    props: { areaOfSupport: area },
+  }));
+};
+
+const { areaOfSupport } = Astro.props;
+---
+
+<AreaOfSupportLayout areaOfSupport={areaOfSupport}>
+  <AreaOfSupportSection areaOfSupport={areaOfSupport} />
+
+  <TestimonialsPreviewSection />
+  <ContactPreviewSection />
+</AreaOfSupportLayout>
