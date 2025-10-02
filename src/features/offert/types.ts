@@ -1,6 +1,7 @@
 import type { EntryFieldTypes } from "contentful";
 
 import loadFormsOfSupport from "./loaders/formsOfSupportLoader";
+import loadAreasOfSupport from "./loaders/areasOfSupportLoader";
 
 export interface OffertPreview {
   contentTypeId: "offertPreview";
@@ -23,7 +24,7 @@ export interface FormOfSupport {
     image: EntryFieldTypes.AssetLink;
     description: EntryFieldTypes.Text;
     body: EntryFieldTypes.RichText;
-    recommendedAreasOfSupport: EntryFieldTypes.Array<
+    relatedAreasOfSupport: EntryFieldTypes.Array<
       EntryFieldTypes.EntryLink<AreaOfSupport>
     >;
   };
@@ -67,6 +68,10 @@ export interface AreasOfSupportList {
     >;
   };
 }
+
+export type AreaOfSupportFields = Awaited<
+  ReturnType<typeof loadAreasOfSupport>
+>["list"][number];
 
 export interface OffertMain {
   contentTypeId: "offertMainPage";
