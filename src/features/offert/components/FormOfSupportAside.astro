@@ -1,0 +1,46 @@
+---
+import { DYNAMIC_ROUTES, STATIC_ROUTES } from "@routes";
+
+import Heading from "@components/typography/Heading.astro";
+
+import Button from "@components/interactive/Button.astro";
+
+import OffertCardPreview from "@features/offert/components/OffertCardPreview.astro";
+
+import type { AreaOfSupportFields as AreaOfSupport } from "@features/offert/types";
+
+interface Props {
+  heading: string;
+  areasOfSupport: AreaOfSupport[];
+}
+
+const { heading, areasOfSupport } = Astro.props;
+---
+
+<Heading
+  className="relative top-[2px] ml-(--space-3xs) font-light text-balance text-forest-green xl:text-sm"
+  level={3}
+>
+  {heading}
+</Heading>
+
+<ul
+  class="mt-(--space-s-m) flex flex-row gap-(--space-s-m) overflow-x-scroll p-1 pb-(--space-xs-s) xl:flex-col xl:overflow-x-auto xl:pb-1"
+>
+  {
+    areasOfSupport.map((area) => (
+      <OffertCardPreview
+        className="min-w-[min(100%,350px)] xl:min-w-[300px]"
+        description={area.description}
+        href={DYNAMIC_ROUTES.areaOfSupport(area.slug)}
+        label={area.name}
+      />
+    ))
+  }
+</ul>
+
+<Button
+  className="icon-left-['🧩'] icon-right-['🧩'] mt-(--space-m-l) w-full xl:mt-(--space-s-m) xl:before:hidden xl:after:hidden"
+  href={STATIC_ROUTES.areaOfSupport}
+  variant="tertiary">Pełne spektrum obszarów</Button
+>

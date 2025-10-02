@@ -1,7 +1,12 @@
+export const IDS = {
+  areaOfSupport: "obszary-wsparcia",
+} as const;
+
 export const STATIC_ROUTES = {
   home: "/",
   aboutMe: "/o-mnie",
   offert: "/oferta",
+  areaOfSupport: `/oferta#${IDS.areaOfSupport}`,
   blog: "/blog",
   contact: "/kontakt",
   contactSuccess: "/kontakt/sukces",
