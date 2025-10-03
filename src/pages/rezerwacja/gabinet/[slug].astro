@@ -3,6 +3,9 @@ import ReservationOfficeLayout from "@features/reservation/layouts/ReservationOf
 
 import ReservationOfficeSection from "@features/reservation/sections/ReservationOffice.astro";
 
+import TestimonialsPreviewSection from "@features/testimonials/sections/TestimonialsPreview.astro";
+import ContactPreviewSection from "@features/contact/sections/ContactPreview.astro";
+
 import loadOfficesData from "@features/reservation/loaders/officesLoader";
 
 export const getStaticPaths = async () => {
@@ -19,4 +22,7 @@ const { office } = Astro.props;
 
 <ReservationOfficeLayout office={office}>
   <ReservationOfficeSection office={office} />
+
+  <TestimonialsPreviewSection />
+  <ContactPreviewSection />
 </ReservationOfficeLayout>
