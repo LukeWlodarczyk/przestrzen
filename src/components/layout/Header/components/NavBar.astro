@@ -1,4 +1,6 @@
 ---
+import { Icon } from "astro-icon/components";
+
 import {
   STATIC_ROUTES,
   type StaticRouteValue,
@@ -8,8 +10,6 @@ import {
 import Section from "@components/layout/Section.astro";
 
 import Button from "@components/interactive/Button.astro";
-
-import Logo from "@assets/logo.svg";
 
 import loadHomeMainData from "@features/home/loaders/mainLoader";
 
@@ -74,9 +74,10 @@ const isAriaCurrentPage = (href: StaticRouteValue) =>
         class="group outline-none"
         href={HOME_LINK.href}
       >
-        <Logo
+        <Icon
           aria-hidden="true"
-          class="w-[120px] text-deep-green transition-colors duration-300 group-focus-visible:shine group-focus-visible:text-warm-yellow hover:shine sm:w-[180px]"
+          class="h-full w-[120px] text-deep-green transition-colors duration-300 group-focus-visible:shine group-focus-visible:text-warm-yellow hover:shine sm:w-[180px]"
+          name="logo"
         />
       </a>
 

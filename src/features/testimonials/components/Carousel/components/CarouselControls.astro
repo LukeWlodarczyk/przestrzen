@@ -1,6 +1,7 @@
 ---
+import { Icon } from "astro-icon/components";
+
 import { tw } from "@utils/index";
-import Arrow from "../assets/arrow.svg";
 
 import { classes } from "../script/config";
 
@@ -23,12 +24,12 @@ const baseButtonClass = tw(
       "scale-x-[-1]",
     )}
   >
-    <Arrow />
+    <Icon class="h-full w-full" name="arrow" />
   </button>
   <button
     aria-label="Następny slajd"
     class:list={tw(classes.button, classes.next, baseButtonClass)}
   >
-    <Arrow />
+    <Icon class="h-full w-full" name="arrow" />
   </button>
 </div>

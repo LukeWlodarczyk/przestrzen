@@ -1,7 +1,7 @@
 ---
-import { tw } from "@utils/index";
+import { Icon } from "astro-icon/components";
 
-import Leaf from "../assets/leaf.svg";
+import { tw } from "@utils/index";
 
 import { classes } from "../script/config";
 
@@ -19,13 +19,14 @@ const { length } = Astro.props;
   {
     Array.from({ length }).map((_item, index) => (
       <div class="carousel-indicator absolute" style={{ "--i": index }}>
-        <Leaf
+        <Icon
           class:list={tw(
             classes.indicator,
-            "w-5 text-warm-white",
+            "h-full w-5 text-warm-white",
             index + 1 > length / 2 ? "scale-x-[-1]" : "",
             index === 0 ? "text-warm-yellow" : "",
           )}
+          name="leaf"
         />
       </div>
     ))
