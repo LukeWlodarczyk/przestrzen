@@ -33,22 +33,22 @@ const { office } = Astro.props;
 >
   <div class="flex w-full flex-col">
     <Heading
-      className="text-center text-lg font-normal text-deep-green lg:text-left"
+      className="text-center text-lg font-normal text-deep-green md:text-left"
       level={1}
     >
       {office.name}
     </Heading>
 
     <InlineLink
-      className="arrow-left-3xs order-first mx-auto mb-(--space-2xs-xs) block w-fit text-center text-sm text-warm-yellow hover:arrow-left-animate hover:no-underline focus:arrow-left-animate focus-visible:no-underline md:ml-[unset]"
+      className="arrow-left-3xs order-first mx-auto mb-(--space-2xs-xs) block w-fit text-sm text-warm-yellow hover:arrow-left-animate hover:no-underline focus:arrow-left-animate focus-visible:no-underline md:ml-[unset]"
       href={STATIC_ROUTES.reservation}
     >
       Rezerwacja
     </InlineLink>
 
     <RichTextBlock
-      className="text-center lg:text-left"
-      containerClassName="mx-auto mt-(--space-xs-s) lg:ml-0 "
+      className="text-justify"
+      containerClassName="mt-(--space-xs-s)"
       document={office.description}
     />
     <OfficeCard
