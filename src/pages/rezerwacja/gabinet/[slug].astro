@@ -1,7 +1,7 @@
 ---
-import ReservationLocationLayout from "@features/reservation/layouts/ReservationLocationLayout.astro";
+import ReservationOfficeLayout from "@features/reservation/layouts/ReservationOfficeLayout.astro";
 
-import ReservationLocationSection from "@features/reservation/sections/ReservationLocation.astro";
+import ReservationOfficeSection from "@features/reservation/sections/ReservationOffice.astro";
 
 import loadOfficesData from "@features/reservation/loaders/officesLoader";
 
@@ -17,7 +17,6 @@ export const getStaticPaths = async () => {
 const { office } = Astro.props;
 ---
 
-<ReservationLocationLayout office={office}>
-  <ReservationLocationSection office={office} />
-
-</ReservationLocationLayout>
+<ReservationOfficeLayout office={office}>
+  <ReservationOfficeSection office={office} />
+</ReservationOfficeLayout>
