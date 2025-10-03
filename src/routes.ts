@@ -13,6 +13,7 @@ export const STATIC_ROUTES = {
   contact: "/kontakt",
   contactSuccess: "/kontakt/sukces",
   reservation: "/rezerwacja",
+  reservationSuccess: "/rezerwacja/sukces",
   notFound: "/404",
 } as const;
 
