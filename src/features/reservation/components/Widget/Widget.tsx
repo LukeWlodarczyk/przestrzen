@@ -23,7 +23,7 @@ interface WidgetProps {
 
 const baseClasses = tw("@container relative");
 
-const SUCCESS_RESERVATION_RETURN_URL = `${import.meta.env.PUBLIC_SITE_URL}${STATIC_ROUTES.contactSuccess}`;
+const SUCCESS_RESERVATION_RETURN_URL = `${import.meta.env.PUBLIC_SITE_URL}${STATIC_ROUTES.reservationSuccess}`;
 
 const Widget: FC<WidgetProps> = ({ className, therapistId }) => {
   const widgetRef = useRef<HTMLDivElement>(null);
