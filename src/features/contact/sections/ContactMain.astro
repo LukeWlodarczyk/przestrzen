@@ -1,4 +1,6 @@
 ---
+import { Icon } from "astro-icon/components";
+
 import Section from "@components/layout/Section.astro";
 
 import Heading from "@components/typography/Heading.astro";
@@ -12,8 +14,6 @@ import CompanyDetails from "@features/contact/components/CompanyDetails.astro";
 import loadCompanyDetails from "@features/contact/loaders/companyDetailsLoader";
 
 import loadData from "@features/contact/loaders/mainLoader";
-
-import Leaves from "@assets/leaves.svg";
 
 const data = await loadData();
 
@@ -48,9 +48,10 @@ const compoanyDetails = await loadCompanyDetails();
     />
   </article>
 
-  <Leaves
+  <Icon
     aria-hidden="true"
-    class="mt-(--space-l-xl) mb-(--space-xs-m) w-[300px] text-warm-yellow"
+    class="mt-(--space-l-xl) mb-(--space-xs-m) h-full w-full max-w-[300px] text-warm-yellow"
+    name="leaves"
   />
 
   <ContactForm className="mt-(--space-l-xl)" client:visible />
