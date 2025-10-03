@@ -5,6 +5,8 @@ import tailwindcss from "@tailwindcss/vite";
 
 import react from "@astrojs/react";
 
+import icon from "astro-icon";
+
 // https://astro.build/config
 export default defineConfig({
   prefetch: {
@@ -22,5 +24,5 @@ export default defineConfig({
   image: {
     domains: ["images.ctfassets.net"],
   },
-  integrations: [react()],
+  integrations: [react(), icon({ iconDir: "src/assets/icons" })],
 });
