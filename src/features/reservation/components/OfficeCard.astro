@@ -73,7 +73,10 @@ const hasWebsite = Boolean(website);
           class="z-2 inline-block w-fit truncate py-[2px] outline-none hover:text-warm-yellow hover:underline focus:text-warm-yellow focus:underline"
           href={`tel:${phone}`}
         >
-          <span class="mr-(--space-3xs) hidden @3xs:inline-block">📞</span>
+          <span
+            aria-hidden="true"
+            class="mr-(--space-3xs) hidden @3xs:inline-block">📞</span
+          >
           {phone}
         </a>
       </dd>
@@ -84,7 +87,10 @@ const hasWebsite = Boolean(website);
           class="z-2 inline-block w-fit truncate py-[2px] outline-none hover:text-warm-yellow hover:underline focus:text-warm-yellow focus:underline"
           href={`mailto:${email}`}
         >
-          <span class="mr-(--space-3xs) hidden @3xs:inline-block">✉️</span>
+          <span
+            aria-hidden="true"
+            class="mr-(--space-3xs) hidden @3xs:inline-block">✉️</span
+          >
           {email}
         </a>
       </dd>
@@ -100,7 +106,10 @@ const hasWebsite = Boolean(website);
                 rel="noopener"
                 target="_blank"
               >
-                <span class="mr-(--space-3xs) hidden @3xs:inline-block">
+                <span
+                  aria-hidden="true"
+                  class="mr-(--space-3xs) hidden @3xs:inline-block"
+                >
                   🌐
                 </span>
                 {website}
