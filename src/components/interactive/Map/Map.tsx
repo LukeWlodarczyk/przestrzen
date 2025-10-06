@@ -1,43 +1,68 @@
-import { useRef, type FC } from "react";
-import { type LngLatLike } from "maplibre-gl";
+import { type FC } from "react";
+
+import { Map as MapLibre, Marker } from "@vis.gl/react-maplibre";
 
 import { tw } from "@utils/index";
 
-import useMapLibreStyles from "./hooks/useMapLibreStyles";
-import useMapLibre from "./hooks/useMapLibre";
+import useMap, { OPEN_FREE_MAP_STYLE_URL } from "./hooks/useMap";
 
-import rawStyles from "./styles.css?raw";
-
-const baseClasses = tw(
-  "relative h-full w-full overflow-hidden rounded-2xl border border-warm-yellow outline-offset-2 has-focus-visible:outline-2 has-focus-visible:outline-warm-yellow",
-);
+export type Coordinates = { lat: number; lon: number };
 
 interface MapProps {
   className?: string;
-  location: LngLatLike;
+  coordinates: Coordinates;
 }
 
-const Map: FC<MapProps> = ({ className, location }) => {
-  const mapContainerRef = useRef<HTMLDivElement>(null);
-  const placeholderRef = useRef<HTMLDivElement>(null);
+const MAPLIBRE_CANVAS_CLASS = ".maplibregl-canvas";
 
-  useMapLibreStyles();
-  useMapLibre({ containerRef: mapContainerRef, placeholderRef, location });
+const baseClasses = tw(
+  "relative h-full w-full overflow-hidden rounded-2xl border border-warm-yellow outline-offset-2 has-focus-visible:outline-2 has-focus-visible:outline-warm-yellow",
+  `[&_${MAPLIBRE_CANVAS_CLASS}]:outline-none`,
+);
+
+const markerClasses = {
+  base: tw(
+    "[&>svg]:origin-[bottom_center] [&>svg]:transition-all [&>svg]:delay-300 [&>svg]:ease-out",
+    "[&>svg]:starting:translate-y-[-10px] [&>svg]:starting:scale-0 [&>svg]:starting:opacity-0",
+  ),
+  fadeIn: tw("[&>svg]:translate-y-0 [&>svg]:scale-100 [&>svg]:opacity-100"),
+};
+
+const Map: FC<MapProps> = ({ className, coordinates }) => {
+  const { view, loading, markerColor } = useMap({
+    longitude: coordinates.lon,
+    latitude: coordinates.lat,
+  });
 
   return (
-    <>
-      <style>{rawStyles}</style>
-      <div className={tw(baseClasses, className)}>
-        {/* z-100000 is applied because .maplibregl-cooperative-gesture-screen has z-index: 99999;  */}
-        <div
-          ref={placeholderRef}
-          className="noise-15 absolute inset-0 z-100000 rounded-2xl bg-warm-yellow"
-          aria-hidden="true"
-        />
+    <div className={tw(baseClasses, className)}>
+      {/* z-100000 is applied because .maplibregl-cooperative-gesture-screen has z-index: 99999;  */}
+      <div
+        aria-hidden="true"
+        className={tw(
+          "noise-15 absolute inset-0 z-100000 rounded-2xl bg-warm-yellow duration-500 ease-out",
+          loading.isLoaded && "invisible opacity-0",
+        )}
+      />
 
-        <div ref={mapContainerRef} className="h-full w-full rounded-2xl" />
-      </div>
-    </>
+      <MapLibre
+        cooperativeGestures
+        mapStyle={OPEN_FREE_MAP_STYLE_URL}
+        onLoad={loading.setLoaded}
+        onMove={view.onMove}
+        {...view.state}
+      >
+        <Marker
+          className={tw(
+            markerClasses.base,
+            loading.isLoaded && markerClasses.fadeIn,
+          )}
+          color={markerColor}
+          longitude={coordinates.lon}
+          latitude={coordinates.lat}
+        />
+      </MapLibre>
+    </div>
   );
 };
 

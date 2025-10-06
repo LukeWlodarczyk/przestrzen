@@ -64,7 +64,7 @@ const { office } = Astro.props;
     <Map
       className="mt-(--space-m-l) hidden h-fit flex-grow lg:block"
       client:load
-      location={office.coordinates}
+      coordinates={office.coordinates}
     />
   </div>
   <div
@@ -84,7 +84,7 @@ const { office } = Astro.props;
       <Map
         className="mt-(--space-l-xl) block h-[200px] flex-grow"
         client:load
-        location={office.coordinates}
+        coordinates={office.coordinates}
       />
     </div>
     <Widget
