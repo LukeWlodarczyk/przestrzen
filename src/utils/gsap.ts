@@ -1,7 +1,9 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-if (typeof window !== "undefined") {
+import { isBrowser } from "@utils/index";
+
+if (isBrowser()) {
   gsap.registerPlugin(ScrollTrigger);
 }
 
