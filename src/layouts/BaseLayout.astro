@@ -27,6 +27,11 @@ const { metaTitle, metaDescription, fontsToPreload, currentPage } = Astro.props;
     <meta content={Astro.generator} name="generator" />
 
     <link href="/sitemap-index.xml" rel="sitemap" />
+    <link
+      href={new URL("rss.xml", Astro.site)}
+      rel="alternate"
+      type="application/rss+xml"
+    />
 
     <FontPreload fontNames={fontsToPreload} />
 
