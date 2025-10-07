@@ -1,10 +1,20 @@
 import { type FC } from "react";
 
-import { Map as MapLibre, Marker } from "@vis.gl/react-maplibre";
+import { Map as MapLibre } from "@vis.gl/react-maplibre";
 
 import { tw } from "@utils/index";
 
-import useMap, { OPEN_FREE_MAP_STYLE_URL } from "./hooks/useMap";
+import useMapLoadingState from "./hooks/useMapLoadingState";
+import useMapStylesLoadingState from "./hooks/useMapStylesLoadingState";
+
+import Placeholder from "./components/Placeholder";
+import Marker from "./components/Marker";
+
+import {
+  DEFAULT_ZOOM,
+  MAPLIBRE_CANVAS_CLASS,
+  OPEN_FREE_MAP_STYLE_URL,
+} from "./config";
 
 export type Coordinates = { lat: number; lon: number };
 
@@ -13,55 +23,35 @@ interface MapProps {
   coordinates: Coordinates;
 }
 
-const MAPLIBRE_CANVAS_CLASS = ".maplibregl-canvas";
-
 const baseClasses = tw(
   "relative h-full w-full overflow-hidden rounded-2xl border border-warm-yellow outline-offset-2 has-focus-visible:outline-2 has-focus-visible:outline-warm-yellow",
   `[&_${MAPLIBRE_CANVAS_CLASS}]:outline-none`,
 );
 
-const markerClasses = {
-  base: tw(
-    "[&>svg]:origin-[bottom_center] [&>svg]:transition-all [&>svg]:delay-300 [&>svg]:ease-out",
-    "[&>svg]:starting:translate-y-[-10px] [&>svg]:starting:scale-0 [&>svg]:starting:opacity-0",
-  ),
-  fadeIn: tw("[&>svg]:translate-y-0 [&>svg]:scale-100 [&>svg]:opacity-100"),
-};
-
 const Map: FC<MapProps> = ({ className, coordinates }) => {
-  const { view, loading, markerColor } = useMap({
-    longitude: coordinates.lon,
-    latitude: coordinates.lat,
-  });
+  const mapLibreLoadingState = useMapLoadingState();
+
+  const stylesheetLoadingState = useMapStylesLoadingState();
+
+  const isFullLoaded =
+    mapLibreLoadingState.isLoaded && stylesheetLoadingState.isLoaded;
 
   return (
     <div className={tw(baseClasses, className)}>
-      {/* z-100000 is applied because .maplibregl-cooperative-gesture-screen has z-index: 99999;  */}
-      <div
-        aria-hidden="true"
-        className={tw(
-          "noise-15 absolute inset-0 z-100000 rounded-2xl bg-warm-yellow duration-500 ease-out",
-          loading.isLoaded && "invisible opacity-0",
-        )}
-      />
-
       <MapLibre
         cooperativeGestures
         mapStyle={OPEN_FREE_MAP_STYLE_URL}
-        onLoad={loading.setLoaded}
-        onMove={view.onMove}
-        {...view.state}
+        onLoad={mapLibreLoadingState.handleOnLoad}
+        initialViewState={{
+          longitude: coordinates.lon,
+          latitude: coordinates.lat,
+          zoom: DEFAULT_ZOOM,
+        }}
       >
-        <Marker
-          className={tw(
-            markerClasses.base,
-            loading.isLoaded && markerClasses.fadeIn,
-          )}
-          color={markerColor}
-          longitude={coordinates.lon}
-          latitude={coordinates.lat}
-        />
+        <Marker coordinates={coordinates} isVisible={isFullLoaded} />
       </MapLibre>
+
+      <Placeholder isHidden={isFullLoaded} />
     </div>
   );
 };
