@@ -9,6 +9,10 @@ import react from "@astrojs/react";
 
 import icon from "astro-icon";
 
+import dotenv from "dotenv";
+
+dotenv.config();
+
 // https://astro.build/config
 export default defineConfig({
   prefetch: {
