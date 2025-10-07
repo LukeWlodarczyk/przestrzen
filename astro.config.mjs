@@ -3,6 +3,8 @@ import { defineConfig } from "astro/config";
 
 import tailwindcss from "@tailwindcss/vite";
 
+import sitemap from "@astrojs/sitemap";
+
 import react from "@astrojs/react";
 
 import icon from "astro-icon";
@@ -24,5 +26,13 @@ export default defineConfig({
   image: {
     domains: ["images.ctfassets.net"],
   },
-  integrations: [react(), icon({ iconDir: "src/assets/icons" })],
+  integrations: [
+    react(),
+    icon({ iconDir: "src/assets/icons" }),
+    sitemap({
+      filter: (page) =>
+        !page.endsWith("/kontakt/sukces/") &&
+        !page.endsWith("/rezerwacja/sukces/"),
+    }),
+  ],
 });
