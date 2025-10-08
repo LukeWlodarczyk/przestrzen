@@ -10,6 +10,7 @@
 @import "./shine";
 @import "./arrows";
 @import "./icons";
+@import "./viewTransition";
 
 @layer base {
   body {
