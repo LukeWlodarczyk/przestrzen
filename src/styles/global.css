@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
-@import "./breakpoints/breakpoints.css";
-@import "./fonts.css";
-@import "./typography.css";
-@import "./colors.css";
-@import "./spacing.css";
-@import "./container.css";
+@import "./breakpoints/breakpoints";
+@import "./fonts";
+@import "./typography";
+@import "./colors";
+@import "./spacing";
+@import "./container";
 @import "./noise";
 @import "./shine";
 @import "./arrows";
