@@ -1,5 +1,7 @@
 import type { EntryFieldTypes } from "contentful";
 
+import type { FormOfSupportSkeleton } from "@features/offert/types";
+
 import loadOffices from "@features/reservation/loaders/officesLoader";
 
 export interface ReservationPreviewSkeleton {
@@ -28,6 +30,9 @@ export interface OfficeSkeleton {
     postalCode: EntryFieldTypes.Text;
     addressLocality: EntryFieldTypes.Text;
     taxId: EntryFieldTypes.Text;
+    availableFormsOfSupport: EntryFieldTypes.Array<
+      EntryFieldTypes.EntryLink<FormOfSupportSkeleton>
+    >;
   };
 }
 
