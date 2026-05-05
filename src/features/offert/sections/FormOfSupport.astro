@@ -15,20 +15,30 @@ import RichArticleBody from "@components/richText/RichArticleBody.astro";
 import Image from "@components/media/Image/Image.astro";
 
 import Button from "@components/interactive/Button.astro";
+import Badge from "@components/interactive/Badge.astro";
 
 import FormOfSupportAside from "@features/offert/components/FormOfSupportAside.astro";
 
 import loadFormsOfSuport from "@features/offert/loaders/formsOfSupportLoader";
+import loadOffices from "@features/reservation/loaders/officesLoader";
 
 import type { FormOfSupport } from "@features/offert/types";
+
+import { getAvailableOfficesByFormOfSupport } from "@features/offert/utils";
 
 interface Props {
   formOfSupport: FormOfSupport;
 }
 
 const formsOfSupport = await loadFormsOfSuport();
+const offices = await loadOffices();
 
 const { formOfSupport } = Astro.props;
+
+const availableOffices = getAvailableOfficesByFormOfSupport(
+  formOfSupport,
+  offices.list,
+);
 ---
 
 <Section
@@ -54,9 +64,27 @@ const { formOfSupport } = Astro.props;
             {formsOfSupport.label}
           </InlineLink>
 
-          <Paragraph className="text-justify">
+          <Paragraph className="mb-(--space-m-l) text-justify">
             {formOfSupport.description}
           </Paragraph>
+
+          <div class="flex flex-wrap items-center gap-(--space-3xs-2xs)">
+            <Paragraph className="w-fit text-sm"> Zarezerwuj w </Paragraph>
+
+            <div class="flex flex-wrap items-center gap-(--space-2xs-xs)">
+              {
+                availableOffices.map((office) => (
+                  <Badge
+                    as="a"
+                    className="w-fit text-sm"
+                    href={`/rezerwacja/gabinet/${office.slug}`}
+                  >
+                    {office.name}
+                  </Badge>
+                ))
+              }
+            </div>
+          </div>
         </div>
 
         <div class="order-first mx-auto md:order-2 md:w-1/3">
