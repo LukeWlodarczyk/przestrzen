@@ -32,6 +32,8 @@ const baseClasses = tw(
 const Map: FC<MapProps> = ({ className, coordinates }) => {
   const { linkRef, onLoad, isLoaded } = useMap();
 
+  const hasCoordinates = Boolean(coordinates);
+
   return (
     <div className={tw(baseClasses, className)}>
       <link
@@ -40,20 +42,22 @@ const Map: FC<MapProps> = ({ className, coordinates }) => {
         ref={linkRef}
       />
 
-      <MapLibre
-        cooperativeGestures
-        mapStyle={OPEN_FREE_MAP_STYLE_URL}
-        onLoad={onLoad}
-        initialViewState={{
-          longitude: coordinates.lon,
-          latitude: coordinates.lat,
-          zoom: DEFAULT_ZOOM,
-        }}
-      >
-        <Marker coordinates={coordinates} isVisible={isLoaded} />
-      </MapLibre>
+      {hasCoordinates && (
+        <MapLibre
+          cooperativeGestures
+          mapStyle={OPEN_FREE_MAP_STYLE_URL}
+          onLoad={onLoad}
+          initialViewState={{
+            longitude: coordinates.lon,
+            latitude: coordinates.lat,
+            zoom: DEFAULT_ZOOM,
+          }}
+        >
+          <Marker coordinates={coordinates} isVisible={isLoaded} />
+        </MapLibre>
+      )}
 
-      <Placeholder isHidden={isLoaded} />
+      <Placeholder hasCoordinates={hasCoordinates} isHidden={isLoaded} />
     </div>
   );
 };

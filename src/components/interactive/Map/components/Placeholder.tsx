@@ -4,6 +4,7 @@ import { tw } from "@utils/index";
 
 type Props = {
   isHidden: boolean;
+  hasCoordinates: boolean;
 };
 
 const placeholderClasses = {
@@ -20,7 +21,7 @@ const placeholderClasses = {
   ),
 };
 
-const Placeholder: FC<Props> = ({ isHidden }) => (
+const Placeholder: FC<Props> = ({ isHidden, hasCoordinates }) => (
   <div
     aria-hidden="true"
     className={tw(
@@ -29,6 +30,11 @@ const Placeholder: FC<Props> = ({ isHidden }) => (
     )}
   >
     <div className={placeholderClasses.grid}></div>
+    {!hasCoordinates && (
+      <p className="text-lg font-extralight text-charcoal/80">
+        Adres niedostępny
+      </p>
+    )}
   </div>
 );
 
