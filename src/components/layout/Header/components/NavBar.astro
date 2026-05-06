@@ -7,6 +7,8 @@ import {
   type StaticRouteLink,
 } from "@routes";
 
+import { tw } from "@utils/index";
+
 import Section from "@components/layout/Section.astro";
 
 import Button from "@components/interactive/Button.astro";
@@ -93,7 +95,10 @@ const isAriaCurrentPage = (href: StaticRouteValue) =>
           <li class="border-b border-b-deep-green first:border-t lg:border-0 lg:first:border-0">
             <Button
               aria-current={isAriaCurrentPage(link.href)}
-              className="text-lg lg:text-sm"
+              className={tw(
+                "text-lg lg:text-sm",
+                currentPage === link.href && "text-warm-yellow",
+              )}
               href={link.href}
               variant="nav"
             >
