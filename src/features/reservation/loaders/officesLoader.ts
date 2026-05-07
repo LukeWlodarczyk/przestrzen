@@ -26,6 +26,7 @@ const loadOfficesDataOrdered = async () => {
         availableFormsOfSupport: office.availableFormsOfSupport
           .filter(isDefined)
           .map(extractEntryFields),
+        gallery: (office.gallery || []).filter(isDefined),
       })),
   };
 };

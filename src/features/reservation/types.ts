@@ -33,6 +33,7 @@ export interface OfficeSkeleton {
     availableFormsOfSupport: EntryFieldTypes.Array<
       EntryFieldTypes.EntryLink<FormOfSupportSkeleton>
     >;
+    gallery: EntryFieldTypes.Array<EntryFieldTypes.AssetLink>;
   };
 }
 

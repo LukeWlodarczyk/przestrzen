@@ -15,6 +15,7 @@ import loadCompanyDetails from "@features/contact/loaders/companyDetailsLoader";
 
 import Widget from "@features/reservation/components/Widget";
 import OfficeCard from "@features/reservation/components/OfficeCard.astro";
+import OfficeGallery from "@features/reservation/components/OfficeGallery.astro";
 
 import type { Office } from "@features/reservation/types";
 
@@ -25,13 +26,15 @@ interface Props {
 const companyDetailsData = await loadCompanyDetails();
 
 const { office } = Astro.props;
+
+const hasGallery = Boolean(office.gallery);
 ---
 
 <Section
   className="reservation-office-wrapper bg-soft-beige pt-(--space-5xl-6xl)"
-  containerClassName="flex flex-col lg:grid lg:grid-cols-(--two-col-grid) lg:gap-(--space-m-l)"
+  containerClassName="flex flex-col lg:grid lg:grid-cols-(--two-col-grid)"
 >
-  <div class="flex w-full flex-col">
+  <div class="flex w-full flex-col lg:pl-(--space-m-l)">
     <Heading
       className="text-center text-lg font-normal text-deep-green md:text-left"
       level={1}
@@ -93,6 +96,15 @@ const { office } = Astro.props;
       therapistId={companyDetailsData.therapistId}
     />
   </div>
+
+  {
+    hasGallery && (
+      <OfficeGallery
+        className="col-span-2 mt-(--space-m-l)"
+        images={office.gallery}
+      />
+    )
+  }
 </Section>
 
 <style>
