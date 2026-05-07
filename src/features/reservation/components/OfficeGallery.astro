@@ -1,0 +1,42 @@
+---
+import Image from "@components/media/Image/Image.astro";
+
+import { resolveAssetUrl } from "@lib/contentful";
+
+import { tw } from "@utils/index";
+
+import type { Office } from "@features/reservation/types";
+
+interface Props {
+  className?: string;
+  images: Office["gallery"];
+}
+
+const { className, images } = Astro.props;
+
+const baseClasses = tw(
+  "office-gallery-wrapper w-full columns-[300px] gap-x-(--grid-gap)",
+);
+---
+
+<div class:list={tw(baseClasses, className)}>
+  {
+    images.map((image) => (
+      <Image
+        alt=""
+        className="w-full noise-10 mb-(--grid-gap)"
+        imgClassName="rounded-2xl"
+        placeholderClassName="noise-10"
+        sizes="600px"
+        src={resolveAssetUrl(image)}
+        widths={[600]}
+      />
+    ))
+  }
+</div>
+
+<style>
+  .office-gallery-wrapper {
+    --grid-gap: var(--space-m-l);
+  }
+</style>
