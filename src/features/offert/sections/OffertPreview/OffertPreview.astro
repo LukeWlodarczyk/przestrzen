@@ -67,13 +67,17 @@ const offertVideoSources = [
 
   <ul
     aria-label={areasOfSupport.label}
-    class="mt-(--space-l-xl) flex flex-wrap justify-center gap-x-(--space-s) gap-y-(--space-xs)"
+    class="mx-auto mt-(--space-l-xl) flex w-min flex-col flex-wrap justify-center gap-x-(--space-s) gap-y-(--space-xs) sm:w-full sm:flex-row"
     role="list"
   >
     {
       areasOfSupport.list.map((item) => (
         <li>
-          <Badge as="a" href={DYNAMIC_ROUTES.areaOfSupport(item.slug)}>
+          <Badge
+            as="a"
+            className="text-center"
+            href={DYNAMIC_ROUTES.areaOfSupport(item.slug)}
+          >
             {item.name}
           </Badge>
         </li>
