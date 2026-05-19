@@ -25,12 +25,12 @@ const { heading, areasOfSupport } = Astro.props;
 </Heading>
 
 <ul
-  class="mt-(--space-s-m) flex flex-row gap-(--space-s-m) overflow-x-scroll p-1 pb-(--space-xs-s) xl:flex-col xl:overflow-x-auto xl:pb-1"
+  class="mt-(--space-s-m) flex snap-x flex-row gap-(--space-s-m) overflow-x-scroll p-1 pb-(--space-xs-s) sm:snap-none xl:flex-col xl:overflow-x-auto xl:pb-1"
 >
   {
     areasOfSupport.map((area) => (
       <OffertCardPreview
-        className="min-w-[min(100%,350px)] xl:min-w-[300px]"
+        className="min-w-[min(100%,350px)] snap-center"
         description={area.description}
         href={DYNAMIC_ROUTES.areaOfSupport(area.slug)}
         label={area.name}
