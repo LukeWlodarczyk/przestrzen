@@ -1,8 +1,8 @@
 ---
-/* eslint-disable astro/no-exports-from-components */
 import type { JSX } from "astro/jsx-runtime";
 
 import { tw, type PropsWithChildren } from "@utils/index.ts";
+import { baseClasses, sizeClasses, variantClasses } from "./Button.classes";
 
 type AllowedTags = "a" | "button";
 
@@ -28,25 +28,6 @@ const {
   className,
   ...attrs
 } = Astro.props;
-
-export const baseClasses = tw(
-  "block w-fit cursor-pointer rounded-2xl text-center select-none",
-);
-
-export const sizeClasses = {
-  medium: "px-(--space-m) py-(--space-2xs)",
-  large: "px-(--space-l-xl) py-(--space-2xs)",
-};
-
-export const variantClasses = {
-  primary:
-    "group noise-10 bg-deep-green disabled:bg-deep-green/80 tracking-widest text-bright-yellow outline-offset-2 outline-deep-green",
-  secondary:
-    "noise-10 bg-dark-beige/60 disabled:bg-dark-beige/40 disabled:text-charcoal/60 font-light tracking-wide text-charcoal/80 outline-offset-2 outline-dark-beige/80 not-disabled:hover:bg-dark-beige/80 focus:bg-dark-beige/80 ",
-  tertiary:
-    "tracking-widest text-deep-green disabled:text-deep-green/60 outline-offset-2 outline-forest-green not-disabled:hover:text-forest-green not-disabled:hover:underline focus:text-forest-green focus:underline",
-  nav: "w-full py-(--space-m-l) duration-300 text-deep-green px-0 tracking-wider outline-none not-disabled:hover:text-warm-yellow focus:text-warm-yellow lg:py-(--space-2xs)",
-};
 ---
 
 <Tag
