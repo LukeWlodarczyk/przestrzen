@@ -15,6 +15,7 @@ dotenv.config();
 
 // https://astro.build/config
 export default defineConfig({
+  trailingSlash: "always",
   prefetch: {
     prefetchAll: true,
   },

@@ -13,6 +13,8 @@ import Video from "@components/media/Video/Video.astro";
 import cldVideoHelper from "@utils/cloudinary/video";
 import generateLQIP from "@utils/generateLQIP";
 
+import { STATIC_ROUTES } from "@routes";
+
 import BREAKPOINTS from "@styles/breakpoints/breakpoints";
 
 import loadData from "@features/home/loaders/mainLoader";
@@ -63,7 +65,7 @@ const heroVideoSources = [
     />
     <Button
       className="mt-(--space-m-l) xl:mr-auto"
-      href="/rezerwacja"
+      href={STATIC_ROUTES.reservation}
       size="large"
     >
       {data.ctaLabel}
