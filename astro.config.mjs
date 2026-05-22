@@ -22,8 +22,6 @@ export default defineConfig({
     enabled: false,
   },
   vite: {
-    // https://github.com/withastro/astro/issues/14030
-    // @ts-expect-error
     plugins: [tailwindcss()],
   },
   site: process.env.PUBLIC_SITE_URL,

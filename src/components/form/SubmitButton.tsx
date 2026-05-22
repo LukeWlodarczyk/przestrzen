@@ -2,13 +2,12 @@ import type { FC, ReactNode } from "react";
 
 import { tw } from "@utils/index";
 
+import { type Variant, type Size } from "@components/interactive/Button.astro";
 import {
-  sizeClasses,
-  variantClasses,
   baseClasses,
-  type Variant,
-  type Size,
-} from "@components/interactive/Button.astro";
+  variantClasses,
+  sizeClasses,
+} from "@components/interactive/Button.classes";
 
 interface Props {
   children: ReactNode;
