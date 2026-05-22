@@ -13,6 +13,8 @@ import Video from "@components/media/Video/Video.astro";
 import cldVideoHelper from "@utils/cloudinary/video";
 import generateLQIP from "@utils/generateLQIP";
 
+import { STATIC_ROUTES } from "@routes";
+
 import BREAKPOINTS from "@styles/breakpoints/breakpoints";
 
 import loadData from "@features/aboutMe/loaders/previewLoader";
@@ -65,7 +67,7 @@ const aboutMeVideoSources = [
     />
     <Button
       className="ml-auto tracking-widest"
-      href="/o-mnie"
+      href={STATIC_ROUTES.aboutMe}
       variant="tertiary"
     >
       {data.ctaLabel}

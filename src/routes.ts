@@ -5,25 +5,25 @@ export const IDS = {
 
 export const STATIC_ROUTES = {
   home: "/",
-  aboutMe: "/o-mnie",
-  offert: "/oferta",
-  formOfSupport: `/oferta#${IDS.formOfSupport}`,
-  areaOfSupport: `/oferta#${IDS.areaOfSupport}`,
-  blog: "/blog",
-  contact: "/kontakt",
-  contactSuccess: "/kontakt/sukces",
-  reservation: "/rezerwacja",
-  reservationSuccess: "/rezerwacja/sukces",
-  notFound: "/404",
+  aboutMe: "/o-mnie/",
+  offert: "/oferta/",
+  formOfSupport: `/oferta#${IDS.formOfSupport}/`,
+  areaOfSupport: `/oferta#${IDS.areaOfSupport}/`,
+  blog: "/blog/",
+  contact: "/kontakt/",
+  contactSuccess: "/kontakt/sukces/",
+  reservation: "/rezerwacja/",
+  reservationSuccess: "/rezerwacja/sukces/",
+  notFound: "/404/",
 } as const;
 
 export const DYNAMIC_ROUTES = {
   formOfSupport: (slug: string) =>
-    `${STATIC_ROUTES.offert}/formy-wsparcia/${slug}`,
+    `${STATIC_ROUTES.offert}formy-wsparcia/${slug}/`,
   areaOfSupport: (slug: string) =>
-    `${STATIC_ROUTES.offert}/obszary-wsparcia/${slug}`,
-  office: (slug: string) => `${STATIC_ROUTES.reservation}/gabinet/${slug}`,
-  blogPost: (slug: string) => `${STATIC_ROUTES.blog}/${slug}`,
+    `${STATIC_ROUTES.offert}obszary-wsparcia/${slug}/`,
+  office: (slug: string) => `${STATIC_ROUTES.reservation}gabinet/${slug}/`,
+  blogPost: (slug: string) => `${STATIC_ROUTES.blog}${slug}/`,
 } as const;
 
 export type StaticRouteKey = keyof typeof STATIC_ROUTES;

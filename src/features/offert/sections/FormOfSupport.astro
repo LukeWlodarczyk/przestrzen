@@ -1,5 +1,5 @@
 ---
-import { STATIC_ROUTES } from "@routes";
+import { DYNAMIC_ROUTES, STATIC_ROUTES } from "@routes";
 
 import { resolveAssetUrl } from "@lib/contentful";
 
@@ -77,7 +77,7 @@ const availableOffices = getAvailableOfficesByFormOfSupport(
                   <Badge
                     as="a"
                     className="w-fit text-sm"
-                    href={`/rezerwacja/gabinet/${office.slug}`}
+                    href={DYNAMIC_ROUTES.office(office.slug)}
                   >
                     {office.name}
                   </Badge>
