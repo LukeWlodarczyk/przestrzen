@@ -1,6 +1,7 @@
 /* Widget external styles */
 
-@import url(https://fonts.googleapis.com/css2?family=Alata&family=Inter:wght@400;500;600&display=swap);
+@import url("https://fonts.googleapis.com/css2?family=Alata&family=Inter:wght@400;500;600&display=swap");
+
 :root {
   --top-background: #0e1b48;
   --top-text: #fff;
@@ -905,5 +906,3 @@
 .mr-1 {
   margin-right: 0.25rem !important;
 } */
-
-/*# sourceMappingURL=main.8fef5df0.css.map*/
