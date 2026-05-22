@@ -1,5 +1,10 @@
 div.tp-widget {
-  background-color: #fffefc !important;
+  --top-background: var(--color-deep-green);
+  --top-text: var(--color-bright-yellow);
+  --button-background: var(--color-deep-green);
+  --button-text: var(--color-bright-yellow);
+
+  background-color: var(--color-warm-white) !important;
   max-width: unset !important;
 
   @container (min-width: 360px) {
@@ -18,6 +23,17 @@ div.tp-widget {
 
   .tp-widget-select__dropdown-button {
     padding: 10px 15px !important;
+
+    > div {
+      width: 90%;
+      flex: none;
+    }
+  }
+
+  .tp-widget-select__selected-item-title {
+    text-wrap: nowrap !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .tp-widget-select__selected-item-subtitle {

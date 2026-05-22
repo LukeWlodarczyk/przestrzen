@@ -1,7 +1,7 @@
 import selectors from "./selectors";
 
 const initWidgetObserver = (
-  element: HTMLElement,
+  widget: HTMLElement,
   cb: (element: HTMLElement) => void,
 ) => {
   const observer = new MutationObserver((mutationsList) => {
@@ -14,14 +14,14 @@ const initWidgetObserver = (
 
           if (!calendarSlots) return;
 
-          cb(element);
+          cb(calendarSlots);
           observer.disconnect();
         }
       }
     }
   });
 
-  observer.observe(element, {
+  observer.observe(widget, {
     childList: true,
     subtree: true,
   });

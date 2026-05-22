@@ -6,14 +6,8 @@ const initSwipeWidget = (wrapper: HTMLElement) =>
   initSwipe(
     wrapper,
     {
-      swipeLeft: () => {
-        const btn = getRequiredElement(selectors.BTN_LEFT);
-        btn.click();
-      },
-      swipeRight: () => {
-        const btn = getRequiredElement(selectors.BTN_RIGHT);
-        btn.click();
-      },
+      swipeLeft: () => getRequiredElement(selectors.BTN_LEFT).click(),
+      swipeRight: () => getRequiredElement(selectors.BTN_RIGHT).click(),
     },
     { mouse: false },
   );

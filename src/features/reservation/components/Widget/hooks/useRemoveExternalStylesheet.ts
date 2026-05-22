@@ -12,6 +12,7 @@ const useRemoveExternalStylesheet = (href: string) => {
             const link = node as HTMLLinkElement;
             if (link.rel === "stylesheet" && link.href.includes(href)) {
               link.remove();
+              observer.disconnect();
             }
           }
         });
