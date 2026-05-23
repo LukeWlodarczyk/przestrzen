@@ -7,8 +7,8 @@ export const STATIC_ROUTES = {
   home: "/",
   aboutMe: "/o-mnie/",
   offert: "/oferta/",
-  formOfSupport: `/oferta#${IDS.formOfSupport}/`,
-  areaOfSupport: `/oferta#${IDS.areaOfSupport}/`,
+  formOfSupport: `/oferta/#${IDS.formOfSupport}`,
+  areaOfSupport: `/oferta/#${IDS.areaOfSupport}`,
   blog: "/blog/",
   contact: "/kontakt/",
   contactSuccess: "/kontakt/sukces/",
@@ -19,9 +19,9 @@ export const STATIC_ROUTES = {
 
 export const DYNAMIC_ROUTES = {
   formOfSupport: (slug: string) =>
-    `${STATIC_ROUTES.offert}formy-wsparcia/${slug}/`,
+    `${STATIC_ROUTES.offert}${IDS.formOfSupport}/${slug}/`,
   areaOfSupport: (slug: string) =>
-    `${STATIC_ROUTES.offert}obszary-wsparcia/${slug}/`,
+    `${STATIC_ROUTES.offert}${IDS.areaOfSupport}/${slug}/`,
   office: (slug: string) => `${STATIC_ROUTES.reservation}gabinet/${slug}/`,
   blogPost: (slug: string) => `${STATIC_ROUTES.blog}${slug}/`,
 } as const;
