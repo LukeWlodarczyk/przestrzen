@@ -16,6 +16,8 @@ interface Props {
 }
 
 const { metaTitle, metaDescription, fontsToPreload, currentPage } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
@@ -25,6 +27,8 @@ const { metaTitle, metaDescription, fontsToPreload, currentPage } = Astro.props;
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
     <meta content={Astro.generator} name="generator" />
+
+    <link href={canonicalURL} rel="canonical" />
 
     <link href="/sitemap-index.xml" rel="sitemap" />
     <link
