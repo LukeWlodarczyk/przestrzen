@@ -34,6 +34,7 @@ export interface OfficeSkeleton {
       EntryFieldTypes.EntryLink<FormOfSupportSkeleton>
     >;
     gallery: EntryFieldTypes.Array<EntryFieldTypes.AssetLink>;
+    externalReservationUrl: EntryFieldTypes.Text;
   };
 }
 

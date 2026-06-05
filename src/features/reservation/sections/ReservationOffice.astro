@@ -91,6 +91,7 @@ const { office } = Astro.props;
     <Widget
       className="mx-auto h-full max-h-(--widget-max-height) min-h-(--widget-min-height) w-full min-[746px]:order-first"
       client:load
+      externalReservationUrl={office.externalReservationUrl}
       therapistId={companyDetailsData.therapistId}
     />
   </div>
