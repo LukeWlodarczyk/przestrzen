@@ -12,7 +12,6 @@ import Marker from "./components/Marker";
 import {
   DEFAULT_ZOOM,
   MAPLIBRE_CANVAS_CLASS,
-  MAP_LIBRE_REMOTE_STYLE_URL,
   OPEN_FREE_MAP_STYLE_URL,
 } from "./config";
 
@@ -20,7 +19,7 @@ export type Coordinates = { lat: number; lon: number };
 
 interface MapProps {
   className?: string;
-  coordinates: Coordinates;
+  coordinates?: Coordinates;
 }
 
 const baseClasses = tw(
@@ -30,18 +29,12 @@ const baseClasses = tw(
 );
 
 const Map: FC<MapProps> = ({ className, coordinates }) => {
-  const { linkRef, onLoad, isLoaded } = useMap();
+  const { onLoad, isLoaded } = useMap();
 
-  const hasCoordinates = Boolean(coordinates);
+  const hasCoordinates = coordinates !== undefined;
 
   return (
     <div className={tw(baseClasses, className)}>
-      <link
-        data-href={MAP_LIBRE_REMOTE_STYLE_URL}
-        rel="stylesheet"
-        ref={linkRef}
-      />
-
       {hasCoordinates && (
         <MapLibre
           cooperativeGestures

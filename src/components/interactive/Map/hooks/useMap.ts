@@ -1,13 +1,16 @@
 import { useState } from "react";
 
-import { useDeferredProp } from "@utils/hooks";
+import useMapLibreStylesheet from "./useMapLibreStylesheet";
 
 const useMap = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const { ref: linkRef } = useDeferredProp<HTMLLinkElement>("href");
+  const stylesheet = useMapLibreStylesheet();
 
-  return { linkRef, isLoaded, onLoad: () => setIsLoaded(true) };
+  return {
+    isLoaded: isLoaded && stylesheet.isLoaded,
+    onLoad: () => setIsLoaded(true),
+  };
 };
 
 export default useMap;

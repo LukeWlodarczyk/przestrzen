@@ -7,6 +7,11 @@ export const MARKER_COLOR = isBrowser()
 export const MAP_LIBRE_REMOTE_STYLE_URL =
   "https://unpkg.com/maplibre-gl@5.8.0/dist/maplibre-gl.css" as const;
 
+export const MAP_LIBRE_LOCAL_STYLE_URL = new URL(
+  "maplibre-gl/dist/maplibre-gl.css",
+  import.meta.url,
+).href;
+
 export const OPEN_FREE_MAP_STYLE_URL =
   "https://tiles.openfreemap.org/styles/bright" as const;
 
